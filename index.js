@@ -9,6 +9,8 @@ var app = express();
 
 // mongo db setup
 require('./models/User');
+require('./models/Booking');
+require('./models/Room');
 require('./services/passport');
 mongoose.connect(keys.mongoURI);
 
@@ -26,6 +28,7 @@ app.use(passport.session());
 
 // Routes
 require('./routes/authRoutes')(app);
+require('./routes/bookingRoutes')(app);
 // another way could be to say
 // const authRoutes = require('./routes/authRoutes');
 // authRoutes(app);

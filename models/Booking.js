@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { Schema } = mongoose();
+const { Schema } = mongoose;
 
 const bookingSchema = new Schema({
     status: String,
@@ -21,8 +21,7 @@ const bookingSchema = new Schema({
     },
     bookingStartDate: Date,
     bookingEndDate: Date,
-    createdOn: Date
-
+    createdOn: Date.now()
 });
 
-mongoose.model('booking', bookingSchema);
+mongoose.model( 'booking', bookingSchema );
