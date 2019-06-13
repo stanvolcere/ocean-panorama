@@ -19,7 +19,7 @@ const addRoom = async () => {
         description: 'Nice Apt'
     });
 
-    room.save();
+    await room.save();
 }
 
 addRoom();

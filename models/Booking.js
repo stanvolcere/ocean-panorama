@@ -21,7 +21,7 @@ const bookingSchema = new Schema({
     },
     bookingStartDate: Date,
     bookingEndDate: Date,
-    createdOn: Date.now()
+    createdOn: Date
 });
 
 mongoose.model( 'booking', bookingSchema );

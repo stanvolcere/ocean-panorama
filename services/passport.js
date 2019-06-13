@@ -13,7 +13,8 @@ passport.use(new GoogleStrategy({
         clientID: keys.googleClientID,
         clientSecret: keys.googleClientSecret,
         // after the user grants permission send them to this route here 
-        callbackURL: '/auth/google/callback'
+        callbackURL: '/auth/google/callback',
+        proxy: true
     }, async (accessToken, refreshToken, profile, done) => {
         try {
             const existingUser = await User.findOne({ googleID: profile.id });
@@ -38,6 +39,7 @@ passport.use(new FacebookStrategy({
     clientSecret: keys.facebookAppSecret,
     // after the user grants permission send them to this route here 
     callbackURL: '/auth/facebook/callback',
+    proxy: true,
     profileFields: ['id', 'displayName', 'email']
     }, async (accessToken, refreshToken, profile, done) => {
         try {

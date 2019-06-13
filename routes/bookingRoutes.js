@@ -10,7 +10,7 @@ module.exports = (app) => {
         const bookings = await Booking.find({ _user: req.user });
 
         if (!bookings) {
-            return res.status(404).send("Sorry no bookings were found");
+            return res.status(404).send();
         }
 
         return res.status(200).send(bookings);
@@ -21,9 +21,11 @@ module.exports = (app) => {
         res.send('return specific booking');
     });
 
-    // create new booking
+    // create new booking     
     app.post('/api/bookings', requireLogin, async (req, res) => {
+        console.log(req.body);
         res.send('create a booking');
+
         // es6 destructuring
         //const { title, body, subject, recipients } = req.body;
         //const { status } = 

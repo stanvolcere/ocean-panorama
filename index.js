@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 
-const keys = require('./config/dev');
+const keys = require('./config/keys');
 var app = express();
 
 // mongo db setup
@@ -29,9 +29,26 @@ app.use(passport.session());
 // Routes
 require('./routes/authRoutes')(app);
 require('./routes/bookingRoutes')(app);
+require('./routes/roomRoutes')(app);
 // another way could be to say
 // const authRoutes = require('./routes/authRoutes');
 // authRoutes(app);
+
+// seeding the database
+// const Booking = mongoose.model('booking');
+// const Room = mongoose.model('room');
+
+// const addRoom = async () => {
+//     const room = await new Room({
+//         title: "Apartment 3",
+//         description: 'Extremely nice Apartment'
+//     });
+
+//     await room.save();
+// }
+
+// addRoom();
+
 
 
 app.get("/", (req, res) => {
