@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER, FETCH_BOOKING, FETCH_BOOKINGS, FETCH_ROOM, FETCH_ROOMS } from "./types";
+import { FETCH_USER, FETCH_ROOMS } from "./types";
 
 // fetches the cirrently signed in user if there is one
 export const fetchUser = () => async dispatch => {
@@ -20,6 +20,7 @@ export const fetchBooking = (id) => async dispatch => {
 export const createBooking = (bookingValues) => async dispatch => {
     const res = await axios.post(`/api/bookings/`, bookingValues);
     console.log(res);
+    //console.log(bookingValues);
 }
 
 export const fetchRooms = () => async dispatch => {

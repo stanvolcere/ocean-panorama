@@ -24,6 +24,11 @@ const roomSchema = new Schema({
     nightlyPrice: {
         type: Number,
         default: 0
+    },
+    cleaningFee: Number,
+    maxGuests: {
+        type: Number,
+        default: 1
     }
 });
 

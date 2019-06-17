@@ -8,7 +8,6 @@ import Header from "./Header";
 import BookingList from './Bookings/BookingList';
 import BookingCreate from './Bookings/BookingCreate';
 import Landing from '../components/Landing';
-import RoomList from './Rooms/RoomList';
 import RoomView from './Rooms/RoomView';
 
 class App extends Component {

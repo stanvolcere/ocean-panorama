@@ -22,7 +22,7 @@ class RoomList extends Component{
                             <div className="ui card">
 
                                 <div className="image">
-                                    <img src="https://via.placeholder.com/150/56a8c2"/>
+                                    <img alt="" src="https://via.placeholder.com/150/56a8c2"/>
                                 </div>
                                 
                                 <div className="content">

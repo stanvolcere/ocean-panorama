@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import BookRoomButton from './BookRoomButton';
 
 class RoomDetail extends Component{
-
-    constructor(props) {
-        super(props);
-    }
 
     renderContent() {
         if (this.props.room) {
@@ -35,7 +29,7 @@ class RoomDetail extends Component{
     renderImages() {
         return ( 
             <div>
-                <img class="ui medium centered image" src={`https://via.placeholder.com/600/1fe46f`}></img>
+                <img alt="" class="ui medium centered image" src={`https://via.placeholder.com/600/1fe46f`}></img>
             </div>
             
         )

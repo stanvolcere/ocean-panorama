@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default ({ id }) => {
+
     return (
         <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
                 <Link to={`/room/book/${id}`}>

@@ -23,13 +23,20 @@ module.exports = (app) => {
 
     // create new booking     
     app.post('/api/bookings', requireLogin, async (req, res) => {
-        console.log(req.body);
-        res.send('create a booking');
-
         // es6 destructuring
-        //const { title, body, subject, recipients } = req.body;
-        //const { status } = 
-
+        // const {  } = req.body;
+        const booking = new Booking({
+            ...req.body,
+            _user: req.user
+        });
+        
+        try {
+            await booking.save();
+            return res.status(200).send();
+        } catch(e) {
+            return res.send(e);
+        }
+    
     });
 
     // update a booking

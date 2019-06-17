@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { fetchRooms, fetchRoom } from '../../actions';
+import { fetchRooms } from '../../actions';
 import RoomList from './RoomList';
 import RoomDetail from './RoomDetail';
 
