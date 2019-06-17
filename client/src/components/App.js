@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {Router, Route, Switch} from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import * as actions from '../actions';
@@ -10,6 +10,8 @@ import BookingCreate from './Bookings/BookingCreate';
 import Landing from '../components/Landing';
 import RoomView from './Rooms/RoomView';
 
+import history from '../history';
+
 class App extends Component {
 
     componentDidMount() {
@@ -19,13 +21,15 @@ class App extends Component {
 
     render() {
         return (
-            <BrowserRouter>
+            <Router history={history}>
                 <Header />
+                <Switch>
                     <Route exact path='/' component={Landing}/>
                     <Route exact path='/bookings' component={BookingList}/>
                     <Route exact path='/room/book/:id' component={BookingCreate}/>
                     <Route exact path='/rooms/:id' component={RoomView}/>
-            </BrowserRouter>
+                </Switch>
+            </Router>
         )   
     }
 }

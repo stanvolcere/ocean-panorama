@@ -17,6 +17,7 @@ class BookingCreate extends Component{
         startDate: moment(),
         endDate: moment(),
         dateRange: 0,
+        cleaningFee: 20,
         totalPrice: 0
     };
 
@@ -133,7 +134,7 @@ class BookingCreate extends Component{
                     <button className="ui primary right floated button" onClick={() => {this.onSubmit({
                         status: "Pending",
                         _room: this.props.room._id,
-                        price: this.calculatePrice(),
+                        price: this.calculatePrice() + this.state.cleaningFee,
                         bookingStartDate: this.state.startDate,
                         bookingEndDate: this.state.endDate,
                         createdOn: moment()
@@ -161,7 +162,7 @@ class BookingCreate extends Component{
                     <div className="ui divider"></div>
                     <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", marginBottom:"1rem"}}>
                         <div>Total Price</div>
-                        <div>£{this.calculatePrice() + 20}</div>
+                        <div>£{this.calculatePrice() + this.state.cleaningFee}</div>
                     </div>
                 </div>
 
@@ -187,7 +188,6 @@ class BookingCreate extends Component{
         return (
             <div className="ui container" >
                 {this.renderContent()}
-                {console.log(this.state)}
             </div>
         )
     }
