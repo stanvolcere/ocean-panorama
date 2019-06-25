@@ -27,7 +27,7 @@ class BookingCreate extends Component{
     }
 
     onSubmit(bookingValues) {
-        this.props.createBooking(bookingValues);
+        this.props.createBooking(bookingValues, this.props.auth);
     }
 
     renderContent() {

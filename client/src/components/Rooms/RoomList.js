@@ -45,9 +45,9 @@ class RoomList extends Component{
 
     render() {
         return (
-            <React.Fragment>
-                {this.renderContent()}
-            </React.Fragment>
+            <div className="ui container">
+                {this.renderContent()} 
+            </div>
         );
     }
 }

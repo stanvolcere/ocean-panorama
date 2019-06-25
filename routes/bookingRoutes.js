@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const requireLogin = require('../middleware/requireLogin');
+const { sendBookingConfirmationEmail } = require("../emails/account");
 
 const Booking = mongoose.model('booking');
 
@@ -7,7 +8,7 @@ module.exports = (app) => {
     // get all bookings for a guest
     app.get('/api/bookings', requireLogin, async (req, res) => {
         //res.send('list of bookings');
-        const bookings = await Booking.find({ _user: req.user });
+        const bookings = await Booking.find({ _user: req.user }).populate('_room').exec();
 
         if (!bookings) {
             return res.status(404).send();
@@ -23,15 +24,29 @@ module.exports = (app) => {
 
     // create new booking     
     app.post('/api/bookings', requireLogin, async (req, res) => {
-        // es6 destructuring
-        // const {  } = req.body;
+        
         const booking = new Booking({
             ...req.body,
             _user: req.user
         });
-        
+
+        //get room name
+        const room = await mongoose.model('room').findOne({ _id: req.body._room }).select('title');
+
+
+        const bookingDetails = {
+            guestName: req.user.name,
+            guestEmail: req.user.email,
+            bookingTotalPrice: req.body.price,
+            bookingStartDate: req.body.bookingStartDate,
+            bookingEndDate: req.body.bookingEndDate,
+            roomTitle: room.title,
+        }
+        //console.log(bookingDetails);
+
         try {
             await booking.save();
+            sendBookingConfirmationEmail(bookingDetails);
             return res.status(200).send();
         } catch(e) {
             return res.send(e);

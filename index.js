@@ -8,11 +8,11 @@ const keys = require('./config/keys');
 var app = express();
 
 // mongo db setup
+mongoose.connect(keys.mongoURI);
 require('./models/User');
 require('./models/Booking');
 require('./models/Room');
 require('./services/passport');
-mongoose.connect(keys.mongoURI);
 
 // NOTE: app.use is used whenever we wish to add a middleware which we 
 // wish express to use

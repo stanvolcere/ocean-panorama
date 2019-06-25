@@ -4,16 +4,18 @@ const { Schema } = mongoose;
 const bookingSchema = new Schema({
     status: String,
     _user: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
         // ref here tells mongo to look for a collection named 
         // user to form the relationship , ie every survey belongs to a user
         ref: 'User'
     },
     _room: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
         // ref here tells mongo to look for a collection named 
         // user to form the relationship , ie every survey belongs to a user
-        ref: 'Room'
+        ref: 'room'
     },
     price: {
         type: Number,
