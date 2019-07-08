@@ -1,203 +1,245 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import moment from 'moment';
-import { DateRangePicker } from 'react-dates';
-import 'react-dates/initialize';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import moment from "moment";
+import { DateRangePicker } from "react-dates";
+import "../../styles/styles.css";
+import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
-import * as actions from '../../actions';
-import { OPEN_UP } from 'react-dates/lib/constants';
+import * as actions from "../../actions";
+import { OPEN_UP } from "react-dates/lib/constants";
 
+class BookingCreate extends Component {
+  state = {
+    createdAt: moment(),
+    calenderFocused: null,
+    startDate: moment(),
+    endDate: moment(),
+    dateRange: 0,
+    cleaningFee: 20,
+    totalPrice: 0
+  };
 
+  componentDidMount() {
+    this.props.fetchUser();
+    this.props.fetchRooms();
+    this.props.fetchBlockedDates(this.props.match.params.id);
+  }
 
-class BookingCreate extends Component{
+  onSubmit(bookingValues) {
+    this.props.createBooking(bookingValues, this.props.auth);
+  }
 
-    state = {
-        createdAt: moment(),
-        calenderFocused: null,
-        startDate: moment(),
-        endDate: moment(),
-        dateRange: 0,
-        cleaningFee: 20,
-        totalPrice: 0
-    };
-
-    componentDidMount() {
-        this.props.fetchUser();
-        this.props.fetchRooms();
+  renderGuest() {
+    if (this.props.auth) {
+      return <h2>{this.props.auth.name}</h2>;
     }
+    return <div>Something Went Wrong</div>;
+  }
 
-    onSubmit(bookingValues) {
-        this.props.createBooking(bookingValues, this.props.auth);
+  // renders details on the room in consideration
+  renderRoom() {
+    if (this.props.room) {
+      const { room } = this.props;
+      return (
+        <div>
+          <h3>{room.title}</h3>
+
+          <h4>Amenities</h4>
+          <div className="booking__room">
+            <p>Bedrooms: {room.bedrooms}</p>
+            <p>Beds: {room.beds}</p>
+            <p>Baths: {room.baths}</p>
+          </div>
+        </div>
+      );
     }
+    return <div>Something Went Wrong</div>;
+  }
 
-    renderContent() {
-        
-        return (
-            <div className="ui segment" >
-                <h2>Complete Booking</h2> 
-                <div className="ui divider"></div>
-                {this.renderGuest()}
-                <div className="ui divider"></div>
-                {this.renderRoom()}
-                <div className="ui divider"></div>
-                
-                    <div className="ui two column very relaxed stackable grid">
-                        <div className="column">
-                            {this.renderPhotos()}
-                        </div>
-                        <div className="column">      
-                            {this.renderBookingDetails()}
-                        </div>
-                
-                </div>
-                
+  renderBookingDetails() {
+    // before this is rendered we wanna get the blocked days of the roomId
+    return (
+      <div className="booking__details ui segment">
+        <div>
+          <h2>Booking Details</h2>
+          <div className="ui divider" />
+          <div>
+            <h4>Select Your Dates</h4>
+          </div>
+          <DateRangePicker
+            startDate={this.state.startDate}
+            startDateId="your_unique_start_date_id"
+            endDate={this.state.endDate}
+            endDateId="your_unique_end_date_id"
+            isDayBlocked={this.isDayBlocked}
+            onDatesChange={this.onDatesChange}
+            focusedInput={this.state.calenderFocused} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+            onFocusChange={this.onFocusChange} // PropTypes.func.isRequired,
+            openDirection={OPEN_UP}
+            readOnly
+            showClearDates
+            // remember that the day argument here is a moment
+          />
+          <div className="ui divider" />
+          <div>
+            <h4>Price</h4>
+          </div>
+          {this.renderPricing()}
+        </div>
+        <div>
+          <button
+            className="ui primary right floated button"
+            onClick={() =>
+              this.onSubmit({
+                status: "Pending",
+                _room: this.props.room,
+                bookingStartDate: this.state.startDate,
+                bookingEndDate: this.state.endDate,
+                createdOn: this.state.createdAt,
+                price: this.calculatePrice() + this.state.cleaningFee
+              })
+            }
+          >
+            Confirm
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  calculatePrice = () => {
+    return this.state.dateRange * this.props.room.nightlyPrice;
+  };
+
+  // could be a separate module
+  renderPricing() {
+    if (this.props.room && this.state.dateRange) {
+      return (
+        <div>
+          <div className="booking__pricing">
+            <div>
+              £{this.props.room.nightlyPrice} x {this.state.dateRange} nights
             </div>
-        )
+            <div style={{ fontSize: "1.5rem" }}>£{this.calculatePrice()}</div>
+          </div>
+          <div className="booking__pricing">
+            <div>Cleaning Fees</div>
+            <div style={{ fontSize: "1.5rem" }}>£20</div>
+          </div>
+          <div className="ui divider" />
+          <div className="booking__pricing">
+            <div>Total Price</div>
+            <div>£{this.calculatePrice() + this.state.cleaningFee}</div>
+          </div>
+        </div>
+      );
     }
+    return <div>Choose Dates to calculate price</div>;
+  }
 
-    renderGuest() {
-        if (this.props.auth) {
-            return <h2>{this.props.auth.name}</h2>
+  renderPhotos() {
+    return (
+      <div className="ui segment">
+        <h2>Photos</h2>
+        <div className="ui divider" />
+        <img
+          alt=""
+          className="ui medium rounded image"
+          src="https://via.placeholder.com/600/92c952"
+        />
+      </div>
+    );
+  }
+
+  // renders the booking details
+  renderContent() {
+    return (
+      <div className="hi ui segment">
+        <h2>Complete Booking</h2>
+        <div className="ui divider" />
+        {this.renderGuest()}
+        <div className="ui divider" />
+        {this.renderRoom()}
+        <div className="ui divider" />
+
+        <div className="ui two column very relaxed stackable grid">
+          <div className="column">{this.renderPhotos()}</div>
+          <div className="column">{this.renderBookingDetails()}</div>
+        </div>
+      </div>
+    );
+  }
+
+  // react dates datepicker helper functions
+  setDateDiff = (startDate, endDate) => {
+    const range = endDate.diff(startDate, "days");
+    this.setState(() => ({ dateRange: range }));
+  };
+
+  isDayBlocked = day => {
+    let hit = false;
+
+    // once we have our start date seleced all dates before said date will be blocked
+    if (this.state.startDate && this.state.calenderFocused === "endDate") {
+      //from our blocked dates list find the next blocked date in relation to the startDate selected
+      let nextBlockedDate = this.props.blockedDates.find(blockedDate => {
+        return moment(blockedDate.bookingStartDate).isAfter(
+          this.state.startDate
+        );
+      });
+
+      if (nextBlockedDate) {
+        if (day.isSameOrAfter(nextBlockedDate.bookingStartDate)) {
+          return true;
         }
-        return (
-            <div>Something Went Wrong</div>
-        )
+      }
+
+      if (day.isBefore(this.state.startDate)) {
+        return true;
+      }
     }
 
-    renderRoom() {
-        if (this.props.room) {
-            const { room } = this.props;
-            return (
-                <div>
-                    <h3>{room.title}</h3>
-
-                    <h4>Amenities</h4>
-                    <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
-                        <p>Bedrooms: {room.bedrooms}</p>
-                        <p>Beds: {room.beds}</p>
-                        <p>Baths: {room.baths}</p>
-                    </div>
-                    
-                </div>
-            )
+    // this will display the regular blocked dates according to the previous bookings
+    if (this.props.blockedDates) {
+      this.props.blockedDates.forEach(blockedDate => {
+        if (
+          day.isSameOrBefore(blockedDate.bookingEndDate) &&
+          day.isSameOrAfter(blockedDate.bookingStartDate)
+        ) {
+          hit = true;
         }
-        return (
-            <div>Something Went Wrong</div>
-        )
-        
+      });
+
+      return hit;
     }
-    
-    setDateDiff = (startDate, endDate) => {
-        const range = endDate.diff(startDate, 'days');
-        this.setState(() => ({ dateRange: range }));
-    };
+  };
 
-    calculatePrice = () => {
-        return this.state.dateRange * this.props.room.nightlyPrice;
+  onDatesChange = ({ startDate, endDate }) => {
+    this.setState(() => ({ startDate, endDate }));
+
+    if (startDate && endDate) {
+      this.setDateDiff(startDate, endDate);
     }
+  };
 
-    onDatesChange = ({startDate, endDate}) => {
+  onFocusChange = focusedInput => {
+    this.setState(() => ({ calenderFocused: focusedInput }));
+  };
 
-        this.setState(() => ({ startDate, endDate }));
-
-        if (startDate && endDate) {
-            this.setDateDiff(startDate, endDate);
-        }
-    }
-
-    onFocusChange = (focusedInput) => {
-        this.setState(() => ({ calenderFocused: focusedInput }));
-    }
-
-    renderBookingDetails() {    
-        return(
-            <div className="ui segment" style={{height:"100%", display:"flex", flexDirection:"column", justifyContent:"space-between"}}>
-                <div>
-                    <h2>Booking Details</h2>
-                    <div className="ui divider"></div>
-                    <div><h4>Select Your Dates</h4></div>
-                    <DateRangePicker 
-                        startDate = {this.state.startDate}
-                        startDateId="your_unique_start_date_id"
-                        endDate = {this.state.endDate}
-                        endDateId="your_unique_end_date_id"
-                        onDatesChange = {this.onDatesChange}
-                        focusedInput={this.state.calenderFocused} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-                        onFocusChange={this.onFocusChange} // PropTypes.func.isRequired,
-                        openDirection={OPEN_UP}
-                    />
-                    <div className="ui divider"></div>
-                    <div><h4>Price</h4></div>
-                    {this.renderPricing()}
-                </div>
-                <div>
-                    <button className="ui primary right floated button" onClick={() => {this.onSubmit({
-                        status: "Pending",
-                        _room: this.props.room._id,
-                        price: this.calculatePrice() + this.state.cleaningFee,
-                        bookingStartDate: this.state.startDate,
-                        bookingEndDate: this.state.endDate,
-                        createdOn: moment()
-                    })}}>
-                        Confirm
-                    </button>
-                </div>
-            </div>
-        )
-    }
-
-    // could be a separate module
-    renderPricing() {
-        if (this.props.room && this.state.dateRange) {
-            return (
-                <div>
-                    <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", marginBottom:"1rem"}}>
-                        <div>£{this.props.room.nightlyPrice}  x   {this.state.dateRange} nights</div>
-                        <div style={{fontSize:"1.5rem"}}>£{this.calculatePrice()}</div>    
-                    </div>
-                    <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", marginBottom:"1rem"}}>
-                        <div>Cleaning Fees</div>
-                        <div style={{fontSize:"1.5rem"}}>£20</div>
-                    </div>
-                    <div className="ui divider"></div>
-                    <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", marginBottom:"1rem"}}>
-                        <div>Total Price</div>
-                        <div>£{this.calculatePrice() + this.state.cleaningFee}</div>
-                    </div>
-                </div>
-
-            )
-        }
-        return (
-            <div>Choose Dates to calculate price</div>
-        )
-        
-    }
-
-    renderPhotos() {
-        return (
-            <div className="ui segment" >
-                <h2>Photos</h2>
-                <div className="ui divider"></div>
-                <img alt="" className="ui medium rounded image" src="https://via.placeholder.com/600/92c952"></img>
-            </div>
-        )
-    }
-
-    render() {
-        return (
-            <div className="ui container" >
-                {this.renderContent()}
-            </div>
-        )
-    }
+  render() {
+    return <div className="ui container">{this.renderContent()}</div>;
+  }
 }
 
-const mapStateToProps = ({ auth, rooms }, ownProps) => {
-    return {
-        auth,
-        room: rooms[ownProps.match.params.id]
-    }
-}
+const mapStateToProps = ({ auth, rooms, blockedDates }, ownProps) => {
+  return {
+    auth,
+    room: rooms.find(room => room._id === ownProps.match.params.id),
+    blockedDates
+  };
+};
 
-export default connect(mapStateToProps, actions)(BookingCreate);
+export default connect(
+  mapStateToProps,
+  actions
+)(BookingCreate);

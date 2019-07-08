@@ -3,3 +3,4 @@ export const FETCH_ROOM = 'fetch_room';
 export const FETCH_ROOMS = 'fetch_rooms';
 export const FETCH_BOOKING = 'fetch_booking';
 export const FETCH_BOOKINGS = 'fetch_bookings';
+export const FETCH_BLOCKED_DATES = "fetch_blocked_dates";

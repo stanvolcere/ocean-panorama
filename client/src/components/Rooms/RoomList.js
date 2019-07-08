@@ -1,59 +1,63 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { fetchRooms } from '../../actions';
-import BookRoomButton from './BookRoomButton';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { fetchRooms } from "../../actions";
+import BookRoomButton from "./BookRoomButton";
 
-class RoomList extends Component{
+class RoomList extends Component {
+  componentDidMount() {
+    this.props.fetchRooms();
+  }
 
-    componentDidMount() {
-        this.props.fetchRooms();
-    }
+  renderContent() {
+    if (this.props.rooms) {
+      const { rooms } = this.props;
 
-    renderContent() {
-        const { rooms } = this.props;
-        var counter = -1;
-        return rooms.map((room) => {
-            counter++;
-            return (
-                <div key={room._id} className="column" style={{display:"flex", alignItems:"center", marginBottom:"1.4rem"}}>
-                    <div className="ui segment">
-                        <Link to={`/rooms/${counter}`}>
-                            <div className="ui card">
-
-                                <div className="image">
-                                    <img alt="" src="https://via.placeholder.com/150/56a8c2"/>
-                                </div>
-                                
-                                <div className="content">
-                                    <a className="header">{room.title}</a>
-                                    <div className="description">
-                                        {room.description}
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </Link>
-                        
-                        <BookRoomButton id={counter} />
-                    </div>
-                </div>
-            )
-            
-        });        
-    }
-
-    render() {
+      return rooms.map(room => {
         return (
-            <div className="ui container">
-                {this.renderContent()} 
+          <div
+            key={room._id}
+            className="column"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              marginBottom: "1.4rem"
+            }}
+          >
+            <div className="ui segment">
+              <Link to={`/rooms/${room._id}`}>
+                <div className="ui card">
+                  <div className="image">
+                    <img alt="" src="https://via.placeholder.com/150/56a8c2" />
+                  </div>
+
+                  <div className="content">
+                    <h3 to="#" className="header">
+                      {room.title}
+                    </h3>
+                    <div className="description">{room.description}</div>
+                  </div>
+                </div>
+              </Link>
+
+              <BookRoomButton id={room._id} />
             </div>
+          </div>
         );
+      });
     }
+  }
+
+  render() {
+    return <div className="ui container">{this.renderContent()}</div>;
+  }
 }
 
 function mapStateToProps({ rooms }) {
-    return { rooms };
+  return { rooms };
 }
 
-export default connect(mapStateToProps, {fetchRooms})(RoomList);
+export default connect(
+  mapStateToProps,
+  { fetchRooms }
+)(RoomList);
