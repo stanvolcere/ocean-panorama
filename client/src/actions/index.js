@@ -4,7 +4,8 @@ import {
   FETCH_ROOMS,
   FETCH_BOOKINGS,
   FETCH_BLOCKED_DATES,
-  FETCH_BOOKING
+  FETCH_BOOKING,
+  CHANGE_DATEPICKER_DATES
 } from "./types";
 import history from "../history";
 
@@ -26,6 +27,13 @@ export const fetchBooking = id => async dispatch => {
 
 export const createBooking = bookingValues => async dispatch => {
   const res = await axios.post(`/api/bookings/`, bookingValues);
+  console.log(res.data);
+  history.push("/bookings");
+};
+
+export const cancelBooking = id => async dispatch => {
+  const res = await axios.delete(`/api/bookings/` + id);
+  console.log(res.data);
   history.push("/bookings");
 };
 
@@ -42,4 +50,9 @@ export const fetchRoom = id => async dispatch => {
 export const fetchBlockedDates = roomId => async dispatch => {
   const res = await axios.get(`/api/bookings/blocked/${roomId}`);
   dispatch({ type: FETCH_BLOCKED_DATES, payload: res.data });
+};
+
+export const updateDatePickerDates = dateValues => async dispatch => {
+  //console.log(dateValues);
+  dispatch({ type: CHANGE_DATEPICKER_DATES, payload: dateValues });
 };

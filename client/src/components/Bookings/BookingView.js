@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import * as actions from "../../actions";
-import { displayDate } from "./utils/helpers";
+import { displayDate } from "./utils/dataPickerHelpers";
 
 class BookingList extends Component {
   componentDidMount() {
@@ -21,12 +21,12 @@ class BookingList extends Component {
           </p>
           <p>Total Price: {this.props.booking.price}</p>
 
-          <Link to="#">
+          <Link to={`/bookings/changedates/${this.props.booking._id}`}>
             <button className="ui inverted secondary button">
               Change Dates
             </button>
           </Link>
-          <Link to="#">
+          <Link to={`/bookings/cancel/${this.props.booking._id}`}>
             <button className="ui inverted red button">Cancel Booking</button>
           </Link>
         </div>

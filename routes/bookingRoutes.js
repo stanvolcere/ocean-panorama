@@ -79,12 +79,24 @@ module.exports = app => {
   });
 
   // update a booking
-  app.patch("/api/bookings", requireLogin, async (req, res) => {
+  app.patch("/api/bookings/:id", requireLogin, async (req, res) => {
     res.send("edit a booking");
   });
 
   // update a booking
-  app.delete("/api/bookings", requireLogin, async (req, res) => {
-    res.send("delete a booking");
+  app.delete("/api/bookings/:id", requireLogin, async (req, res) => {
+    try {
+      const booking = await Booking.findOneAndDelete({
+        _id: req.params.id,
+        _user: req.user._id
+      });
+
+      if (!booking) {
+        return res.status(404).send();
+      }
+      res.send(booking);
+    } catch (e) {
+      res.status(500).send(e);
+    }
   });
 };

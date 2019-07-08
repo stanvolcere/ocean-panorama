@@ -231,11 +231,15 @@ class BookingCreate extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, rooms, blockedDates }, ownProps) => {
+const mapStateToProps = (
+  { auth, rooms, blockedDates, datePickerDates },
+  ownProps
+) => {
   return {
     auth,
     room: rooms.find(room => room._id === ownProps.match.params.id),
-    blockedDates
+    blockedDates,
+    datePickerDates
   };
 };
 

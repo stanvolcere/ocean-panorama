@@ -1,4 +1,4 @@
-import { FETCH_BOOKINGS, FETCH_BOOKING } from "../actions/types";
+import { FETCH_BOOKINGS } from "../actions/types";
 
 export default function(state = [], action) {
   switch (action.type) {

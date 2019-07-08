@@ -12,6 +12,8 @@ import RoomView from "./Rooms/RoomView";
 
 import history from "../history";
 import BookingView from "./Bookings/BookingView";
+import BookingEdit from "./Bookings/BookingEdit";
+import BookingDelete from "./Bookings/BookingDelete";
 
 class App extends Component {
   componentDidMount() {
@@ -27,6 +29,12 @@ class App extends Component {
           <Route exact path="/" component={Landing} />
           <Route exact path="/bookings" component={BookingList} />
           <Route exact path="/bookings/:id" component={BookingView} />
+          <Route
+            exact
+            path="/bookings/changedates/:id"
+            component={BookingEdit}
+          />
+          <Route exact path="/bookings/cancel/:id" component={BookingDelete} />
           <Route exact path="/room/book/:id" component={BookingCreate} />
           <Route exact path="/rooms/:id" component={RoomView} />
         </Switch>
