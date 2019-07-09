@@ -29,13 +29,15 @@ class BookingDelete extends Component {
   }
 
   render() {
+    const { id } = this.props.match.params;
+
     return (
       <Modal
         title="Cancel Booking"
         content={this.renderContent()}
         actions={this.renderActions()}
         onDismiss={() => {
-          history.push("/");
+          history.push(`/bookings/${id}`);
         }}
       />
     );

@@ -10,7 +10,9 @@ import "react-dates/lib/css/_datepicker.css";
 
 class CustomDatePicker extends Component {
   state = {
-    calenderFocused: null
+    calenderFocused: null,
+    startDate: moment(),
+    endDate: moment()
   };
 
   componentDidMount() {
@@ -21,10 +23,11 @@ class CustomDatePicker extends Component {
     let hit = false;
 
     // once we have our start date seleced all dates before said date will be blocked
-    if (
-      this.props.datePickerDates.startDate &&
-      this.state.calenderFocused === "endDate"
-    ) {
+    if (this.state.startDate && this.state.calenderFocused === "endDate") {
+      if (day.isBefore(this.state.startDate)) {
+        return true;
+      }
+
       //from our blocked dates list find the next blocked date in relation to the startDate selected
       let nextBlockedDate = this.props.blockedDates.find(blockedDate => {
         return moment(blockedDate.bookingStartDate).isAfter(
@@ -36,10 +39,6 @@ class CustomDatePicker extends Component {
         if (day.isSameOrAfter(nextBlockedDate.bookingStartDate)) {
           return true;
         }
-      }
-
-      if (day.isBefore(this.state.startDate)) {
-        return true;
       }
     }
 
@@ -61,6 +60,7 @@ class CustomDatePicker extends Component {
   onDatesChange = ({ startDate, endDate }) => {
     //updates the start date and the end date in our redux state
     this.props.updateDatePickerDates({ startDate, endDate });
+    this.setState(() => ({ startDate, endDate }));
   };
 
   onFocusChange = focusedInput => {

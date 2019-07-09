@@ -29,8 +29,12 @@ module.exports = app => {
       }
     }).select("bookingStartDate bookingEndDate");
 
+    bookingsForSpecifiedRoom.sort((a, b) => {
+      return moment(a.bookingStartDate).isAfter(b.bookingStartDate);
+    });
+
     // sent in reversed order here in order to simplfiy the searching of blocked dates
-    res.send(bookingsForSpecifiedRoom.reverse());
+    res.send(bookingsForSpecifiedRoom);
   });
 
   // specific booking for guest
@@ -80,7 +84,39 @@ module.exports = app => {
 
   // update a booking
   app.patch("/api/bookings/:id", requireLogin, async (req, res) => {
-    res.send("edit a booking");
+    // // this handles the error that would occur if we try to update a property that doesm't exist
+    const updates = Object.keys(req.body);
+
+    const allowUpdates = ["price", "bookingStartDate", "bookingEndDate"];
+
+    // if all elements in the array returns true the every will return every
+    const isValidOperation = updates.every(update => {
+      return allowUpdates.includes(update);
+    });
+
+    if (!isValidOperation) {
+      return res.status(500).send({ error: "invalid updates" });
+    }
+
+    try {
+      const booking = await Booking.findOne({
+        _id: req.params.id,
+        _user: req.user._id
+      });
+
+      if (!booking) {
+        return res.status(404).send({ info: "Booking Not Found" });
+      }
+
+      updates.forEach(update => {
+        booking[update] = req.body[update];
+      });
+
+      await booking.save();
+      res.status(200).send(booking);
+    } catch (e) {
+      res.status(500).send(e);
+    }
   });
 
   // update a booking

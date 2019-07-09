@@ -53,6 +53,14 @@ export const fetchBlockedDates = roomId => async dispatch => {
 };
 
 export const updateDatePickerDates = dateValues => async dispatch => {
-  //console.log(dateValues);
   dispatch({ type: CHANGE_DATEPICKER_DATES, payload: dateValues });
+};
+
+export const updateBookingDates = (
+  id,
+  newDatesChangeValues
+) => async dispatch => {
+  const res = await axios.patch(`/api/bookings/${id}`, newDatesChangeValues);
+  dispatch({ type: CHANGE_DATEPICKER_DATES, payload: {} });
+  history.push("/bookings/" + id);
 };
