@@ -15,10 +15,6 @@ class CustomDatePicker extends Component {
     endDate: moment()
   };
 
-  componentDidMount() {
-    this.props.fetchBlockedDates(this.props.roomId);
-  }
-
   isDayBlocked = day => {
     let hit = false;
 
@@ -68,6 +64,8 @@ class CustomDatePicker extends Component {
   };
 
   renderContent() {
+    //console.log(this.props);
+
     return (
       <React.Fragment>
         <DateRangePicker
@@ -93,9 +91,8 @@ class CustomDatePicker extends Component {
   }
 }
 
-const mapStateToProps = ({ blockedDates, datePickerDates }) => {
+const mapStateToProps = ({ datePickerDates }, ownProps) => {
   return {
-    blockedDates,
     datePickerDates
   };
 };

@@ -36,7 +36,19 @@ class BookingList extends Component {
   }
 
   render() {
-    return <div>{this.renderContent()}</div>;
+    return (
+      <div>
+        <Link to="/bookings">
+          <i
+            style={{ paddingLeft: "2rem" }}
+            className="huge arrow alternate circle left outline icon"
+            data-content="Hello. This is an inverted popup"
+            data-variation="basic"
+          />
+        </Link>
+        {this.renderContent()}
+      </div>
+    );
   }
 }
 

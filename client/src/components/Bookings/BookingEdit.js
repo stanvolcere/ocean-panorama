@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import moment from "moment";
 import CustomDatePicker from "../DatePicker/CustomDatePicker";
 import Modal from "../Modal";
 import * as actions from "../../actions";
@@ -14,6 +15,20 @@ class BookingEdit extends Component {
 
   componentDidMount() {
     this.props.fetchBookings();
+    if (this.props.booking) {
+      this.props.fetchBlockedDates(this.props.booking._room._id);
+    }
+  }
+
+  getBlockedDates() {
+    if (this.props.blockedDates) {
+      return this.props.blockedDates.filter(
+        date =>
+          !moment(date.bookingStartDate).isSame(
+            this.props.booking.bookingStartDate
+          )
+      );
+    }
   }
 
   calculatePrice = (startDate, endDate) => {
@@ -62,13 +77,18 @@ class BookingEdit extends Component {
   }
 
   renderContent() {
+    console.log(this.getBlockedDates());
+
     if (this.props.booking) {
       return (
         <div>
           <h4>{`Your current dates are: ${displayDate(
             this.props.booking.bookingStartDate
           )} - ${displayDate(this.props.booking.bookingEndDate)}`}</h4>
-          <CustomDatePicker roomId={this.props.booking._room._id} />
+          <CustomDatePicker
+            roomId={this.props.booking._room._id}
+            blockedDates={this.getBlockedDates()}
+          />
           {this.renderPricing()}
           {this.renderWarning()}
         </div>
@@ -113,9 +133,13 @@ class BookingEdit extends Component {
   }
 }
 
-const mapStateToProps = ({ bookings, datePickerDates }, ownProps) => {
+const mapStateToProps = (
+  { bookings, datePickerDates, blockedDates },
+  ownProps
+) => {
   return {
     booking: bookings.find(booking => booking._id === ownProps.match.params.id),
+    blockedDates,
     datePickerDates
   };
 };

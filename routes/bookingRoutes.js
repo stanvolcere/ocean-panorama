@@ -17,11 +17,16 @@ module.exports = app => {
       return res.status(404).send();
     }
 
+    bookings.sort((a, b) => {
+      return moment(a.bookingStartDate).isAfter(b.bookingStartDate);
+    });
+
     return res.status(200).send(bookings);
   });
 
   app.get("/api/bookings/blocked/:id", requireLogin, async (req, res) => {
-    // res.send("from blocked route");
+    console.log(req.params);
+
     const bookingsForSpecifiedRoom = await Booking.find({
       _room: req.params.id,
       bookingEndDate: {
