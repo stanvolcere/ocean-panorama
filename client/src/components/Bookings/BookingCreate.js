@@ -137,37 +137,37 @@ class BookingCreate extends Component {
     return <div>Choose Dates to calculate price</div>;
   }
 
-  renderPhotos() {
+  renderPhotos(imageUrls) {
     return (
       <div className="ui segment">
         <h2>Photos</h2>
         <div className="ui divider" />
-        <img
-          alt=""
-          className="ui medium rounded image"
-          src="https://via.placeholder.com/600/92c952"
-        />
+        <img alt="" className="ui medium rounded image" src={imageUrls[0]} />
       </div>
     );
   }
 
   // renders the booking details
   renderContent() {
-    return (
-      <div className="hi ui segment">
-        <h2>Complete Booking</h2>
-        <div className="ui divider" />
-        {this.renderGuest()}
-        <div className="ui divider" />
-        {this.renderRoom()}
-        <div className="ui divider" />
+    if (this.props.room) {
+      const { imageUrls } = this.props.room;
 
-        <div className="ui two column very relaxed stackable grid">
-          <div className="column">{this.renderPhotos()}</div>
-          <div className="column">{this.renderBookingDetails()}</div>
+      return (
+        <div className="hi ui segment">
+          <h2>Complete Booking</h2>
+          <div className="ui divider" />
+          {this.renderGuest()}
+          <div className="ui divider" />
+          {this.renderRoom()}
+          <div className="ui divider" />
+
+          <div className="ui two column very relaxed stackable grid">
+            <div className="column">{this.renderPhotos(imageUrls)}</div>
+            <div className="column">{this.renderBookingDetails()}</div>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 
   // react dates datepicker helper functions

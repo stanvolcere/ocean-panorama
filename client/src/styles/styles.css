@@ -1,4 +1,4 @@
-/* COMPLETE BOOKIMG SECTION */
+/* COMPLETE BOOKING SECTION */
 .booking__room {
   display: flex;
   justify-content: space-between;
@@ -15,4 +15,40 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 1rem;
+}
+
+/* COMPLETE LANDING PAGE SECTION */
+
+.landing-hero {
+  height: 90vh;
+  background-image: linear-gradient(to right bottom, #65a5cf80, #1c5488),
+    url("https://ocean-panorama.s3.eu-west-2.amazonaws.com/site-photos/private-room/private-room-10.jpeg");
+  background-size: cover;
+  background-position: top;
+}
+
+.text-box {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.heading-primary {
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.heading-primary-main {
+  display: block;
+  font-size: 60px;
+  font-weight: 400;
+  letter-spacing: 35px;
+}
+
+.heading-primary-sub {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 17.4px;
 }

@@ -5,7 +5,7 @@ import BookRoomButton from "./BookRoomButton";
 class RoomDetail extends Component {
   renderContent() {
     if (this.props.room) {
-      const { title, description, nightlyPrice } = this.props.room;
+      const { title, description, nightlyPrice, imageUrls } = this.props.room;
 
       return (
         <div>
@@ -13,7 +13,7 @@ class RoomDetail extends Component {
           <div className="ui divider" />
           <p>{description}</p>
           <div className="ui divider" />
-          {this.renderImages()}
+          {this.renderImages(imageUrls)}
           <div className="ui divider" />
           {this.renderPrice(nightlyPrice)}
         </div>
@@ -26,14 +26,10 @@ class RoomDetail extends Component {
     );
   }
 
-  renderImages() {
+  renderImages(imageUrls) {
     return (
       <div>
-        <img
-          alt=""
-          className="ui medium centered image"
-          src={`https://via.placeholder.com/600/1fe46f`}
-        />
+        <img alt="" className="ui medium centered image" src={imageUrls[0]} />
       </div>
     );
   }

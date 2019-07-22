@@ -28,7 +28,7 @@ class RoomList extends Component {
               <Link to={`/rooms/${room._id}`}>
                 <div className="ui card">
                   <div className="image">
-                    <img alt="" src="https://via.placeholder.com/150/56a8c2" />
+                    <img alt="" src={room.imageUrls[0]} />
                   </div>
 
                   <div className="content">
