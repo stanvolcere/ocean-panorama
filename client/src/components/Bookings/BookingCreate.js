@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import moment from "moment";
 import { DateRangePicker } from "react-dates";
+import CustomDatePicker from "../DatePicker/CustomDatePicker";
 import "../../styles/styles.css";
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
@@ -66,19 +67,9 @@ class BookingCreate extends Component {
           <div>
             <h4>Select Your Dates</h4>
           </div>
-          <DateRangePicker
-            startDate={this.state.startDate}
-            startDateId="your_unique_start_date_id"
-            endDate={this.state.endDate}
-            endDateId="your_unique_end_date_id"
-            isDayBlocked={this.isDayBlocked}
-            onDatesChange={this.onDatesChange}
-            focusedInput={this.state.calenderFocused} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-            onFocusChange={this.onFocusChange} // PropTypes.func.isRequired,
-            openDirection={OPEN_UP}
-            readOnly
-            showClearDates
-            // remember that the day argument here is a moment
+          <CustomDatePicker
+            roomId={this.props.match.params.id}
+            blockedDates={this.props.blockedDates}
           />
           <div className="ui divider" />
           <div>
@@ -145,6 +136,20 @@ class BookingCreate extends Component {
         <img alt="" className="ui medium rounded image" src={imageUrls[0]} />
       </div>
     );
+  }
+
+  // this function here is not needed in the create booking feature because we will
+  // not have an already selected date range for this new booking
+  getBlockedDates() {
+    //console.log(this.props.blockedDates.length);console.log(this.props.blockedDates);
+    if (this.props.blockedDates.length > 0) {
+      return this.props.blockedDates.filter(
+        date =>
+          !moment(date.bookingStartDate).isSame(
+            this.props.booking.bookingStartDate
+          )
+      );
+    }
   }
 
   // renders the booking details
@@ -226,6 +231,7 @@ class BookingCreate extends Component {
     this.setState(() => ({ calenderFocused: focusedInput }));
   };
 
+  // main render method
   render() {
     return <div className="ui container">{this.renderContent()}</div>;
   }
