@@ -53,9 +53,20 @@ class CustomDatePicker extends Component {
     }
   };
 
+  getDateRange(startDate, endDate) {
+    if (startDate && endDate) {
+      return endDate.diff(startDate, "days");
+    }
+    return 0;
+  }
+
   onDatesChange = ({ startDate, endDate }) => {
     //updates the start date and the end date in our redux state
-    this.props.updateDatePickerDates({ startDate, endDate });
+    this.props.updateDatePickerDates({
+      startDate,
+      endDate,
+      dateRange: this.getDateRange(startDate, endDate)
+    });
     this.setState(() => ({ startDate, endDate }));
   };
 
@@ -64,8 +75,6 @@ class CustomDatePicker extends Component {
   };
 
   renderContent() {
-    //console.log(this.props);
-
     return (
       <React.Fragment>
         <DateRangePicker
