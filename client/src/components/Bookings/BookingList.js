@@ -9,25 +9,15 @@ class BookingList extends Component {
     this.props.fetchBookings();
   }
 
-  renderPhotos() {
+  renderPhotos(imageUrls) {
     return (
       <React.Fragment>
-        <img
-          alt="img"
-          className="ui medium rounded image"
-          src="https://via.placeholder.com/600/92c952"
-        />
+        <img alt="img" className="ui medium rounded image" src={imageUrls[0]} />
       </React.Fragment>
     );
   }
 
-  // displayDate(date) {
-  //   const displayDate = moment(date);
-  //   return displayDate.format("Do MMM YYYY");
-  // }
-
   getStatus(status) {
-    // {if (booking.status === "Confirmed") ? <span className="ui yellow label">{booking.status}</span> : }
     if (status === "Confirmed") {
       return <span className="ui green label">{status}</span>;
     }
@@ -39,7 +29,9 @@ class BookingList extends Component {
       return (
         <div key={booking._id} className="ui divided items">
           <div className="item">
-            <div className="image">{this.renderPhotos()}</div>
+            <div className="image">
+              {this.renderPhotos(booking._room.imageUrls)}
+            </div>
             <div className="middle aligned content">
               <Link to={`/rooms/${booking._room._id}`} className="header large">
                 {booking._room.title}

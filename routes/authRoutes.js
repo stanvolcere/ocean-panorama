@@ -1,4 +1,7 @@
 const passport = require("passport");
+const mongoose = require('mongoose');
+
+const Admin = mongoose.model('admin');
 
 module.exports = app => {
   // GOOGLE
@@ -14,25 +17,45 @@ module.exports = app => {
     "/auth/google/callback",
     passport.authenticate("google"),
     (req, res) => {
+      console.log(req);
       res.redirect("/bookings");
     }
   );
 
   // FACEBOOK
-  app.get(
-    "/auth/facebook",
-    passport.authenticate("facebook", {
-      scope: ["email"]
-    })
+  app.get("/auth/facebook", passport.authenticate("facebook", {
+    scope: ["email"]
+  })
   );
 
-  app.get(
-    "/auth/facebook/callback",
-    passport.authenticate("facebook"),
-    (req, res) => {
-      res.redirect("/bookings");
-    }
+  app.get("/auth/facebook/callback", passport.authenticate("facebook"), (req, res) => {
+    res.redirect("/bookings");
+  }
   );
+
+  // using passport local for login in an admin
+  app.post('/admin/login', passport.authenticate('local', { failureRedirect: "/admin/login" }), (req, res) => {
+    console.log(req.user);
+    res.redirect("/admin/home");
+  });
+
+  // Sign Up a new Admin
+  app.post('/admin', async (req, res) => {
+    const admin = new Admin(req.body);
+
+    try {
+      await admin.save();
+      res.status(201).send(admin);
+    } catch (e) {
+      res.send(e);
+    }
+  });
+
+
+
+
+
+
 
   // General
   app.get("/api/current_user", (req, res) => {

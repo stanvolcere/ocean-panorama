@@ -77,8 +77,6 @@ class BookingEdit extends Component {
   }
 
   renderContent() {
-    console.log(this.getBlockedDates());
-
     if (this.props.booking) {
       return (
         <div>

@@ -26,8 +26,10 @@ export const fetchBooking = id => async dispatch => {
 };
 
 export const createBooking = bookingValues => async dispatch => {
-  const res = await axios.post(`/api/bookings/`, bookingValues);
-  console.log(res.data);
+  await axios.post(`/api/bookings/`, bookingValues);
+
+  //empties our datepicker selected dates fromm the Redux store
+  dispatch({ type: CHANGE_DATEPICKER_DATES, payload: {} });
   history.push("/bookings");
 };
 
@@ -43,7 +45,6 @@ export const fetchRooms = () => async dispatch => {
 
 export const fetchRoom = id => async dispatch => {
   const res = await axios.get(`/api/rooms/${id}`);
-  console.log(res);
 };
 
 export const fetchBlockedDates = roomId => async dispatch => {

@@ -25,8 +25,6 @@ module.exports = app => {
   });
 
   app.get("/api/bookings/blocked/:id", requireLogin, async (req, res) => {
-    console.log(req.params);
-
     const bookingsForSpecifiedRoom = await Booking.find({
       _room: req.params.id,
       bookingEndDate: {
@@ -76,11 +74,12 @@ module.exports = app => {
       bookingEndDate: req.body.bookingEndDate,
       roomTitle: room.title
     };
-    //console.log(bookingDetails);
 
     try {
       await booking.save();
-      sendBookingConfirmationEmail(bookingDetails);
+
+      // TODO: reset this call to the email module to true in live app
+      //sendBookingConfirmationEmail(bookingDetails);
       return res.status(200).send();
     } catch (e) {
       return res.send(e);

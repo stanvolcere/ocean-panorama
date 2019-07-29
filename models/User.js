@@ -9,4 +9,4 @@ const userSchema = new Schema({
 });
 
 // creates the collection in mongoDB under the name user
-mongoose.model( 'user', userSchema );
+mongoose.model('user', userSchema);
