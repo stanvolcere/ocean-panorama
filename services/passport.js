@@ -2,6 +2,8 @@ const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20");
 const FacebookStrategy = require("passport-facebook").Strategy;
 const LocalStrategy = require("passport-local");
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
 const keys = require("../config/dev");
 const mongoose = require("mongoose");
 
@@ -10,6 +12,24 @@ const mongoose = require("mongoose");
 const User = mongoose.model("user");
 
 const Admin = mongoose.model('admin');
+
+// STEP 2
+
+// will generate an identifying token
+// for the user which will be placed on a cookie
+// note this is what is called immediatly after the done we called from within the strategy below
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+// turns a user into a token to identify the user
+// here
+passport.deserializeUser(async (id, done) => {
+  const user = await User.findById(id);
+  // if it's not a user then its might be an admin
+  done(null, user);
+});
+
 
 // STEP 1 - with google strategy
 passport.use(
@@ -90,27 +110,37 @@ passport.use(
 
       return done(null, existingAdmin);
     } catch (e) {
+      done(e);
       console.log(e);
     }
   })
 );
 
-// STEP 2
+// using the JWT for signiing users in using JWT
 
-// will generate an identifying token
-// for the user which will be placed on a cookie
-// note this is what is called immediatly after the done we called from within the strategy below
-passport.serializeUser((user, done) => {
-  //console.log(user.id);
-  done(null, user.id);
-});
+// setup options
+// essesntially we tell it where to look for the JWT
+const jwtOptions = {
+  jwtFromRequest: ExtractJwt.fromHeader('authorization'),
+  secretOrKey: keys.jwtSecret
+};
 
-// turns a user into a token to identify the user
-// here
-passport.deserializeUser(async (id, done) => {
-  const user = await User.findById(id);
-  done(null, user);
-});
+// create the jwt strategy is being used to make authenticated requests
+passport.use(new JwtStrategy(jwtOptions, async (payload, done) => {
+  try {
+    const admin = await Admin.findById(payload.sub);
+
+    if (admin) {
+      return done(null, admin);
+    }
+    return done(null, false);
+  } catch (e) {
+    return done(e, false);
+  }
+
+})
+);
+
 
 // // route handler for handling return from the google server
 // app.get('/auth/google', passport.authenticate('google', {

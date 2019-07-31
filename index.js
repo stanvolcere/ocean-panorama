@@ -18,7 +18,8 @@ require("./services/passport");
 // NOTE: app.use is used whenever we wish to add a middleware which we
 // wish express to use
 // bodyParser will parse any post request payload to a req.body variable
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
+app.use(express.json());
 app.use(
   cookieSession({
     // represents 30 days

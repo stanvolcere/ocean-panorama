@@ -17,7 +17,7 @@ module.exports = app => {
     "/auth/google/callback",
     passport.authenticate("google"),
     (req, res) => {
-      console.log(req);
+
       res.redirect("/bookings");
     }
   );
@@ -29,13 +29,13 @@ module.exports = app => {
   );
 
   app.get("/auth/facebook/callback", passport.authenticate("facebook"), (req, res) => {
+
     res.redirect("/bookings");
   }
   );
 
   // using passport local for login in an admin
   app.post('/admin/login', passport.authenticate('local', { failureRedirect: "/admin/login" }), (req, res) => {
-    console.log(req.user);
     res.redirect("/admin/home");
   });
 
@@ -50,11 +50,6 @@ module.exports = app => {
       res.send(e);
     }
   });
-
-
-
-
-
 
 
   // General

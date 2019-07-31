@@ -42,6 +42,22 @@ adminSchema.statics.findByCredentials = async (username, password) => {
     return admin;
 };
 
+// if we wish to use the this keyword within this function we have to defined it in the 
+// normal way finctions are defined and refrain from using an arrow function
+adminSchema.methods.toJSON = function () {
+    console.log("inside toJSon")
+    // user now holds the current user 
+    const admin = this;
+    const adminObject = admin.toObject();
+
+    // allows us to manupulate the userobject that we want to send back as response
+    // so as to ensure that when we login the data returned to the user does t contain confidential info 
+    // for example password and access tokens
+    delete adminObject.password
+
+    return adminObject;
+};
+
 // setting up our model creation and export like this allows
 // us to reuse the Admin models for querying the db from wothin this schema creation itself
 const Admin = new mongoose.model('admin', adminSchema);
