@@ -1,8 +1,6 @@
 const passport = require("passport");
 const mongoose = require('mongoose');
 
-const Admin = mongoose.model('admin');
-
 module.exports = app => {
   // GOOGLE
   // route handler for handling return from the google server
@@ -17,7 +15,6 @@ module.exports = app => {
     "/auth/google/callback",
     passport.authenticate("google"),
     (req, res) => {
-
       res.redirect("/bookings");
     }
   );
@@ -29,28 +26,9 @@ module.exports = app => {
   );
 
   app.get("/auth/facebook/callback", passport.authenticate("facebook"), (req, res) => {
-
     res.redirect("/bookings");
   }
   );
-
-  // using passport local for login in an admin
-  app.post('/admin/login', passport.authenticate('local', { failureRedirect: "/admin/login" }), (req, res) => {
-    res.redirect("/admin/home");
-  });
-
-  // Sign Up a new Admin
-  app.post('/admin', async (req, res) => {
-    const admin = new Admin(req.body);
-
-    try {
-      await admin.save();
-      res.status(201).send(admin);
-    } catch (e) {
-      res.send(e);
-    }
-  });
-
 
   // General
   app.get("/api/current_user", (req, res) => {

@@ -127,6 +127,7 @@ const jwtOptions = {
 
 // create the jwt strategy is being used to make authenticated requests
 passport.use(new JwtStrategy(jwtOptions, async (payload, done) => {
+
   try {
     const admin = await Admin.findById(payload.sub);
 
@@ -140,9 +141,3 @@ passport.use(new JwtStrategy(jwtOptions, async (payload, done) => {
 
 })
 );
-
-
-// // route handler for handling return from the google server
-// app.get('/auth/google', passport.authenticate('google', {
-//     scope: ['profile', 'email']
-// }));

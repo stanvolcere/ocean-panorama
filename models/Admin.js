@@ -45,7 +45,7 @@ adminSchema.statics.findByCredentials = async (username, password) => {
 // if we wish to use the this keyword within this function we have to defined it in the 
 // normal way finctions are defined and refrain from using an arrow function
 adminSchema.methods.toJSON = function () {
-    console.log("inside toJSon")
+
     // user now holds the current user 
     const admin = this;
     const adminObject = admin.toObject();
