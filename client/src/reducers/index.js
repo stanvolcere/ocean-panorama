@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import { reducer as formReducer } from "redux-form";
 import authReducer from "./authReducer";
 import roomReducer from "./roomReducer";
 import bookingReducer from "./bookingReducer";
@@ -11,5 +12,6 @@ export default combineReducers({
   rooms: roomReducer,
   bookings: bookingReducer,
   blockedDates: blockedDatesReducer,
-  datePickerDates: datePickerDatesReducer
+  datePickerDates: datePickerDatesReducer,
+  form: formReducer
 });

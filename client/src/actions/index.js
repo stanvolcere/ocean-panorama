@@ -15,6 +15,8 @@ export const fetchUser = () => async dispatch => {
   dispatch({ type: FETCH_USER, payload: res.data });
 };
 
+//// Bookings
+
 export const fetchBookings = () => async dispatch => {
   const res = await axios.get("/api/bookings");
   dispatch({ type: FETCH_BOOKINGS, payload: res.data });
@@ -38,6 +40,8 @@ export const cancelBooking = id => async dispatch => {
   history.push("/bookings");
 };
 
+
+// ROOMS
 export const fetchRooms = () => async dispatch => {
   const res = await axios.get("/api/rooms");
   dispatch({ type: FETCH_ROOMS, payload: res.data });
@@ -64,3 +68,8 @@ export const updateBookingDates = (
   dispatch({ type: CHANGE_DATEPICKER_DATES, payload: {} });
   history.push("/bookings/" + id);
 };
+
+// ADMIN
+export const adminSignIn = formValues => async dispatch => {
+  console.log(formValues);
+}

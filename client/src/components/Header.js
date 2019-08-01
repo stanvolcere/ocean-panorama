@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import * as actions from "../actions";
 
 class Header extends Component {
+
   renderContent() {
     switch (this.props.auth) {
       case null:
@@ -29,7 +30,7 @@ class Header extends Component {
     }
   }
 
-  render() {
+  renderGuestsHeader() {
     return (
       <div className="ui secondary menu" style={{ fontSize: "1.5rem" }}>
         <Link to="/" className="item">
@@ -40,6 +41,12 @@ class Header extends Component {
         </Link>
         <div className="right menu">{this.renderContent()}</div>
       </div>
+    )
+  }
+
+  render() {
+    return (
+      this.renderGuestsHeader()
     );
   }
 }

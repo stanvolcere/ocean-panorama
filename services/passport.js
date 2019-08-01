@@ -127,7 +127,7 @@ const jwtOptions = {
 
 // create the jwt strategy is being used to make authenticated requests
 passport.use(new JwtStrategy(jwtOptions, async (payload, done) => {
-
+  // payload.sub in this instance will represnt the admin.id
   try {
     const admin = await Admin.findById(payload.sub);
 
