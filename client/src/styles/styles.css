@@ -17,6 +17,22 @@
   margin-bottom: 1rem;
 }
 
+/* BOOKING LIST SECTION */
+.booking_list_item_content {
+  font-size: 1.5rem;
+}
+
+#booking_list_raised {
+  border-style: solid;
+  border-color: grey;
+  border-width: 1px;
+  border-radius: 5px;
+}
+
+.booking_list_buttons {
+  margin-right: 1rem; 
+}
+
 /* COMPLETE LANDING PAGE SECTION */
 
 .landing-hero {

@@ -28,8 +28,8 @@ class BookingList extends Component {
     return this.props.bookings.map(booking => {
       return (
         <div key={booking._id} className="ui divided items">
-          <div className="item">
-            <div className="image">
+          <div id="booking_list_raised" className="item">
+            <div className="ui medium rounded image">
               {this.renderPhotos(booking._room.imageUrls)}
             </div>
             <div className="middle aligned content">
@@ -54,10 +54,10 @@ class BookingList extends Component {
                   }}
                 >
                   <h4>
-                    Total Cost : {booking.price} (£{booking._room.nightlyPrice}
+                    Total Cost : £{booking.price} (£{booking._room.nightlyPrice}
                     /night)
                   </h4>
-                  <div>
+                  <div className="booking_list_buttons">
                     <Link to={`/bookings/${booking._id}`}>
                       <button className="ui inverted primary button">
                         View Booking Details
@@ -77,7 +77,10 @@ class BookingList extends Component {
     return (
       <div className="ui container">
         <h1>Upcoming Bookings</h1>
-        {this.renderContent()}
+        <div className="booking_list_item_content">
+          {this.renderContent()}
+        </div>
+
       </div>
     );
   }

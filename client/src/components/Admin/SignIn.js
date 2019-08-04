@@ -29,7 +29,6 @@ class AdminSignIn extends Component {
             <form className="ui form error" onSubmit={this.props.handleSubmit(this.onSubmit)}>
                 <Field name="username" component={this.renderInput} label="Enter Username" />
                 <Field name="password" component={this.renderInput} label="Enter Password" />
-                {console.log(this.props)}
                 <Field name="errorMessage" component={this.renderError} anyTouched={this.props.anyTouched} />
                 <button className="ui button">Submit</button>
             </form>
@@ -37,8 +36,9 @@ class AdminSignIn extends Component {
     }
 
     // handlesbmit above will pass down the form values that have been entered by the user
-    onSubmit(formValues) {
-        console.log(formValues);
+    onSubmit = (formValues) => {
+        console.log(this.props);
+        this.props.adminSignIn(formValues);
     }
 
     render() {
