@@ -16,8 +16,9 @@ import RoomView from "./Rooms/RoomView";
 
 import AdminSignIn from "../components/Admin/SignIn";
 
-import PageNotFound from "../PageNotFound";
+import PageNotFound from "./PageNotFound";
 import history from "../history";
+import SignInModal from "./SignInModal";
 
 
 
@@ -33,6 +34,7 @@ class App extends Component {
         <Header />
         <Switch>
           <Route exact path="/" component={Landing} />
+          <Route exact path="/signin" component={SignInModal} />
 
           <Route exact path="/bookings" component={BookingList} />
           <Route exact path="/bookings/:id" component={BookingView} />

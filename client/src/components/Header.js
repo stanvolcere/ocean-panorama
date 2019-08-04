@@ -12,11 +12,11 @@ class Header extends Component {
       case false:
         return [
           <li key="1" className="item">
-            <a href="/auth/google">Log in with Google</a>
+            <a href="/signin">Log In/Sign Up</a>
           </li>,
-          <li key="2" className="item">
-            <a href="/auth/facebook">Log in with Facebook</a>
-          </li>
+          // <li key="2" className="item">
+          //   <a href="/auth/facebook">Log in with Facebook</a>
+          // </li>
         ];
       default:
         return [
