@@ -10,7 +10,7 @@ Key Features:
   
 Preview:
 
-![alt text](https://github.com/stanvolcere/ocean-panorama/tree/master/github-display-pics/screengrab-1.png =100x20 "Preview 1")
+![alt text](https://github.com/stanvolcere/ocean-panorama/tree/master/github-display-pics/screengrab-1.png =250x)
 ![alt text](https://github.com/stanvolcere/ocean-panorama/tree/master/github-display-pics/screengrab-2.png "Preview 2")
 
 
