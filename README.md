@@ -8,6 +8,11 @@ Key Features:
   
   - Automated communication (e.g booking confirmation, payment confirmation or booking cancelation)between guests and tha platform is done using the SendGrid Api.
   
+Preview:
+
+![alt text](https://github.com/stanvolcere/ocean-panorama/tree/master/github-display-pics/screengrab-1 "Preview 1")
+![alt text](https://github.com/stanvolcere/ocean-panorama/tree/master/github-display-pics/screengrab-2 "Preview 2")
+
 
 Tools: Node.js, React, Redux, Stripe and SendGrid.
 

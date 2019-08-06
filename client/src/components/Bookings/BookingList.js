@@ -40,7 +40,7 @@ class BookingList extends Component {
               <div className="meta">{this.getStatus(booking.status)}</div>
               <div className="description">
                 <div>
-                  <h5>Check In - Check Out</h5>
+                  <div>Check In - Check Out</div>
                   <p>
                     {displayDate(booking.bookingStartDate)} -{" "}
                     {displayDate(booking.bookingEndDate)}
@@ -54,10 +54,10 @@ class BookingList extends Component {
                     justifyContent: "space-between"
                   }}
                 >
-                  <h4>
+                  <div>
                     Total Cost : £{booking.price} (£{booking._room.nightlyPrice}
                     /night)
-                  </h4>
+                  </div>
                   <div className="booking_list_buttons">
                     <Link to={`/bookings/${booking._id}`}>
                       <button className="ui inverted primary button">

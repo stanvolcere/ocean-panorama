@@ -29,6 +29,7 @@
 
 .booking_list_item_content {
   font-size: 1.5rem;
+  margin-top: 1rem; 
 }
 
 #booking_list_raised {
@@ -45,17 +46,20 @@
 /* BOOKING DETAIL VIEW */
 .booking__details__back__button {
   padding-left: 2rem;
+  padding-top: 1rem;
+  color: #34b4eb;
   height: fit-content;
   width: fit-content;
 }
 
 .booking__details__main {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .booking__details__main__content {
-  font-size: 1.3rem
+  font-size: 1.5rem;
+  margin: 1.5rem;
 }
 
 /* SIGN IN MODAL  */
@@ -70,8 +74,9 @@
 
 /* HEADER  */
 #guests__header__menu {
+  font-family: 'Darker Grotesque', sans-serif;
   font-size: 1.5em;
-  background-color: #61f2f5;
+  background-color: #34b4eb;
   margin: 0
 }
 
@@ -81,6 +86,7 @@
 }
 
 .section__heading {
+  margin-top: 2rem; 
   font-size: 3em;
   height: 4rem;
 }
@@ -95,6 +101,10 @@
 /* General  */
 .content__heading {
   font-size: 3em;
+}
+
+.header__logout {
+  color: #943855;
 }
 
 

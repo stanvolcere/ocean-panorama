@@ -11,7 +11,7 @@ class BookingList extends Component {
 
   renderPhotos(imageUrls) {
     return <div>
-      <img alt="img" className="ui huge rounded image" src={imageUrls[0]} />
+      <img alt="img" className="ui big rounded image" src={imageUrls[0]} />
     </div>
   }
 
@@ -21,7 +21,7 @@ class BookingList extends Component {
     if (booking) {
       return (
         <div className="ui container">
-          <h1>Booking Detail View</h1>
+          <div className="section__heading">Booking Detail View</div>
           <div className="booking__details__main">
             <div>
               {this.renderPhotos(booking._room.imageUrls)}
@@ -54,9 +54,9 @@ class BookingList extends Component {
   render() {
     return (
       <div>
-        <Link className="booking__details__back__button" to="/bookings">
+        <Link className="" to="/bookings">
           <i
-            className="huge arrow alternate circle left outline icon"
+            className="booking__details__back__button huge arrow alternate circle left outline icon"
             data-content="Hello. This is an inverted popup"
             data-variation="basic"
           />

@@ -19,10 +19,10 @@ class Header extends Component {
       default:
         return [
           <Link key="3" to="/bookings" className="item">
-            My Bookings
+            <div>My Bookings</div>
           </Link>,
           <li key="4" className="item">
-            <a href="/api/logout">Log Out</a>
+            <a className="header__logout" href="/api/logout">Log Out</a>
           </li>
         ];
     }

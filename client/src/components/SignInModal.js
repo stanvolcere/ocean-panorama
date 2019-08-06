@@ -6,8 +6,9 @@ import history from "../history";
 
 class SignInModal extends React.Component {
 
-    onDismiss() {
-        if (this.props.auth) {
+    onDismiss = () => {
+        const { auth } = this.props;
+        if (auth) {
             history.push("/bookings");
         }
         history.push("/");

@@ -28,7 +28,7 @@ class BookingCreate extends Component {
   // details
   renderGuest() {
     if (this.props.auth) {
-      return <h2>{this.props.auth.name}</h2>;
+      return <div>{this.props.auth.name}</div>;
     }
     return <div>Something Went Wrong</div>;
   }
@@ -39,9 +39,9 @@ class BookingCreate extends Component {
       const { room } = this.props;
       return (
         <div>
-          <h3>{room.title}</h3>
+          <div>{room.title}</div>
 
-          <h4>Amenities</h4>
+          <div>Amenities</div>
           <div className="booking__room">
             <p>Bedrooms: {room.bedrooms}</p>
             <p>Beds: {room.beds}</p>
@@ -58,10 +58,10 @@ class BookingCreate extends Component {
     return (
       <div className="booking__details ui segment">
         <div>
-          <h2>Booking Details</h2>
+          <div>Booking Details</div>
           <div className="ui divider" />
           <div>
-            <h4>Select Your Dates</h4>
+            <div>Select Your Dates</div>
           </div>
           <CustomDatePicker
             roomId={this.props.match.params.id}
@@ -129,7 +129,7 @@ class BookingCreate extends Component {
   renderPhotos(imageUrls) {
     return (
       <div className="ui segment">
-        <h2>Photos</h2>
+        <div>Photos</div>
         <div className="ui divider"></div>
         <div className="booking__room_images"  >
           <img alt="" className="ui large rounded image" src={imageUrls[0]} />
@@ -145,7 +145,7 @@ class BookingCreate extends Component {
 
       return (
         <div className="hi ui segment">
-          <h2>Complete Booking</h2>
+          <div>Complete Booking</div>
           <div className="ui divider" />
           {this.renderGuest()}
           <div className="ui divider" />

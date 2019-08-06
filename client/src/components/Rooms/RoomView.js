@@ -27,6 +27,8 @@ class RoomView extends Component {
 
   // this renders the left list of rooms
   renderLeftContent() {
+    console.log(document.querySelector("#page__heading__contents"))
+    console.log(window.pageYOffset);
     return <RoomList />;
   }
 
