@@ -13,11 +13,12 @@ class RoomView extends Component {
   renderContent() {
     if (this.props.room) {
       return (
-        <div
-          className="ui segment"
-          style={{ position: "fixed", width: "55%", height: "85%" }}
-        >
-          <RoomDetail id={this.props.room._id} />
+        <div id="room__detail__display" className="sticky__room__detail">
+          <div
+            className="ui segment"
+          >
+            <RoomDetail id={this.props.room._id} />
+          </div>
         </div>
       );
     }
@@ -31,7 +32,8 @@ class RoomView extends Component {
 
   render() {
     return (
-      <div className="ui container">
+      <div id="page__heading__contents" className="ui container">
+        <div className="section__heading">Our Rooms</div>
         <div className="ui grid">
           <div className="six wide column">{this.renderLeftContent()}</div>
 

@@ -4,7 +4,7 @@ const keys = require('../config/keys');
 
 sgmail.setApiKey(keys.sendgridApiKey);
 
-const sendBookingConfirmationEmail = ({ guestName, guestEmail, bookingTotalPrice, bookingStartDate, bookingEndDate, roomTitle}) => {
+const sendBookingConfirmationEmail = ({ guestName, guestEmail, bookingTotalPrice, bookingStartDate, bookingEndDate, roomTitle }) => {
 
     const getHtml = () => {
 
@@ -27,7 +27,11 @@ const sendBookingConfirmationEmail = ({ guestName, guestEmail, bookingTotalPrice
     }
 
     sgmail.send({
-        to: guestEmail,
+        to: [
+            guestEmail,
+            "booking@oceanpanorama.com",
+            "svolcere10@gmail.com"
+        ],
         from: {
             name: "Ocean Panorama",
             email: "booking@oceanpanorama.com",

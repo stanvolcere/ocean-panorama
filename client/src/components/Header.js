@@ -14,9 +14,7 @@ class Header extends Component {
           <li key="1" className="item">
             <a href="/signin">Log In/Sign Up</a>
           </li>,
-          // <li key="2" className="item">
-          //   <a href="/auth/facebook">Log in with Facebook</a>
-          // </li>
+
         ];
       default:
         return [
@@ -32,9 +30,9 @@ class Header extends Component {
 
   renderGuestsHeader() {
     return (
-      <div className="ui secondary menu" style={{ fontSize: "1.5rem" }}>
+      <div id="guests__header__menu" className="ui secondary menu">
         <Link to="/" className="item">
-          Home
+          Ocean Panorama
         </Link>
         <Link to="/rooms/0" className="item">
           Rooms

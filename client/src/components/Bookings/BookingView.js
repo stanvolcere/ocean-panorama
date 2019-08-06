@@ -9,26 +9,42 @@ class BookingList extends Component {
     this.props.fetchBookings();
   }
 
+  renderPhotos(imageUrls) {
+    return <div>
+      <img alt="img" className="ui huge rounded image" src={imageUrls[0]} />
+    </div>
+  }
+
   renderContent() {
-    if (this.props.booking) {
+    const { booking } = this.props;
+
+    if (booking) {
       return (
         <div className="ui container">
           <h1>Booking Detail View</h1>
-          <p>Room: {this.props.booking._room.title}</p>
-          <p>
-            Dates: {displayDate(this.props.booking.bookingStartDate)} -{" "}
-            {displayDate(this.props.booking.bookingEndDate)}
-          </p>
-          <p>Total Price: {this.props.booking.price}</p>
+          <div className="booking__details__main">
+            <div>
+              {this.renderPhotos(booking._room.imageUrls)}
+            </div>
+            <div className="booking__details__main__content">
+              <p>Room: {booking._room.title}</p>
+              <p>
+                Dates: {displayDate(booking.bookingStartDate)} -{" "}
+                {displayDate(booking.bookingEndDate)}
+              </p>
+              <p>Total Price: £{booking.price}</p>
+              <div className="ui divider"></div>
+              <Link to={`/bookings/changedates/${booking._id}`}>
+                <button className="ui inverted secondary button">
+                  Change Dates
+                </button>
+              </Link>
+              <Link to={`/bookings/cancel/${booking._id}`}>
+                <button className="ui inverted red button">Cancel Booking</button>
+              </Link>
+            </div>
 
-          <Link to={`/bookings/changedates/${this.props.booking._id}`}>
-            <button className="ui inverted secondary button">
-              Change Dates
-            </button>
-          </Link>
-          <Link to={`/bookings/cancel/${this.props.booking._id}`}>
-            <button className="ui inverted red button">Cancel Booking</button>
-          </Link>
+          </div>
         </div>
       );
     }
@@ -38,14 +54,14 @@ class BookingList extends Component {
   render() {
     return (
       <div>
-        <Link to="/bookings">
+        <Link className="booking__details__back__button" to="/bookings">
           <i
-            style={{ paddingLeft: "2rem" }}
             className="huge arrow alternate circle left outline icon"
             data-content="Hello. This is an inverted popup"
             data-variation="basic"
           />
         </Link>
+
         {this.renderContent()}
       </div>
     );

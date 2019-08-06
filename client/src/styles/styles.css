@@ -17,7 +17,16 @@
   margin-bottom: 1rem;
 }
 
+.booking__room_images {
+  display: flex;
+  justify-content: center;
+}
+
 /* BOOKING LIST SECTION */
+.booking__list__header {
+  font-size: 3rem;
+}
+
 .booking_list_item_content {
   font-size: 1.5rem;
 }
@@ -33,19 +42,70 @@
   margin-right: 1rem; 
 }
 
+/* BOOKING DETAIL VIEW */
+.booking__details__back__button {
+  padding-left: 2rem;
+  height: fit-content;
+  width: fit-content;
+}
+
+.booking__details__main {
+  display: flex;
+  justify-content: space-between;
+}
+
+.booking__details__main__content {
+  font-size: 1.3rem
+}
+
 /* SIGN IN MODAL  */
-.signin_modal_actions:a {
+.signin_modal_actions{
+  display: flex;
+  justify-content: space-between
+}
+
+.signin_modal_actions a {
   text-decoration: none;
 }
 
+/* HEADER  */
+#guests__header__menu {
+  font-size: 1.5em;
+  background-color: #61f2f5;
+  margin: 0
+}
+
+/* ROOM LIST VIEW */
+#page__heading__contents{
+  margin-top: 1rem;
+}
+
+.section__heading {
+  font-size: 3em;
+  height: 4rem;
+}
+
+.sticky__room__detail {
+  position: fixed;
+  width: 55%;
+  height: 85%;
+}
+/* style={{ position: "fixed", }} */
+
+/* General  */
+.content__heading {
+  font-size: 3em;
+}
 
 
 /* COMPLETE LANDING PAGE SECTION */
 
 .landing-hero {
   height: 90vh;
-  background-image: linear-gradient(to right bottom, #65a5cf80, #1c5488),
-    url("https://ocean-panorama.s3.eu-west-2.amazonaws.com/site-photos/private-room/private-room-10.jpeg");
+  margin: 0;
+  /* background-image: linear-gradient(to right bottom, #65a5cf80, #1c5488),
+    url("https://ocean-panorama.s3.eu-west-2.amazonaws.com/site-photos/private-room/private-room-10.jpeg"); */
+  background-image: url("https://ocean-panorama.s3.eu-west-2.amazonaws.com/site-photos/private-room/private-room-10.jpeg");
   background-size: cover;
   background-position: top;
 }

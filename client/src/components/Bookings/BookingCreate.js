@@ -130,8 +130,10 @@ class BookingCreate extends Component {
     return (
       <div className="ui segment">
         <h2>Photos</h2>
-        <div className="ui divider" />
-        <img alt="" className="ui medium rounded image" src={imageUrls[0]} />
+        <div className="ui divider"></div>
+        <div className="booking__room_images"  >
+          <img alt="" className="ui large rounded image" src={imageUrls[0]} />
+        </div>
       </div>
     );
   }

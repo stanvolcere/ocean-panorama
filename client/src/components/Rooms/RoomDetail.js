@@ -9,9 +9,9 @@ class RoomDetail extends Component {
 
       return (
         <div>
-          <h1>{title}</h1>
+          <div className="content__heading">{title}</div>
           <div className="ui divider" />
-          <p>{description}</p>
+          <div>{description}</div>
           <div className="ui divider" />
           {this.renderImages(imageUrls)}
           <div className="ui divider" />

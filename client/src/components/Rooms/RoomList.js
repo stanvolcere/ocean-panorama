@@ -49,7 +49,9 @@ class RoomList extends Component {
   }
 
   render() {
-    return <div className="ui container">{this.renderContent()}</div>;
+    return <div className="ui container">
+      {this.renderContent()}
+    </div>;
   }
 }
 

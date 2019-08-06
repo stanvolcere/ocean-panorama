@@ -10,9 +10,10 @@ class BookingList extends Component {
   }
 
   renderPhotos(imageUrls) {
+
     return (
       <React.Fragment>
-        <img alt="img" className="ui medium rounded image" src={imageUrls[0]} />
+        <img alt="img" className="ui big rounded image" src={imageUrls[0]} />
       </React.Fragment>
     );
   }
@@ -33,7 +34,7 @@ class BookingList extends Component {
               {this.renderPhotos(booking._room.imageUrls)}
             </div>
             <div className="middle aligned content">
-              <Link to={`/rooms/${booking._room._id}`} className="header large">
+              <Link to={`/rooms/${booking._room._id}`} style={{ fontSize: "2em" }}>
                 {booking._room.title}
               </Link>
               <div className="meta">{this.getStatus(booking.status)}</div>
@@ -75,8 +76,8 @@ class BookingList extends Component {
 
   render() {
     return (
-      <div className="ui container">
-        <h1>Upcoming Bookings</h1>
+      <div id="page__heading__contents" className="ui container">
+        <div className="section__heading">Upcoming Bookings</div>
         <div className="booking_list_item_content">
           {this.renderContent()}
         </div>
