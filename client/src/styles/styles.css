@@ -75,8 +75,9 @@
 /* HEADER  */
 #guests__header__menu {
   font-family: 'Darker Grotesque', sans-serif;
-  font-size: 1.5em;
-  background-color: #34b4eb;
+  font-size: 1.1em;
+  background-color: transparent;
+  /* background-image: linear-gradient(to right bottom, #65a5cf80, #1c5488); */
   margin: 0
 }
 
@@ -113,30 +114,44 @@
 .landing-hero {
   height: 90vh;
   margin: 0;
+  padding: 1rem 6rem 6rem 6rem;
+  top: 0;
   /* background-image: linear-gradient(to right bottom, #65a5cf80, #1c5488),
-    url("https://ocean-panorama.s3.eu-west-2.amazonaws.com/site-photos/private-room/private-room-10.jpeg"); */
-  background-image: url("https://ocean-panorama.s3.eu-west-2.amazonaws.com/site-photos/private-room/private-room-10.jpeg");
+    url("https://ocean-panorama.s3.eu-west-2.amazonaws.com/site-photos/landing-page/landing-dp.png"); */
+  background-image: url("https://ocean-panorama.s3.eu-west-2.amazonaws.com/site-photos/landing-page/landing-dp.png");
   background-size: cover;
   background-position: top;
+  background-origin: content-box;
+  background-repeat: no-repeat;
 }
 
 .text-box {
   position: absolute;
-  top: 40%;
+  top: 48%;
   left: 50%;
   transform: translate(-50%, -50%);
+  /* background-color: #34b4eb; */
+  /* background: rgba(52, 180, 235, 0.8); */
+  background: rgba(47, 55, 59, 0.6);
+  height: 15rem;
+  width: 65%;
 }
 
-.heading-primary {
+.landing__page__heading-primary {
   color: #ffffff;
   text-transform: uppercase;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .heading-primary-main {
   display: block;
-  font-size: 60px;
+  font-size: 75px;
   font-weight: 400;
-  letter-spacing: 35px;
+  letter-spacing: 10px;
 }
 
 .heading-primary-sub {
