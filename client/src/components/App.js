@@ -19,6 +19,7 @@ import AdminSignIn from "../components/Admin/SignIn";
 import PageNotFound from "./PageNotFound";
 import history from "../history";
 import SignInModal from "./SignInModal";
+import Footer from "./Footer";
 
 
 
@@ -52,6 +53,7 @@ class App extends Component {
 
           <Route component={PageNotFound} />
         </Switch>
+        <Footer />
       </Router>
     );
   }

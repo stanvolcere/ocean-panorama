@@ -160,3 +160,124 @@
   font-weight: 700;
   letter-spacing: 17.4px;
 }
+
+/* Landing Page Rooms Presentation */
+.section__landing {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 5rem;
+}
+
+#rooms {
+  background-color: #34b4eb;
+}
+
+.section__main__header {
+  height: fit-content;
+  font-size: 3rem;
+  font-weight: 500;
+}
+
+.section__main__sub {
+  height: fit-content;
+  font-size: 1.5rem;
+}
+
+.section__rooms__show__room {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 90%;
+}
+
+hr {
+	width: 250px;
+	height: 3px;
+	border: 0;
+	background-color: #3f51b5;
+  margin-bottom: 50px;
+  margin-top: 2rem;
+}
+
+/* ROOM CARD STYLING */
+.room__card {
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  height: 25rem;
+  width: 20rem;
+  margin: 2em;
+  border-radius: 3px;
+}
+
+/* TESTIMONIAL STYLING */
+.testimonial__header {
+  font-size: 3rem;
+}
+
+/* FOOTER STYLING */
+.footer__landing {
+  color: white;
+  background-color: #333333;
+  height: 15rem;
+  margin-top: 10rem;
+  padding-top: 3rem;
+  bottom: 0%;
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+  align-content: center;
+  text-align: center;
+
+}
+
+.footer__info {
+  display: flex;
+  flex-direction: column;
+  width: 25rem;
+}
+
+.footer__info__header {
+  font-size: 2rem;
+  margin-bottom: 2rem; 
+}
+
+.footer__info__sub {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 450px){
+  
+  /* Landing Page */
+  #guests__header__menu {
+    font-size: 0.9rem;
+  }
+	
+  
+  .heading-primary-main {
+    font-size: 50px;
+    justify-content: center;
+    text-align: center;
+    line-height: 1em;
+  }
+
+  .heading-primary-sub {
+    font-size: 15px;
+    text-align: center;
+    line-height: 1.2em;
+  }
+
+  .section__rooms{
+    margin: 0%;
+    background-color: aqua;
+    
+  }
+  .text-box {
+    width: 90%;
+  }
+}

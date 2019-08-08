@@ -1,6 +1,10 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
+import { Link } from "react-router-dom";
+import RoomList from './Rooms/RoomList';
 
 class Landing extends Component {
+
   render() {
     return (
       <div>
@@ -15,10 +19,30 @@ class Landing extends Component {
             </div>
           </div>
         </div>
-        <div className="landing-hero" />
+        <div id="rooms" className="section__landing">
+          <div className="section__main__header">Some of Our Rooms</div>
+          <div className="section__main__sub">Our rooms range from Private Rooms to Entire Floor.</div>
+          <hr></hr>
+          <div className="section__rooms__show__room">
+            <RoomList />
+          </div>
+        </div>
+        <div id="testimonials" className="section__landing">
+          <div className="section__main__header">Some Testimonials from our Adventurers</div>
+          <hr></hr>
+          <div className="testimonial__header">Stan Volcere</div>
+
+          <div>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+          industry's standard dummy text ever since the 1500s.</div>
+        </div>
+
       </div>
     );
   }
 }
 
-export default Landing;
+const mapStateToProps = ({ rooms }) => {
+  return { rooms };
+}
+
+export default connect(mapStateToProps)(Landing);

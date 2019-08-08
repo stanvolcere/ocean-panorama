@@ -10,7 +10,7 @@ class RoomView extends Component {
   }
 
   // main content holding the currently selected room
-  renderContent() {
+  renderRightContent() {
     if (this.props.room) {
       return (
         <div id="room__detail__display" className="sticky__room__detail">
@@ -28,7 +28,7 @@ class RoomView extends Component {
   // this renders the left list of rooms
   renderLeftContent() {
     console.log(document.querySelector("#page__heading__contents"))
-    console.log(window.pageYOffset);
+    console.log(window);
     return <RoomList />;
   }
 
@@ -39,7 +39,7 @@ class RoomView extends Component {
         <div className="ui grid">
           <div className="six wide column">{this.renderLeftContent()}</div>
 
-          <div className="eight wide column">{this.renderContent()}</div>
+          <div className="eight wide column">{this.renderRightContent()}</div>
         </div>
       </div>
     );
