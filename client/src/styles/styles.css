@@ -169,6 +169,7 @@
   justify-content: space-around;
   align-items: center;
   margin-top: 5rem;
+  padding-top: 2rem;
 }
 
 #rooms {
@@ -207,11 +208,45 @@ hr {
 .room__card {
   display: flex;
   flex-direction: column;
-  background-color: black;
+  background-color: white;
   height: 25rem;
   width: 20rem;
   margin: 2em;
-  border-radius: 3px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  color: black;
+}
+
+.room__card__image {
+  width: 100%;
+  height: 50%;
+}
+
+.room__card__header {
+  font-size: 1.5rem;
+}
+
+.room__card__image img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px 5px 0 0;;
+}
+
+.room__card__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex-grow: 1;
+  padding: 1rem;
+}
+.room__card__details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.room__card__pricing {
+  font-size: 2rem;
 }
 
 /* TESTIMONIAL STYLING */

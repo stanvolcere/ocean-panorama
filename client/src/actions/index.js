@@ -36,7 +36,7 @@ export const createBooking = bookingValues => async dispatch => {
 };
 
 export const cancelBooking = id => async dispatch => {
-  const res = await axios.delete(`/api/bookings/` + id);
+  await axios.delete(`/api/bookings/` + id);
   history.push("/bookings");
 };
 

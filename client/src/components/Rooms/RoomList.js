@@ -15,7 +15,7 @@ class RoomList extends Component {
       const { rooms } = this.props;
       return rooms.map(room => {
         return (
-          <React.Fragment>
+          <React.Fragment key={room._id}>
             <RoomCard room={room} />
           </React.Fragment>
         );

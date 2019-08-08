@@ -4,6 +4,8 @@ import { fetchRooms } from "../../actions";
 import RoomList from "./RoomList";
 import RoomDetail from "./RoomDetail";
 
+import ScrollToTopOnMount from "../utils/ScrollToTopOnMount";
+
 class RoomView extends Component {
   componentDidMount() {
     this.props.fetchRooms();
@@ -33,8 +35,10 @@ class RoomView extends Component {
   }
 
   render() {
+
     return (
       <div id="page__heading__contents" className="ui container">
+        <ScrollToTopOnMount />
         <div className="section__heading">Our Rooms</div>
         <div className="ui grid">
           <div className="six wide column">{this.renderLeftContent()}</div>
