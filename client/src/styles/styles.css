@@ -249,6 +249,14 @@ hr {
   font-size: 2rem;
 }
 
+/* ROOM VIEW  */
+div.room__display {
+  position: -webkit-sticky;
+  position: sticky;
+  background-color: #34b4eb;
+  padding: 40px;
+}
+
 /* TESTIMONIAL STYLING */
 .testimonial__header {
   font-size: 3rem;

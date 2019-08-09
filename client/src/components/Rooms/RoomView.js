@@ -15,13 +15,7 @@ class RoomView extends Component {
   renderRightContent() {
     if (this.props.room) {
       return (
-        <div id="room__detail__display" className="sticky__room__detail">
-          <div
-            className="ui segment"
-          >
-            <RoomDetail id={this.props.room._id} />
-          </div>
-        </div>
+        <div className="room__display"></div>
       );
     }
     return <div>Something went wrong.</div>;
@@ -29,8 +23,8 @@ class RoomView extends Component {
 
   // this renders the left list of rooms
   renderLeftContent() {
-    console.log(document.querySelector("#page__heading__contents"))
-    console.log(window);
+    // console.log(document.querySelector("#page__heading__contents"))
+    // console.log(window);
     return <RoomList />;
   }
 
@@ -42,7 +36,6 @@ class RoomView extends Component {
         <div className="section__heading">Our Rooms</div>
         <div className="ui grid">
           <div className="six wide column">{this.renderLeftContent()}</div>
-
           <div className="eight wide column">{this.renderRightContent()}</div>
         </div>
       </div>
