@@ -14,8 +14,11 @@ class RoomView extends Component {
   // main content holding the currently selected room
   renderRightContent() {
     if (this.props.room) {
+      const { room } = this.props;
       return (
-        <div className="room__display"></div>
+        <div class="room__display">
+          <div className="room__display__header">{room.title}</div>
+        </div>
       );
     }
     return <div>Something went wrong.</div>;
@@ -23,9 +26,7 @@ class RoomView extends Component {
 
   // this renders the left list of rooms
   renderLeftContent() {
-    // console.log(document.querySelector("#page__heading__contents"))
-    // console.log(window);
-    return <RoomList />;
+    return <RoomList />
   }
 
   render() {
@@ -35,7 +36,7 @@ class RoomView extends Component {
         <ScrollToTopOnMount />
         <div className="section__heading">Our Rooms</div>
         <div className="ui grid">
-          <div className="six wide column">{this.renderLeftContent()}</div>
+          <div className="six wide column room__view__list">{this.renderLeftContent()}</div>
           <div className="eight wide column">{this.renderRightContent()}</div>
         </div>
       </div>

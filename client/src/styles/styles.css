@@ -250,11 +250,17 @@ hr {
 }
 
 /* ROOM VIEW  */
-div.room__display {
-  position: -webkit-sticky;
+.room__display {
   position: sticky;
+  position: -webkit-sticky;
+  top: 5%;
   background-color: #34b4eb;
-  padding: 40px;
+  width: 55rem;
+  height: 45rem;
+}
+
+.room__display__header {
+  font-size: 4rem;
 }
 
 /* TESTIMONIAL STYLING */
