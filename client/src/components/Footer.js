@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 class Footer extends Component {
     render() {
         return (
-            <div className="footer__landing">
+            <footer className="footer__landing">
                 <div className="footer__info">
                     <div className="footer__info__header">
                         <span>Location</span>
@@ -19,7 +19,7 @@ class Footer extends Component {
                     </div>
                     <div className="footer__info__sub">
                         <span>E-mail: hellooceanpanorama@gmail.com</span>
-                        <span>Phone: +248 2524 756</span>
+                        <span>Phone: +248 2 524 756</span>
                     </div>
                 </div>
                 <div className="footer__info">
@@ -31,7 +31,7 @@ class Footer extends Component {
                         <span>FAQs</span>
                     </div>
                 </div>
-            </div>
+            </footer>
         )
     }
 }

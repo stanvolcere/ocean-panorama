@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchRooms } from "../../actions";
 import RoomList from "./RoomList";
-import RoomDetail from "./RoomDetail";
-
+import BookRoomButton from "./BookRoomButton";
 import ScrollToTopOnMount from "../utils/ScrollToTopOnMount";
 
 class RoomView extends Component {
@@ -11,14 +10,58 @@ class RoomView extends Component {
     this.props.fetchRooms();
   }
 
+  // will send us to top of page on compoent mount 
+  scrollToTopOnMount() {
+    return <ScrollToTopOnMount />
+  }
+
+  renderActions(roomId) {
+    return (
+      <div>
+        <BookRoomButton roomId={roomId} />
+        <button class="ui inverted primary button">Make Enquiry</button>
+      </div>
+    )
+  }
+
+  renderRoomDetails(room) {
+    return <div className="room__details__info">
+      <span>{room.beds} <i className="bed icon"></i></span>
+      <span>{room.baths} <i className="shower icon"></i></span>
+      <span>{room.maxGuests} <i className="male icon"></i></span>
+    </div>
+  }
+
+  renderPhotos(imageUrls) {
+    return (<div className="ui large rounded image">
+      <img src={imageUrls}></img>
+    </div>)
+  }
+
   // main content holding the currently selected room
   renderRightContent() {
     if (this.props.room) {
       const { room } = this.props;
       return (
-        <div class="room__display">
-          <div className="room__display__header">{room.title}</div>
-        </div>
+        <div className="room__display">
+          <div>
+            <div className="room__display__header">{room.title}</div>
+            <div className="room__display__sub">{room.description}</div>
+          </div>
+
+          <div className="room__display__content">
+            {this.renderPhotos(room.imageUrls)}
+            <div className="room__display__details">
+              <div className="room__display__details__header">Room Details</div>
+              {this.renderRoomDetails(room)}
+            </div>
+          </div>
+          <div className="ui divider">
+          </div>
+          <div className="room__display__actions">
+            {this.renderActions(room._id)}
+          </div>
+        </div >
       );
     }
     return <div>Something went wrong.</div>;
@@ -33,7 +76,7 @@ class RoomView extends Component {
 
     return (
       <div id="page__heading__contents" className="ui container">
-        <ScrollToTopOnMount />
+        {this.scrollToTopOnMount()}
         <div className="section__heading">Our Rooms</div>
         <div className="ui grid">
           <div className="six wide column room__view__list">{this.renderLeftContent()}</div>

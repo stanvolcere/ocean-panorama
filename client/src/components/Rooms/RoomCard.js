@@ -7,7 +7,6 @@ class RoomCard extends Component {
 
     render() {
         const { room } = this.props;
-        console.log(room);
         return (
             <Link to={`/rooms/${room._id}`} >
                 <div className="room__card">

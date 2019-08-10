@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import * as actions from "../../actions";
 import { displayDate } from "./utils/dataPickerHelpers";
+import ScrollTopTopOnMount from "../utils/ScrollToTopOnMount";
 
 class BookingList extends Component {
   componentDidMount() {
@@ -52,8 +53,10 @@ class BookingList extends Component {
   }
 
   render() {
+    // will scroll the page to top of page when we first mount the component using - <ScrollTopTopOnMount />
     return (
       <div>
+        <ScrollTopTopOnMount />
         <Link className="" to="/bookings">
           <i
             className="booking__details__back__button huge arrow alternate circle left outline icon"

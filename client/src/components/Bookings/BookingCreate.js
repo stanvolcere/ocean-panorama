@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import moment from "moment";
 import CustomDatePicker from "../DatePicker/CustomDatePicker";
+import ScrollToTopOnMount from "../utils/ScrollToTopOnMount";
 import "../../styles/styles.css";
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
@@ -18,6 +19,11 @@ class BookingCreate extends Component {
     this.props.fetchUser();
     this.props.fetchRooms();
     this.props.fetchBlockedDates(this.props.match.params.id);
+  }
+
+  // will send us to top of page on compoent mount 
+  scrollToTopOnMount() {
+    return <ScrollToTopOnMount />
   }
 
   // this will trigger the create booking form submit
@@ -163,7 +169,12 @@ class BookingCreate extends Component {
 
   // main render method
   render() {
-    return <div className="ui container">{this.renderContent()}</div>;
+    return (
+      <div className="ui container">
+        {this.scrollToTopOnMount()}
+        {this.renderContent()}
+      </div>
+    )
   }
 }
 

@@ -21,6 +21,7 @@ import history from "../history";
 import SignInModal from "./SignInModal";
 import Footer from "./Footer";
 
+import ScrollToTopOnMount from "./utils/ScrollToTopOnMount";
 
 class App extends Component {
   componentDidMount() {
@@ -30,29 +31,34 @@ class App extends Component {
 
   render() {
     return (
-      <Router history={history}>
-        <Header />
-        <Switch>
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/signin" component={SignInModal} />
+      <Router history={history} >
+        <div className="main__styling__after__root">
+          <Header />
 
-          <Route exact path="/bookings" component={BookingList} />
-          <Route exact path="/bookings/:id" component={BookingView} />
-          <Route
-            exact
-            path="/bookings/changedates/:id"
-            component={BookingEdit}
-          />
-          <Route exact path="/bookings/cancel/:id" component={BookingDelete} />
-          <Route exact path="/room/book/:id" component={BookingCreate} />
-          <Route exact path="/rooms/:id" component={RoomView} />
+          <div className="content__on__any__page">
+            <Switch>
+              <Route exact path="/" component={Landing} />
+              <Route exact path="/signin" component={SignInModal} />
+
+              <Route exact path="/bookings" component={BookingList} />
+              <Route exact path="/bookings/:id" component={BookingView} />
+              <Route
+                exact
+                path="/bookings/changedates/:id"
+                component={BookingEdit}
+              />
+              <Route exact path="/bookings/cancel/:id" component={BookingDelete} />
+              <Route exact path="/room/book/:id" component={BookingCreate} />
+              <Route exact path="/rooms/:id" component={RoomView} />
 
 
-          <Route exact path="/admin" component={AdminSignIn} />
+              <Route exact path="/admin" component={AdminSignIn} />
 
-          <Route component={PageNotFound} />
-        </Switch>
-        <Footer />
+              <Route component={PageNotFound} />
+            </Switch>
+          </div>
+          <Footer />
+        </div>
       </Router >
     );
   }

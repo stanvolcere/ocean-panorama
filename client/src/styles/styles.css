@@ -1,3 +1,14 @@
+/* MAIN PAGE  */
+.content__on__any__page {
+  flex: 1;
+}
+
+.main__styling__after__root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 /* COMPLETE BOOKING SECTION */
 .booking__room {
   display: flex;
@@ -254,13 +265,53 @@ hr {
   position: sticky;
   position: -webkit-sticky;
   top: 5%;
-  background-color: #34b4eb;
+  background-color: #00aeff;
   width: 55rem;
   height: 45rem;
+
+  padding: 1.5rem;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-around;
+
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .room__display__header {
-  font-size: 4rem;
+  font-size: 4.5rem;
+  margin: 10px;
+  line-height: 1;
+}
+
+.room__display__sub {
+  font-size: 1.5rem;
+  margin: 10px;
+}
+
+.room__display__content {
+  display: flex;
+  justify-content: space-around;
+  
+}
+
+.room__display__details {
+  flex-grow: 1;
+  padding-left: 1rem;
+}
+
+.room__display__details__header {
+  font-size: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+.room__details__info {
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-around;
+  font-size: 2.5rem;
 }
 
 /* TESTIMONIAL STYLING */
@@ -270,18 +321,20 @@ hr {
 
 /* FOOTER STYLING */
 .footer__landing {
+  position: relative;
   color: white;
   background-color: #333333;
   height: 15rem;
+  width: 100%;
   margin-top: 10rem;
   padding-top: 3rem;
-  bottom: 0%;
+  bottom: 0;
   display: flex;
   justify-content: space-around;
   align-items: baseline;
   align-content: center;
   text-align: center;
-
+  
 }
 
 .footer__info {

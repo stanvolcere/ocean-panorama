@@ -10,7 +10,6 @@ class BookingList extends Component {
   }
 
   renderPhotos(imageUrls) {
-
     return (
       <React.Fragment>
         <img alt="img" className="ui big rounded image" src={imageUrls[0]} />
