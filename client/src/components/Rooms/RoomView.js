@@ -17,9 +17,9 @@ class RoomView extends Component {
 
   renderActions(roomId) {
     return (
-      <div>
+      <div className="room__display__actions">
+        <button class="ui yellow button">Make Enquiry</button>
         <BookRoomButton roomId={roomId} />
-        <button class="ui inverted primary button">Make Enquiry</button>
       </div>
     )
   }
@@ -34,7 +34,7 @@ class RoomView extends Component {
 
   renderPhotos(imageUrls) {
     return (<div className="ui large rounded image">
-      <img src={imageUrls}></img>
+      <img src={imageUrls} alt="img"></img>
     </div>)
   }
 
@@ -48,17 +48,16 @@ class RoomView extends Component {
             <div className="room__display__header">{room.title}</div>
             <div className="room__display__sub">{room.description}</div>
           </div>
-
+          <div className="ui divider" />
           <div className="room__display__content">
             {this.renderPhotos(room.imageUrls)}
             <div className="room__display__details">
-              <div className="room__display__details__header">Room Details</div>
+              <div className="content__heading__sub">Room Details</div>
               {this.renderRoomDetails(room)}
             </div>
           </div>
-          <div className="ui divider">
-          </div>
-          <div className="room__display__actions">
+          <div className="ui divider"></div>
+          <div>
             {this.renderActions(room._id)}
           </div>
         </div >

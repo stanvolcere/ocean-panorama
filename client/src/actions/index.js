@@ -48,7 +48,7 @@ export const fetchRooms = () => async dispatch => {
 };
 
 export const fetchRoom = id => async dispatch => {
-  const res = await axios.get(`/api/rooms/${id}`);
+  await axios.get(`/api/rooms/${id}`);
 };
 
 export const fetchBlockedDates = roomId => async dispatch => {
@@ -64,10 +64,14 @@ export const updateBookingDates = (
   id,
   newDatesChangeValues
 ) => async dispatch => {
-  const res = await axios.patch(`/api/bookings/${id}`, newDatesChangeValues);
+  await axios.patch(`/api/bookings/${id}`, newDatesChangeValues);
   dispatch({ type: CHANGE_DATEPICKER_DATES, payload: {} });
   history.push("/bookings/" + id);
 };
+
+export const clearSelectedDates = () => async dispatch => {
+  dispatch({ type: CHANGE_DATEPICKER_DATES, payload: {} });
+}
 
 // ADMIN
 export const adminSignIn = formValues => async dispatch => {

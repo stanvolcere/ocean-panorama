@@ -21,8 +21,6 @@ import history from "../history";
 import SignInModal from "./SignInModal";
 import Footer from "./Footer";
 
-import ScrollToTopOnMount from "./utils/ScrollToTopOnMount";
-
 class App extends Component {
   componentDidMount() {
     // load the user

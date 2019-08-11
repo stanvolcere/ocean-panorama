@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import moment from "moment";
 import { DateRangePicker } from "react-dates";
-import { OPEN_UP } from "react-dates/lib/constants";
 import * as actions from "../../actions";
 import "../../styles/styles.css";
 import "react-dates/initialize";
@@ -89,7 +88,7 @@ class CustomDatePicker extends Component {
           //openDirection={OPEN_UP}
           readOnly
           showClearDates
-          // remember that the day argument here is a moment
+        // remember that the day argument here is a moment
         />
       </React.Fragment>
     );

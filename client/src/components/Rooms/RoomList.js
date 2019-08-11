@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { fetchRooms } from "../../actions";
-import BookRoomButton from "./BookRoomButton";
 import RoomCard from "./RoomCard";
 
 class RoomList extends Component {

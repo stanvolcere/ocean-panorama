@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
-import { fetchRooms } from "../../actions";
+
 
 class RoomCard extends Component {
 
@@ -11,7 +10,7 @@ class RoomCard extends Component {
             <Link to={`/rooms/${room._id}`} >
                 <div className="room__card">
                     <div className="room__card__image">
-                        <img src={room.imageUrls[0]}></img>
+                        <img src={room.imageUrls[0]} alt="img"></img>
                     </div>
                     <div className="room__card__content">
                         <div className="room__card__header">{room.title}</div>

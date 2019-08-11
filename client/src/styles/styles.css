@@ -10,16 +10,32 @@
 }
 
 /* COMPLETE BOOKING SECTION */
-.booking__room {
-  display: flex;
-  justify-content: space-between;
+.new__booking__guest {
+  font-size: 3rem;
 }
 
-.booking__details {
-  height: 100%;
+#new__booking__container {
+  font-size: 2rem;
+}
+
+.booking__render__room {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.booking__room__details {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+.booking__details {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 1.5rem;
 }
 
 .booking__pricing {
@@ -27,6 +43,8 @@
   justify-content: space-between;
   margin-bottom: 1rem;
 }
+
+
 
 .booking__room_images {
   display: flex;
@@ -54,7 +72,7 @@
   margin-right: 1rem; 
 }
 
-/* BOOKING DETAIL VIEW */
+/* BOOKING DETAIL VIEW COMPONENT*/
 .booking__details__back__button {
   padding-left: 2rem;
   padding-top: 1rem;
@@ -108,11 +126,16 @@
   width: 55%;
   height: 85%;
 }
-/* style={{ position: "fixed", }} */
 
 /* General  */
 .content__heading {
-  font-size: 3em;
+  font-size: 3rem;
+}
+
+.content__heading__sub {
+  font-size: 1.5rem;
+  text-decoration: underline;
+  margin-bottom: 0.3rem;
 }
 
 .header__logout {
@@ -215,7 +238,7 @@ hr {
   margin-top: 2rem;
 }
 
-/* ROOM CARD STYLING */
+/* ROOM CARD COMPONENT STYLING */
 .room__card {
   display: flex;
   flex-direction: column;
@@ -260,14 +283,19 @@ hr {
   font-size: 2rem;
 }
 
-/* ROOM VIEW  */
+.room__display__actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ROOM VIEW COMPONENT */
 .room__display {
   position: sticky;
   position: -webkit-sticky;
   top: 5%;
-  background-color: #00aeff;
+  background-color: #34b4eb;
   width: 55rem;
-  height: 45rem;
+  height: auto;
 
   padding: 1.5rem;
 
@@ -300,11 +328,6 @@ hr {
 .room__display__details {
   flex-grow: 1;
   padding-left: 1rem;
-}
-
-.room__display__details__header {
-  font-size: 1.5rem;
-  padding-bottom: 1rem;
 }
 
 .room__details__info {
