@@ -7,11 +7,27 @@ import history from "../history";
 
 class SignInModal extends React.Component {
 
-    onDismiss = () => {
+    componentDidMount() {
         console.log(this.props);
+        console.log(localStorage.getItem('destination'));
+    };
+
+    componentDidUpdate() {
+        console.log(localStorage);
+    }
+
+    componentWillUnmount() {
+        console.log("im about to unmount");
+    }
+
+    goToAuthenticatedPage() {
+        history.push("bookings");
+    }
+
+    onDismiss = () => {
         const { auth } = this.props;
         if (auth) {
-            history.push(`${this.props.match.path}`);
+            history.push("/bookings");
         }
         history.push("/");
     }
@@ -21,18 +37,20 @@ class SignInModal extends React.Component {
         if (!auth) {
             return "You have to be signed in to perform that.";
         }
-        return `You are currently signed in as: ${auth.name}`;
+        //return `You are currently signed in as: ${auth.name}`;
+        this.goToAuthenticatedPage();
     }
 
     renderActions() {
         if (this.props.auth) {
-            return (
-                <a href="/api/logout">
-                    <button class="ui secondary button">
-                        Sign Out
-                    </button>
-                </a>
-            )
+            // return (
+            //     <a href="/api/logout">
+            //         <button class="ui secondary button">
+            //             Sign Out
+            //         </button>
+            //     </a>
+            // )
+            this.goToAuthenticatedPage();
         }
         return (
             <div className="signin_modal_actions">

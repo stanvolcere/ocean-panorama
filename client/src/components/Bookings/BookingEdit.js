@@ -142,7 +142,4 @@ const mapStateToProps = (
   };
 };
 
-export default connect(
-  mapStateToProps,
-  actions
-)(BookingEdit);
+export default connect(mapStateToProps, actions)(requireAuth(BookingEdit));

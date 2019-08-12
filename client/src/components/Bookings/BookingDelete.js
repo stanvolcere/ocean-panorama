@@ -44,7 +44,4 @@ class BookingDelete extends Component {
   }
 }
 
-export default connect(
-  null,
-  actions
-)(BookingDelete);
+export default connect(mapStateToProps, actions)(requireAuth(BookingDelete));

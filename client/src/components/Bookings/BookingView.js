@@ -77,7 +77,4 @@ const mapStateToProps = ({ bookings }, ownProps) => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  actions
-)(BookingList);
+export default connect(mapStateToProps, actions)(requireAuth(BookingList));

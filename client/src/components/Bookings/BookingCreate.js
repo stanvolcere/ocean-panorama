@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import moment from "moment";
 import CustomDatePicker from "../DatePicker/CustomDatePicker";
 import ScrollToTopOnMount from "../utils/ScrollToTopOnMount";
+import requireAuth from '../utils/requireAuth';
+
 import "../../styles/styles.css";
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
@@ -188,7 +190,4 @@ const mapStateToProps = (
   };
 };
 
-export default connect(
-  mapStateToProps,
-  actions
-)(BookingCreate);
+export default connect(mapStateToProps, actions)(requireAuth(BookingCreate));
