@@ -4,12 +4,14 @@ import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import history from "../history";
 
+
 class SignInModal extends React.Component {
 
     onDismiss = () => {
+        console.log(this.props);
         const { auth } = this.props;
         if (auth) {
-            history.push("/bookings");
+            history.push(`${this.props.match.path}`);
         }
         history.push("/");
     }

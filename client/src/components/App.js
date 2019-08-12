@@ -19,6 +19,7 @@ import AdminSignIn from "../components/Admin/SignIn";
 import PageNotFound from "./PageNotFound";
 import history from "../history";
 import SignInModal from "./SignInModal";
+import SendEnquiryModal from "./Enquiry/SendEnquiryModal";
 import Footer from "./Footer";
 
 class App extends Component {
@@ -48,6 +49,7 @@ class App extends Component {
               <Route exact path="/bookings/cancel/:id" component={BookingDelete} />
               <Route exact path="/room/book/:id" component={BookingCreate} />
               <Route exact path="/rooms/:id" component={RoomView} />
+              <Route exect path="/enquiry" component={SendEnquiryModal}></Route>
 
 
               <Route exact path="/admin" component={AdminSignIn} />

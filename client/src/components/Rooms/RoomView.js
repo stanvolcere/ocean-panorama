@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
 import { fetchRooms } from "../../actions";
 import RoomList from "./RoomList";
 import BookRoomButton from "./BookRoomButton";
@@ -15,11 +16,11 @@ class RoomView extends Component {
     return <ScrollToTopOnMount />
   }
 
-  renderActions(roomId) {
+  renderActions(room) {
     return (
       <div className="room__display__actions">
-        <button class="ui yellow button">Make Enquiry</button>
-        <BookRoomButton roomId={roomId} />
+        <Link to="/enquiry" room={room}><button className="ui yellow button">Make Enquiry</button></Link>
+        <BookRoomButton roomId={room._id} />
       </div>
     )
   }
@@ -58,7 +59,7 @@ class RoomView extends Component {
           </div>
           <div className="ui divider"></div>
           <div>
-            {this.renderActions(room._id)}
+            {this.renderActions(room)}
           </div>
         </div >
       );
