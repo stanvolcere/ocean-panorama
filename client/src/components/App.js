@@ -19,6 +19,7 @@ import AdminSignIn from "../components/Admin/SignIn";
 import PageNotFound from "./PageNotFound";
 import history from "../history";
 import SignInModal from "./SignInModal";
+import AfterSignIn from "./Auth/AfterSignIn";
 import SendEnquiryModal from "./Enquiry/SendEnquiryModal";
 import Footer from "./Footer";
 
@@ -34,10 +35,12 @@ class App extends Component {
         <div className="main__styling__after__root">
           <Header />
 
+
           <div className="content__on__any__page">
             <Switch>
               <Route exact path="/" component={Landing} />
               <Route exact path="/signin" component={SignInModal} />
+              <Route exact path="/aftersignin" component={AfterSignIn} />
 
               <Route exact path="/bookings" component={BookingList} />
               <Route exact path="/bookings/:id" component={BookingView} />

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Modal from "../Modal";
 import * as actions from "../../actions";
 import history from "../../history";
+import requireAuth from "../utils/requireAuth";
 
 class BookingDelete extends Component {
   renderContent() {
@@ -44,4 +45,4 @@ class BookingDelete extends Component {
   }
 }
 
-export default connect(mapStateToProps, actions)(requireAuth(BookingDelete));
+export default connect(null, actions)(requireAuth(BookingDelete));

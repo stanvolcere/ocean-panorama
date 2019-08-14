@@ -8,20 +8,7 @@ import history from "../history";
 class SignInModal extends React.Component {
 
     componentDidMount() {
-        console.log(this.props);
-        console.log(localStorage.getItem('destination'));
-    };
-
-    componentDidUpdate() {
-        console.log(localStorage);
-    }
-
-    componentWillUnmount() {
-        console.log("im about to unmount");
-    }
-
-    goToAuthenticatedPage() {
-        history.push("bookings");
+        this.checkAuth();
     }
 
     onDismiss = () => {
@@ -32,46 +19,53 @@ class SignInModal extends React.Component {
         history.push("/");
     }
 
+    checkAuth() {
+        let destinationUrl = localStorage.getItem("destinationUrl");
+
+        if (this.props.auth && destinationUrl) {
+            if (destinationUrl.includes("booking")) {
+                destinationUrl = "/bookings";
+            }
+
+            localStorage.removeItem("destinationUrl");
+            //history.push(`${destinationUrl}`);
+            history.push(destinationUrl);
+        }
+    }
+
     renderContent() {
         const { auth } = this.props;
         if (!auth) {
             return "You have to be signed in to perform that.";
         }
-        //return `You are currently signed in as: ${auth.name}`;
-        this.goToAuthenticatedPage();
+        return `You are currently signed in as: ${auth.name}`;
+
     }
 
     renderActions() {
-        if (this.props.auth) {
-            // return (
-            //     <a href="/api/logout">
-            //         <button class="ui secondary button">
-            //             Sign Out
-            //         </button>
-            //     </a>
-            // )
-            this.goToAuthenticatedPage();
-        }
-        return (
-            <div className="signin_modal_actions">
-                <a href="/auth/facebook">
-                    <button className="ui facebook button">
-                        <i className="facebook icon"></i>
-                        Sign In with Facebook
+        if (!this.props.auth) {
+            return (
+                <div className="signin_modal_actions">
+                    <a href="/auth/facebook">
+                        <button className="ui facebook button">
+                            <i className="facebook icon"></i>
+                            Sign In with Facebook
+                        </button>
+                    </a>
+                    <a href="/auth/google">
+                        <button className="ui google plus button">
+                            <i className="google plus icon"></i>
+                            Sign In with Google
                     </button>
-                </a>
-                <a href="/auth/google">
-                    <button className="ui google plus button">
-                        <i className="google plus icon"></i>
-                        Sign In with Google
-                </button>
-                </a>
-            </div>
+                    </a>
+                </div>
 
-        )
+            )
+        }
     }
 
     render() {
+        this.checkAuth();
         // e.stopPropagation stops the event from bubbling up to en eventual event handler
         // which would cause the history.push() event to accidentaly get pushed
         return ReactDOM.createPortal(

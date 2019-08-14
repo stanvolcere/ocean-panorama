@@ -7,6 +7,7 @@ import Modal from "../Modal";
 import * as actions from "../../actions";
 import history from "../../history";
 import { displayDate, getDateDiff } from "../Bookings/utils/dataPickerHelpers";
+import requireAuth from "../utils/requireAuth";
 
 class BookingEdit extends Component {
   state = {

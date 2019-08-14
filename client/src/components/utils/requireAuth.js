@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as actions from '../../actions';
+import history from "../../history";
 
 export default ChildComponent => {
   class ComposedComponent extends Component {
@@ -7,27 +9,38 @@ export default ChildComponent => {
     // Our component just got rendered
     componentDidMount() {
       console.log(this.props);
-      // console.log(localStorage.getItem('destination'));
+      this.props.fetchUser();
+      this.setDestinationUrl();
       this.shouldNavigateAway();
     }
     // Our component just got updated
     componentDidUpdate() {
       this.shouldNavigateAway();
-      console.log(this.props);
+    }
+
+    setDestinationUrl() {
+      const destinationUrl = localStorage.getItem("destinationUrl");
+      const { auth } = this.props;
+
+      if (!destinationUrl && !auth) {
+        localStorage.setItem("destinationUrl", this.props.match.url);
+      }
     }
 
     shouldNavigateAway() {
       if (!this.props.auth) {
-        this.props.history.push('/signin');
+        history.push('/signin');
       }
-      localStorage.setItem("destination", "yessir");
     }
+
     render() {
       return <ChildComponent {...this.props} />;
     }
   }
-  function mapStateToProps(state) {
-    return { auth: state.auth };
+
+  const mapStateToProps = ({ auth }) => {
+    return { auth };
   }
-  return connect(mapStateToProps)(ComposedComponent);
+
+  return connect(mapStateToProps, actions)(ComposedComponent);
 };

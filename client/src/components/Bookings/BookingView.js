@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import * as actions from "../../actions";
 import { displayDate } from "./utils/dataPickerHelpers";
 import ScrollTopTopOnMount from "../utils/ScrollToTopOnMount";
+import requireAuth from "../utils/requireAuth";
 
 class BookingList extends Component {
   componentDidMount() {

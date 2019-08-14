@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default ({ roomId }) => {
 
+
     return (
         <div>
             <Link to={`/room/book/${roomId}`}>

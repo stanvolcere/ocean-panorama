@@ -9,6 +9,7 @@ import {
 } from "./types";
 import history from "../history";
 
+///// AUTH
 // fetches the cirrently signed in user if there is one
 export const fetchUser = () => async dispatch => {
   const res = await axios.get("/api/current_user");
