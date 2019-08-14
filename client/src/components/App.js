@@ -34,8 +34,6 @@ class App extends Component {
       <Router history={history} >
         <div className="main__styling__after__root">
           <Header />
-
-
           <div className="content__on__any__page">
             <Switch>
               <Route exact path="/" component={Landing} />

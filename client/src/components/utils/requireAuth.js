@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../actions';
 import history from "../../history";
 
 export default ChildComponent => {
@@ -8,8 +7,6 @@ export default ChildComponent => {
 
     // Our component just got rendered
     componentDidMount() {
-      console.log(this.props);
-      this.props.fetchUser();
       this.setDestinationUrl();
       this.shouldNavigateAway();
     }
@@ -29,7 +26,7 @@ export default ChildComponent => {
 
     shouldNavigateAway() {
       if (!this.props.auth) {
-        history.push('/signin');
+        return history.push('/signin');
       }
     }
 
@@ -40,7 +37,7 @@ export default ChildComponent => {
 
   const mapStateToProps = ({ auth }) => {
     return { auth };
-  }
+  };
 
-  return connect(mapStateToProps, actions)(ComposedComponent);
+  return connect(mapStateToProps)(ComposedComponent);
 };

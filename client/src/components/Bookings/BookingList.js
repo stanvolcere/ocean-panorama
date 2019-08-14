@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { compose } from "redux";
 import * as actions from "../../actions";
 import { displayDate } from "./utils/dataPickerHelpers";
 import requireAuth from "../utils/requireAuth";
@@ -93,9 +92,10 @@ class BookingList extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ bookings, auth }) => {
   return {
-    bookings: state.bookings
+    bookings,
+    auth
   };
 };
 

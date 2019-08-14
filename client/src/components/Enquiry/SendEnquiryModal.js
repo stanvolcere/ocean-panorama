@@ -20,6 +20,7 @@ class SendEnquiryModal extends React.Component {
 
     renderContent() {
         return <div>
+            <p>from {this.props.auth.name}</p>
             some stuff you wanna ask
         </div>
     }
@@ -49,6 +50,5 @@ class SendEnquiryModal extends React.Component {
         );
     };
 }
-
 
 export default requireAuth(SendEnquiryModal);
