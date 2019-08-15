@@ -6,10 +6,6 @@ import requireAuth from "../utils/requireAuth";
 
 class SendEnquiryModal extends React.Component {
 
-    componentDidMount() {
-        console.log(this.props);
-    }
-
     onDismiss = () => {
         const { room } = this.props;
         if (room) {

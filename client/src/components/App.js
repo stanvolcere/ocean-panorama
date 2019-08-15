@@ -18,7 +18,7 @@ import AdminSignIn from "../components/Admin/SignIn";
 
 import PageNotFound from "./PageNotFound";
 import history from "../history";
-import SignInModal from "./SignInModal";
+import SignInModal from "./Auth/SignInModal";
 import AfterSignIn from "./Auth/AfterSignIn";
 import SendEnquiryModal from "./Enquiry/SendEnquiryModal";
 import Footer from "./Footer";

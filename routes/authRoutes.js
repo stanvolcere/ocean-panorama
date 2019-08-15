@@ -25,7 +25,6 @@ module.exports = app => {
   app.get("/auth/facebook/callback", passport.authenticate("facebook"), (req, res) => {
     //console.log(req.user);
     res.redirect("/aftersignin");
-
   }
   );
 

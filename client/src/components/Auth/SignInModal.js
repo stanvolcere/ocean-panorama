@@ -2,8 +2,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
-import history from "../history";
-import * as actions from "../actions";
+import history from "../../history";
+import * as actions from "../../actions";
 
 class SignInModal extends React.Component {
 
