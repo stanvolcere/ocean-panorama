@@ -14,20 +14,19 @@ import BookingDelete from "./Bookings/BookingDelete";
 
 import RoomView from "./Rooms/RoomView";
 
-import AdminSignIn from "../components/Admin/SignIn";
-
 import PageNotFound from "./PageNotFound";
 import history from "../history";
 import SignInModal from "./Auth/SignInModal";
 import AfterSignIn from "./Auth/AfterSignIn";
+import SignOut from "./Auth/SignOut";
 import SendEnquiryModal from "./Enquiry/SendEnquiryModal";
 import Footer from "./Footer";
 
 class App extends Component {
-  componentDidMount() {
-    // load the user
-    this.props.fetchUser();
-  }
+  // componentDidMount() {
+  //   // load the user
+  //   this.props.fetchUser();
+  // }
 
   render() {
     return (
@@ -39,6 +38,7 @@ class App extends Component {
               <Route exact path="/" component={Landing} />
               <Route exact path="/signin" component={SignInModal} />
               <Route exact path="/aftersignin" component={AfterSignIn} />
+              <Route exact path="/signout" component={SignOut} />
 
               <Route exact path="/bookings" component={BookingList} />
               <Route exact path="/bookings/:id" component={BookingView} />
@@ -51,9 +51,6 @@ class App extends Component {
               <Route exact path="/room/book/:id" component={BookingCreate} />
               <Route exact path="/rooms/:id" component={RoomView} />
               <Route exect path="/enquiry" component={SendEnquiryModal}></Route>
-
-
-              <Route exact path="/admin" component={AdminSignIn} />
 
               <Route component={PageNotFound} />
             </Switch>

@@ -7,24 +7,32 @@ import * as actions from "../../actions";
 
 class SignInModal extends React.Component {
 
+    componentDidMount() {
+        this.props.fetchUser();
+    }
+
     onDismiss = () => {
-        const { auth } = this.props;
-        if (auth) {
+        const { authToken } = this.props;
+        if (authToken) {
             history.push("/bookings");
         }
         history.push("/");
     }
 
     renderContent() {
-        const { auth } = this.props;
-        if (!auth) {
+        const { authToken } = this.props;
+        if (!authToken) {
             return "You have to be signed in to perform that.";
         }
-        return `You are currently signed in as: ${auth.name}`;
+        // if (!authToken && !auth) {
+        //     return `You are currently signed in as: ${auth.name}`;
+        // }
+
+        history.push("/bookings");
     }
 
     renderActions() {
-        if (!this.props.auth) {
+        if (!this.props.authToken) {
             return (
                 <div className="signin_modal_actions">
                     <a href="/auth/facebook">
@@ -37,10 +45,9 @@ class SignInModal extends React.Component {
                         <button className="ui google plus button">
                             <i className="google plus icon"></i>
                             Sign In with Google
-                    </button>
+                        </button>
                     </a>
                 </div>
-
             )
         }
     }
@@ -65,8 +72,8 @@ class SignInModal extends React.Component {
     };
 }
 
-const mapStateToProps = ({ auth }) => {
-    return { auth }
+const mapStateToProps = ({ authToken, auth }) => {
+    return { authToken, auth }
 };
 
 export default connect(mapStateToProps, actions)(SignInModal);

@@ -25,8 +25,12 @@ passport.serializeUser((user, done) => {
 // turns a user into a token to identify the user
 // here
 passport.deserializeUser(async (id, done) => {
-  const user = await User.findById(id);
+  let user = await User.findById(id);
   // if it's not a user then its might be an admin
+  // if (!user) {
+  //   user = await Admin.findById(id);
+  // }
+
   done(null, user);
 });
 
@@ -125,8 +129,9 @@ const jwtOptions = {
   secretOrKey: keys.jwtSecret
 };
 
-// create the jwt strategy is being used to make authenticated requests
-passport.use(new JwtStrategy(jwtOptions, async (payload, done) => {
+// the 
+passport.use("auth_admin_token", new JwtStrategy(jwtOptions, async (payload, done) => {
+
   // payload.sub in this instance will represnt the admin.id
   try {
     const admin = await Admin.findById(payload.sub);
@@ -134,8 +139,60 @@ passport.use(new JwtStrategy(jwtOptions, async (payload, done) => {
     if (admin) {
       return done(null, admin);
     }
+
+    // check that its infact a normal user
+
     return done(null, false);
   } catch (e) {
+    return done(e, false);
+  }
+
+})
+);
+
+// create the jwt strategy is being used to make authenticated requests
+passport.use("auth_user_token", new JwtStrategy(jwtOptions, async (payload, done) => {
+
+  // payload.sub in this instance will represnt the admin.id
+  try {
+    const user = await User.findById(payload.sub);
+
+    if (user) {
+      return done(null, user);
+    }
+
+    return done(null, false);
+  } catch (e) {
+    return done(e, false);
+  }
+
+})
+);
+
+// will be the token authentication for both user and admin
+// create the jwt strategy is being used to make authenticated requests
+passport.use("auth_token", new JwtStrategy(jwtOptions, async (payload, done) => {
+
+  console.log(payload);
+
+  // payload.sub in this instance will represnt the admin.id
+  try {
+    const user = await User.findById(payload.sub);
+
+    if (user) {
+      return done(null, user);
+    }
+
+    const admin = await Admin.findById(payload.sub);
+
+    if (admin) {
+      return done(null, admin);
+    }
+
+    // check that its infact a normal user
+    return done(null, false);
+  } catch (e) {
+    console.log("hi from catch error");
     return done(e, false);
   }
 

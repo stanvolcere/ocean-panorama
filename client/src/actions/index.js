@@ -5,15 +5,30 @@ import {
   FETCH_BOOKINGS,
   FETCH_BLOCKED_DATES,
   FETCH_BOOKING,
-  CHANGE_DATEPICKER_DATES
+  CHANGE_DATEPICKER_DATES,
+  FETCH_AUTH_TOKEN
 } from "./types";
 import history from "../history";
+import baseUrl from "../apis/baseUrl";
 
 ///// AUTH
 // fetches the cirrently signed in user if there is one
 export const fetchUser = () => async dispatch => {
-  const res = await axios.get("/api/current_user");
+  const res = await baseUrl.get("/api/current_user");
   dispatch({ type: FETCH_USER, payload: res.data });
+};
+
+export const signOut = () => async dispatch => {
+  const res = await baseUrl.get("/api/logout");
+  //clear the local storage for token
+  await localStorage.removeItem("token");
+  dispatch({ type: FETCH_AUTH_TOKEN, payload: res.data });
+};
+
+export const saveToken = () => async dispatch => {
+  const res = await axios.get("/api/current_user_token");
+  localStorage.setItem("token", res.data.token);
+  dispatch({ type: FETCH_AUTH_TOKEN, payload: res.data.token });
 };
 
 //// Bookings

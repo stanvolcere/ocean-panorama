@@ -5,6 +5,7 @@ import roomReducer from "./roomReducer";
 import bookingReducer from "./bookingReducer";
 import blockedDatesReducer from "./blockedDatesReducer";
 import datePickerDatesReducer from "./datePickerDatesReducer";
+import authTokenReducer from "./authTokenReducer";
 
 // the index.js mostly responsible for the redux set up stuff
 export default combineReducers({
@@ -13,5 +14,6 @@ export default combineReducers({
   bookings: bookingReducer,
   blockedDates: blockedDatesReducer,
   datePickerDates: datePickerDatesReducer,
-  form: formReducer
+  form: formReducer,
+  authToken: authTokenReducer
 });

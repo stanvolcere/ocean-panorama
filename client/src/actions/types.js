@@ -5,3 +5,4 @@ export const FETCH_BOOKING = "fetch_booking";
 export const FETCH_BOOKINGS = "fetch_bookings";
 export const FETCH_BLOCKED_DATES = "fetch_blocked_dates";
 export const CHANGE_DATEPICKER_DATES = "update_datepicker_dates";
+export const FETCH_AUTH_TOKEN = "fetch_auth_token";

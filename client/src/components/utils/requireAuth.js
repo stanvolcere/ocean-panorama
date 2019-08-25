@@ -24,8 +24,20 @@ export default ChildComponent => {
       }
     }
 
+    // shouldNavigateAway() {
+    //   if (!this.props.auth) {
+    //     return history.push('/signin');
+    //   }
+    // }
+
+    // getAuthToken() {
+    //   return localStorage.getItem('token');
+    // }
+
     shouldNavigateAway() {
-      if (!this.props.auth) {
+      //const authToken = this.getAuthToken();
+
+      if (!this.props.authToken) {
         return history.push('/signin');
       }
     }
@@ -35,8 +47,8 @@ export default ChildComponent => {
     }
   }
 
-  const mapStateToProps = ({ auth }) => {
-    return { auth };
+  const mapStateToProps = ({ authToken }) => {
+    return { authToken };
   };
 
   return connect(mapStateToProps)(ComposedComponent);

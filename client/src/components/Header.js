@@ -6,25 +6,26 @@ import * as actions from "../actions";
 class Header extends Component {
 
   renderContent() {
-    switch (this.props.auth) {
-      case null:
-        return;
-      case false:
-        return [
-          <li key="1" className="item">
-            <a href="/signin">Log In/Sign Up</a>
-          </li>,
+    const { authToken } = this.props;
 
-        ];
-      default:
-        return [
-          <Link key="3" to="/bookings" className="item">
-            <div>My Bookings</div>
-          </Link>,
-          <li key="4" className="item">
-            <a className="header__logout" href="/api/logout">Log Out</a>
-          </li>
-        ];
+    if (authToken) {
+      return [
+        <Link key="3" to="/bookings" className="item">
+          <div>My Bookings</div>
+        </Link>,
+        // <Link key="4" to="/signout" className="item" >
+        //   <div>Log Out</div>
+        // </Link>,
+        <div key="5" className="item">
+          <a href="/signout">Log Out</a>
+        </div>
+      ];
+    } else {
+      return [
+        <Link key="1" to="/signin" className="item" >
+          <div>Log In/Sign Up</div>
+        </Link>
+      ];
     }
   }
 
@@ -49,9 +50,9 @@ class Header extends Component {
   }
 }
 
-const mapStateToProps = ({ auth }) => {
+const mapStateToProps = ({ auth, authToken }) => {
   return {
-    auth
+    auth, authToken
   };
 };
 

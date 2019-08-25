@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import * as actions from "../../actions";
+import { fetchUser, saveToken } from "../../actions";
 import history from "../../history";
 
 class AfterSignIn extends Component {
+
+    componentDidMount() {
+        this.props.saveToken();
+    }
 
     componentDidUpdate() {
         this.performRedirect();
@@ -11,17 +15,18 @@ class AfterSignIn extends Component {
 
     performRedirect() {
         let destinationUrl = localStorage.getItem("destinationUrl");
+        const { authToken } = this.props;
 
-        if (!this.props.auth) {
+        if (!authToken) {
             history.push('/');
-        } else if (this.props.auth && destinationUrl) {
+        } else if (authToken && destinationUrl) {
             if (destinationUrl.includes("booking")) {
                 destinationUrl = "/bookings";
             }
 
             localStorage.removeItem("destinationUrl");
             history.push(destinationUrl);
-        } else if (this.props.auth) {
+        } else if (authToken) {
             history.push('/bookings');
         }
     }
@@ -34,8 +39,8 @@ class AfterSignIn extends Component {
     }
 }
 
-const mapStateToProps = ({ auth }) => {
-    return { auth }
+const mapStateToProps = ({ auth, authToken }) => {
+    return { auth, authToken }
 };
 
-export default connect(mapStateToProps, actions)(AfterSignIn);
+export default connect(mapStateToProps, { fetchUser, saveToken })(AfterSignIn);
