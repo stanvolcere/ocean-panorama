@@ -1,13 +1,15 @@
 const mongoose = require("mongoose");
 const moment = require("moment");
 const requireLogin = require("../middleware/requireLogin");
+const { requireAuth } = require('../middleware/requireAuth');
 const { sendBookingConfirmationEmail } = require("../emails/account");
 
 const Booking = mongoose.model("booking");
 
 module.exports = app => {
   // get all bookings for a guest
-  app.get("/api/bookings", requireLogin, async (req, res) => {
+  app.get("/api/bookings", requireAuth, async (req, res) => {
+
     //res.send('list of bookings');
     const bookings = await Booking.find({ _user: req.user })
       .populate("_room")
@@ -41,7 +43,7 @@ module.exports = app => {
   });
 
   // specific booking for guest
-  app.get("/api/bookings/:id", requireLogin, async (req, res) => {
+  app.get("/api/bookings/:id", requireAuth, async (req, res) => {
     // return a specific booking
     const id = req.params.id;
     const booking = await Booking.findById(id).populate("_room");
@@ -124,7 +126,7 @@ module.exports = app => {
   });
 
   // update a booking
-  app.delete("/api/bookings/:id", requireLogin, async (req, res) => {
+  app.delete("/api/bookings/:id", requireAuth, async (req, res) => {
     try {
       const booking = await Booking.findOneAndDelete({
         _id: req.params.id,

@@ -114,8 +114,9 @@ passport.use(
 
       return done(null, existingAdmin);
     } catch (e) {
-      done(e);
       console.log(e);
+      done(e, false);
+
     }
   })
 );
@@ -172,8 +173,6 @@ passport.use("auth_user_token", new JwtStrategy(jwtOptions, async (payload, done
 // will be the token authentication for both user and admin
 // create the jwt strategy is being used to make authenticated requests
 passport.use("auth_token", new JwtStrategy(jwtOptions, async (payload, done) => {
-
-  console.log(payload);
 
   // payload.sub in this instance will represnt the admin.id
   try {

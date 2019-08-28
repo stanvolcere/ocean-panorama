@@ -9,42 +9,42 @@ import {
   FETCH_AUTH_TOKEN
 } from "./types";
 import history from "../history";
-import baseUrl from "../apis/baseUrl";
+import baseRequest from "../apis/baseUrl";
 
 ///// AUTH
 // fetches the cirrently signed in user if there is one
-export const fetchUser = () => async dispatch => {
-  const res = await baseUrl.get("/api/current_user");
+export const fetchUser = () => async (dispatch, getState) => {
+  const res = await baseRequest.get("/api/current_user");
   dispatch({ type: FETCH_USER, payload: res.data });
 };
 
 export const signOut = () => async dispatch => {
-  const res = await baseUrl.get("/api/logout");
+  const res = await baseRequest.get("/api/logout");
   //clear the local storage for token
-  await localStorage.removeItem("token");
+  localStorage.removeItem("token");
   dispatch({ type: FETCH_AUTH_TOKEN, payload: res.data });
+  dispatch({ type: FETCH_USER, payload: false });
 };
 
-export const saveToken = () => async dispatch => {
+export const saveToken = () => async (dispatch, getState) => {
   const res = await axios.get("/api/current_user_token");
-  localStorage.setItem("token", res.data.token);
+  await localStorage.setItem("token", res.data.token);
   dispatch({ type: FETCH_AUTH_TOKEN, payload: res.data.token });
 };
 
 //// Bookings
-
-export const fetchBookings = () => async dispatch => {
-  const res = await axios.get("/api/bookings");
+export const fetchBookings = () => async (dispatch, getState) => {
+  const res = await baseRequest.get("/api/bookings");
   dispatch({ type: FETCH_BOOKINGS, payload: res.data });
 };
 
 export const fetchBooking = id => async dispatch => {
-  const res = await axios.get(`/api/bookings/${id}`);
+  const res = await baseRequest.get(`/api/bookings/${id}`);
   dispatch({ type: FETCH_BOOKING, payload: res.data });
 };
 
 export const createBooking = bookingValues => async dispatch => {
-  await axios.post(`/api/bookings/`, bookingValues);
+  await baseRequest.post(`/api/bookings/`, bookingValues);
 
   //empties our datepicker selected dates fromm the Redux store
   dispatch({ type: CHANGE_DATEPICKER_DATES, payload: {} });
@@ -52,14 +52,14 @@ export const createBooking = bookingValues => async dispatch => {
 };
 
 export const cancelBooking = id => async dispatch => {
-  await axios.delete(`/api/bookings/` + id);
+  await baseRequest.delete(`/api/bookings/` + id);
   history.push("/bookings");
 };
 
 
 // ROOMS
 export const fetchRooms = () => async dispatch => {
-  const res = await axios.get("/api/rooms");
+  const res = await baseRequest.get("/api/rooms");
   dispatch({ type: FETCH_ROOMS, payload: res.data });
 };
 
@@ -68,7 +68,7 @@ export const fetchRoom = id => async dispatch => {
 };
 
 export const fetchBlockedDates = roomId => async dispatch => {
-  const res = await axios.get(`/api/bookings/blocked/${roomId}`);
+  const res = await baseRequest.get(`/api/bookings/blocked/${roomId}`);
   dispatch({ type: FETCH_BLOCKED_DATES, payload: res.data });
 };
 
@@ -80,7 +80,7 @@ export const updateBookingDates = (
   id,
   newDatesChangeValues
 ) => async dispatch => {
-  await axios.patch(`/api/bookings/${id}`, newDatesChangeValues);
+  await baseRequest.patch(`/api/bookings/${id}`, newDatesChangeValues);
   dispatch({ type: CHANGE_DATEPICKER_DATES, payload: {} });
   history.push("/bookings/" + id);
 };

@@ -7,10 +7,6 @@ import * as actions from "../../actions";
 
 class SignInModal extends React.Component {
 
-    componentDidMount() {
-        this.props.fetchUser();
-    }
-
     onDismiss = () => {
         const { authToken } = this.props;
         if (authToken) {
@@ -24,9 +20,6 @@ class SignInModal extends React.Component {
         if (!authToken) {
             return "You have to be signed in to perform that.";
         }
-        // if (!authToken && !auth) {
-        //     return `You are currently signed in as: ${auth.name}`;
-        // }
 
         history.push("/bookings");
     }

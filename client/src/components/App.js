@@ -28,6 +28,11 @@ class App extends Component {
   //   this.props.fetchUser();
   // }
 
+  componentDidUpdate() {
+    this.props.updateAuth();
+    this.props.fetchUser();
+  }
+
   render() {
     return (
       <Router history={history} >

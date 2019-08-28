@@ -7,6 +7,7 @@ import requireAuth from '../utils/requireAuth';
 class SignOut extends Component {
     componentDidMount() {
         this.props.signOut();
+        this.props.fetchUser();
         this.performRedirect();
     }
 

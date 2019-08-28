@@ -6,6 +6,10 @@ import requireAuth from "../utils/requireAuth";
 
 class SendEnquiryModal extends React.Component {
 
+    componentDidMount() {
+        console.log(this.props);
+    }
+
     onDismiss = () => {
         const { room } = this.props;
         if (room) {
@@ -16,8 +20,7 @@ class SendEnquiryModal extends React.Component {
 
     renderContent() {
         return <div>
-            <p>from {this.props.auth.name}</p>
-            some stuff you wanna ask
+            <p>some stuff you wanna ask</p>
         </div>
     }
 

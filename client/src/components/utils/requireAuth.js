@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { fetchUser } from '../../actions';
 import history from "../../history";
 
 export default ChildComponent => {
@@ -7,12 +8,20 @@ export default ChildComponent => {
 
     // Our component just got rendered
     componentDidMount() {
+      this.fetchUser();
       this.setDestinationUrl();
       this.shouldNavigateAway();
     }
+
     // Our component just got updated
     componentDidUpdate() {
       this.shouldNavigateAway();
+    }
+
+    fetchUser() {
+      if (this.props.authToken) {
+        this.props.fetchUser();
+      }
     }
 
     setDestinationUrl() {
@@ -24,21 +33,9 @@ export default ChildComponent => {
       }
     }
 
-    // shouldNavigateAway() {
-    //   if (!this.props.auth) {
-    //     return history.push('/signin');
-    //   }
-    // }
-
-    // getAuthToken() {
-    //   return localStorage.getItem('token');
-    // }
-
     shouldNavigateAway() {
-      //const authToken = this.getAuthToken();
-
       if (!this.props.authToken) {
-        return history.push('/signin');
+        history.push('/signin');
       }
     }
 
@@ -47,9 +44,9 @@ export default ChildComponent => {
     }
   }
 
-  const mapStateToProps = ({ authToken }) => {
-    return { authToken };
+  const mapStateToProps = ({ authToken, auth }) => {
+    return { authToken, auth };
   };
 
-  return connect(mapStateToProps)(ComposedComponent);
+  return connect(mapStateToProps, { fetchUser })(ComposedComponent);
 };
