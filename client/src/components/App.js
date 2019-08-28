@@ -23,13 +23,8 @@ import SendEnquiryModal from "./Enquiry/SendEnquiryModal";
 import Footer from "./Footer";
 
 class App extends Component {
-  // componentDidMount() {
-  //   // load the user
-  //   this.props.fetchUser();
-  // }
-
-  componentDidUpdate() {
-    this.props.updateAuth();
+  componentDidMount() {
+    // load the user
     this.props.fetchUser();
   }
 

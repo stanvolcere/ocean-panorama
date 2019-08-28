@@ -14,21 +14,28 @@ class AfterSignIn extends Component {
     }
 
     performRedirect() {
-        let destinationUrl = localStorage.getItem("destinationUrl");
         const { authToken } = this.props;
 
-        if (!authToken) {
-            history.push('/');
-        } else if (authToken && destinationUrl) {
-            if (destinationUrl.includes("booking")) {
-                destinationUrl = "/bookings";
-            }
-
-            localStorage.removeItem("destinationUrl");
-            history.push(destinationUrl);
-        } else if (authToken) {
+        if (authToken) {
             history.push('/bookings');
+        } else {
+            history.push('/');
         }
+        // let destinationUrl = localStorage.getItem("destinationUrl");
+        // const { authToken } = this.props;
+
+        // if (!authToken) {
+        //     history.push('/');
+        // } else if (authToken && destinationUrl) {
+        //     if (destinationUrl.includes("booking")) {
+        //         destinationUrl = "/bookings";
+        //     }
+
+        //     localStorage.removeItem("destinationUrl");
+        //     history.push(destinationUrl);
+        // } else if (authToken) {
+        //     history.push('/bookings');
+        // }
     }
 
     render() {

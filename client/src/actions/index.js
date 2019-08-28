@@ -23,7 +23,6 @@ export const signOut = () => async dispatch => {
   //clear the local storage for token
   localStorage.removeItem("token");
   dispatch({ type: FETCH_AUTH_TOKEN, payload: res.data });
-  dispatch({ type: FETCH_USER, payload: false });
 };
 
 export const saveToken = () => async (dispatch, getState) => {
