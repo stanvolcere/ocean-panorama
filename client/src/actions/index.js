@@ -27,7 +27,7 @@ export const signOut = () => async dispatch => {
 
 export const saveToken = () => async (dispatch, getState) => {
   const res = await axios.get("/api/current_user_token");
-  await localStorage.setItem("token", res.data.token);
+  localStorage.setItem("token", res.data.token);
   dispatch({ type: FETCH_AUTH_TOKEN, payload: res.data.token });
 };
 

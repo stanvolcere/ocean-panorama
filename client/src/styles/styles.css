@@ -340,6 +340,15 @@ hr {
 /* TESTIMONIAL STYLING */
 .testimonial__header {
   font-size: 3rem;
+  padding-bottom: 1rem;
+}
+
+.testimonial__content {
+  height: 20rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  
 }
 
 /* FOOTER STYLING */

@@ -43,4 +43,8 @@ const sendBookingConfirmationEmail = ({ guestName, guestEmail, bookingTotalPrice
 
 }
 
+const sendEnquiryEmail = () => {
+    console.log("message about to send");
+}
+
 module.exports = { sendBookingConfirmationEmail }

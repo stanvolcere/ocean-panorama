@@ -6,7 +6,7 @@ class Landing extends Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <div className="landing-hero" />
         <div className="text-box">
           <div className="landing__page__heading-primary">
@@ -29,13 +29,27 @@ class Landing extends Component {
         <div id="testimonials" className="section__landing">
           <div className="section__main__header">Some Testimonials from our Adventurers</div>
           <hr></hr>
-          <div className="testimonial__header">Stan Volcere</div>
+          <div className="testimonial__content">
+            <div>
+              <div className="testimonial__header">Stan Volcere</div>
+              <div>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+              industry's standard dummy text ever since the 1500s.</div>
+            </div>
+            <div>
+              <div className="testimonial__header">LeBron James</div>
+              <div>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+              industry's standard dummy text ever since the 1500s.</div>
+            </div>
+            <div>
+              <div className="testimonial__header">Black Panther</div>
+              <div>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+              industry's standard dummy text ever since the 1500s.</div>
+            </div>
+          </div>
 
-          <div>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-          industry's standard dummy text ever since the 1500s.</div>
         </div>
 
-      </div>
+      </React.Fragment>
     );
   }
 }
