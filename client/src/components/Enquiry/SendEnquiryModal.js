@@ -4,16 +4,13 @@ import ReactDOM from "react-dom";
 import { connect } from 'react-redux';
 import history from "../../history";
 import requireAuth from "../utils/requireAuth";
-import { fetchRoom } from '../../actions';
+import EnquiryForm from './EnquiryForm';
+import { fetchRoom, sendEnquiry } from '../../actions';
 
 class SendEnquiryModal extends React.Component {
 
     componentDidMount() {
         this.props.fetchRoom(this.props.match.params.id);
-    }
-
-    componentDidUpdate() {
-        console.log(this.props);
     }
 
     onDismiss = () => {
@@ -25,15 +22,11 @@ class SendEnquiryModal extends React.Component {
     }
 
     renderContent() {
-        return <div>
-            <p>some stuff you wanna ask</p>
-        </div>
+        return <div><EnquiryForm onSubmit={this.props.sendEnquiry} auth={this.props.auth} room={this.props.room} /></div>
     }
 
     renderActions() {
-        return <div>
-            buttons to send or dismiss
-        </div>
+        return;
     }
 
     render() {
@@ -47,7 +40,6 @@ class SendEnquiryModal extends React.Component {
                 >
                     <div className="header">Send An Enquiry.</div>
                     <div className="content">{this.renderContent()}</div>
-                    <div className="actions">{this.renderActions()}</div>
                 </div>
             </div>,
             // component to render this modal into
@@ -56,10 +48,11 @@ class SendEnquiryModal extends React.Component {
     };
 }
 
-const mapStateToProps = ({ rooms }) => {
+const mapStateToProps = ({ auth, rooms }) => {
     return {
+        auth,
         room: rooms[0]
     }
 }
 
-export default connect(mapStateToProps, { fetchRoom })(requireAuth(SendEnquiryModal));
+export default connect(mapStateToProps, { fetchRoom, sendEnquiry })(requireAuth(SendEnquiryModal));

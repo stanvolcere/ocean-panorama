@@ -90,7 +90,7 @@ export const clearSelectedDates = () => async dispatch => {
   dispatch({ type: CHANGE_DATEPICKER_DATES, payload: {} });
 }
 
-// ADMIN
-export const adminSignIn = formValues => async dispatch => {
+// Enquiry
+export const sendEnquiry = formValues => async dispatch => {
   console.log(formValues);
 }
