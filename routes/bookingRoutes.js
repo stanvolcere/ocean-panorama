@@ -56,7 +56,7 @@ module.exports = app => {
   });
 
   // create new booking
-  app.post("/api/bookings", requireLogin, async (req, res) => {
+  app.post("/api/bookings", requireAuth, async (req, res) => {
     const booking = new Booking({
       ...req.body,
       _user: req.user
@@ -89,7 +89,7 @@ module.exports = app => {
   });
 
   // update a booking
-  app.patch("/api/bookings/:id", requireLogin, async (req, res) => {
+  app.patch("/api/bookings/:id", requireAuth, async (req, res) => {
     // // this handles the error that would occur if we try to update a property that doesm't exist
     const updates = Object.keys(req.body);
 

@@ -92,5 +92,6 @@ export const clearSelectedDates = () => async dispatch => {
 
 // Enquiry
 export const sendEnquiry = formValues => async dispatch => {
-  console.log(formValues);
+  const res = await baseRequest.post(`/api/sendenquiry`, formValues);
+  console.log(res.data);
 }

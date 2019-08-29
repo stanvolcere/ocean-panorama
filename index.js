@@ -35,6 +35,7 @@ require("./routes/authRoutes")(app);
 require("./routes/bookingRoutes")(app);
 require("./routes/roomRoutes")(app);
 require("./routes/adminRoutes")(app);
+require("./routes/enquiryRoutes")(app);
 // another way could be to say
 // const authRoutes = require('./routes/authRoutes');
 // authRoutes(app);
