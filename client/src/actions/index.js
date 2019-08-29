@@ -2,6 +2,7 @@ import axios from "axios";
 import {
   FETCH_USER,
   FETCH_ROOMS,
+  FETCH_ROOM,
   FETCH_BOOKINGS,
   FETCH_BLOCKED_DATES,
   FETCH_BOOKING,
@@ -62,8 +63,9 @@ export const fetchRooms = () => async dispatch => {
   dispatch({ type: FETCH_ROOMS, payload: res.data });
 };
 
-export const fetchRoom = id => async dispatch => {
-  await axios.get(`/api/rooms/${id}`);
+export const fetchRoom = id => async (dispatch) => {
+  const res = await axios.get(`/api/rooms/${id}`);
+  dispatch({ type: FETCH_ROOM, payload: res.data })
 };
 
 export const fetchBlockedDates = roomId => async dispatch => {

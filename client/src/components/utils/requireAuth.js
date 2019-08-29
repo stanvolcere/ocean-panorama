@@ -6,6 +6,7 @@ import history from "../../history";
 export default ChildComponent => {
   class ComposedComponent extends Component {
 
+
     // Our component just got rendered
     componentDidMount() {
       this.fetchUser();

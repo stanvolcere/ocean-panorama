@@ -15,7 +15,9 @@ module.exports = (app) => {
         const _id = req.params.id;
 
         const room = await Room.findOne({ _id, enlisted: true });
-        res.status(200).send(room);
+
+        // return all room as an array
+        res.status(200).send([room]);
     });
 
 

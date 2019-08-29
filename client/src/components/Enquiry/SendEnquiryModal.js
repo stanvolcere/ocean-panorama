@@ -1,21 +1,27 @@
 // this should be for delete confirmation only
 import React from "react";
 import ReactDOM from "react-dom";
+import { connect } from 'react-redux';
 import history from "../../history";
 import requireAuth from "../utils/requireAuth";
+import { fetchRoom } from '../../actions';
 
 class SendEnquiryModal extends React.Component {
 
     componentDidMount() {
+        this.props.fetchRoom(this.props.match.params.id);
+    }
+
+    componentDidUpdate() {
         console.log(this.props);
     }
 
     onDismiss = () => {
         const { room } = this.props;
         if (room) {
-            history.push(`/rooms/${room._id}`);
+            return history.push(`/rooms/${room._id}`);
         }
-        history.push("/");
+        history.push(`/rooms/0`);
     }
 
     renderContent() {
@@ -50,4 +56,10 @@ class SendEnquiryModal extends React.Component {
     };
 }
 
-export default requireAuth(SendEnquiryModal);
+const mapStateToProps = ({ rooms }) => {
+    return {
+        room: rooms[0]
+    }
+}
+
+export default connect(mapStateToProps, { fetchRoom })(requireAuth(SendEnquiryModal));

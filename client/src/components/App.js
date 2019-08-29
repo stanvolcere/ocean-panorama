@@ -50,7 +50,7 @@ class App extends Component {
               <Route exact path="/bookings/cancel/:id" component={BookingDelete} />
               <Route exact path="/room/book/:id" component={BookingCreate} />
               <Route exact path="/rooms/:id" component={RoomView} />
-              <Route exect path="/enquiry" component={SendEnquiryModal}></Route>
+              <Route exect path="/enquiry/:id" component={SendEnquiryModal}></Route>
 
               <Route component={PageNotFound} />
             </Switch>
