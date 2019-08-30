@@ -25,13 +25,19 @@ export const signOut = () => async dispatch => {
   //clear the local storage for token
   localStorage.removeItem("token");
   dispatch({ type: FETCH_AUTH_TOKEN, payload: res.data });
+  dispatch({ type: SET_FLASH_MESSAGE, payload: "Logged Out." });
 };
 
 export const saveToken = () => async (dispatch, getState) => {
-  const res = await axios.get("/api/current_user_token");
-  localStorage.setItem("token", res.data.token);
-  dispatch({ type: FETCH_AUTH_TOKEN, payload: res.data.token });
-  dispatch({ type: SET_FLASH_MESSAGE, payload: "Log In was successful." });
+  try {
+    const res = await axios.get("/api/current_user_token");
+    localStorage.setItem("token", res.data.token);
+    dispatch({ type: FETCH_AUTH_TOKEN, payload: res.data.token });
+    dispatch({ type: SET_FLASH_MESSAGE, payload: "Log in was successful." });
+  } catch (e) {
+    dispatch({ type: SET_FLASH_MESSAGE, payload: "Log In failed. Please try again." });
+  }
+
 };
 
 //// Bookings
@@ -46,16 +52,29 @@ export const fetchBooking = id => async dispatch => {
 };
 
 export const createBooking = bookingValues => async dispatch => {
-  await baseRequest.post(`/api/bookings/`, bookingValues);
+  try {
+    await baseRequest.post(`/api/bookings/`, bookingValues);
 
-  //empties our datepicker selected dates fromm the Redux store
-  dispatch({ type: CHANGE_DATEPICKER_DATES, payload: {} });
-  history.push("/bookings");
+    //empties our datepicker selected dates fromm the Redux store
+    dispatch({ type: CHANGE_DATEPICKER_DATES, payload: {} });
+    dispatch({ type: SET_FLASH_MESSAGE, payload: "Booking Successful." });
+    history.push("/bookings");
+  } catch (e) {
+    dispatch({ type: SET_FLASH_MESSAGE, payload: "Booking could not be completed." });
+    console.log(e);
+  }
+
 };
 
 export const cancelBooking = id => async dispatch => {
-  await baseRequest.delete(`/api/bookings/` + id);
-  history.push("/bookings");
+  try {
+    await baseRequest.delete(`/api/bookings/` + id);
+    dispatch({ type: SET_FLASH_MESSAGE, payload: "Booking Cancelled Successfully." });
+    history.push("/bookings");
+  } catch (e) {
+    dispatch({ type: SET_FLASH_MESSAGE, payload: "Booking Cancellation could not be completed." });
+  }
+
 };
 
 
@@ -83,9 +102,16 @@ export const updateBookingDates = (
   id,
   newDatesChangeValues
 ) => async dispatch => {
-  await baseRequest.patch(`/api/bookings/${id}`, newDatesChangeValues);
-  dispatch({ type: CHANGE_DATEPICKER_DATES, payload: {} });
-  history.push("/bookings/" + id);
+  try {
+    await baseRequest.patch(`/api/bookings/${id}`, newDatesChangeValues);
+    dispatch({ type: CHANGE_DATEPICKER_DATES, payload: {} });
+    dispatch({ type: SET_FLASH_MESSAGE, payload: "Booking date change was successful." });
+    history.push("/bookings/" + id);
+  } catch (e) {
+    dispatch({ type: SET_FLASH_MESSAGE, payload: "Booking date change could not be completed." });
+    console.log(e);
+  }
+
 };
 
 export const clearSelectedDates = () => async dispatch => {
@@ -96,10 +122,10 @@ export const clearSelectedDates = () => async dispatch => {
 export const sendEnquiry = formValues => async dispatch => {
   try {
     await baseRequest.post(`/api/sendenquiry`, formValues);
-    dispatch({ type: SET_FLASH_MESSAGE, payload: "Your enquiry has been sent" });
+    dispatch({ type: SET_FLASH_MESSAGE, payload: "Your enquiry has been sent." });
     history.push("/rooms/0");
   } catch (e) {
-    dispatch({ type: SET_FLASH_MESSAGE, payload: "Sorry, we had an error processing" });
+    dispatch({ type: SET_FLASH_MESSAGE, payload: "Sorry, we had an error processing." });
     history.push("/");
   }
 
