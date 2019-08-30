@@ -6,6 +6,7 @@ import bookingReducer from "./bookingReducer";
 import blockedDatesReducer from "./blockedDatesReducer";
 import datePickerDatesReducer from "./datePickerDatesReducer";
 import authTokenReducer from "./authTokenReducer";
+import flashMessageReducer from "./flashMessageReducer";
 
 // the index.js mostly responsible for the redux set up stuff
 export default combineReducers({
@@ -15,5 +16,6 @@ export default combineReducers({
   blockedDates: blockedDatesReducer,
   datePickerDates: datePickerDatesReducer,
   form: formReducer,
-  authToken: authTokenReducer
+  authToken: authTokenReducer,
+  flashMessage: flashMessageReducer
 });

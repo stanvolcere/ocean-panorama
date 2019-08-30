@@ -7,7 +7,8 @@ import {
   FETCH_BLOCKED_DATES,
   FETCH_BOOKING,
   CHANGE_DATEPICKER_DATES,
-  FETCH_AUTH_TOKEN
+  FETCH_AUTH_TOKEN,
+  SET_FLASH_MESSAGE
 } from "./types";
 import history from "../history";
 import baseRequest from "../apis/baseUrl";
@@ -30,6 +31,7 @@ export const saveToken = () => async (dispatch, getState) => {
   const res = await axios.get("/api/current_user_token");
   localStorage.setItem("token", res.data.token);
   dispatch({ type: FETCH_AUTH_TOKEN, payload: res.data.token });
+  dispatch({ type: SET_FLASH_MESSAGE, payload: "Log In was successful." });
 };
 
 //// Bookings
@@ -92,6 +94,18 @@ export const clearSelectedDates = () => async dispatch => {
 
 // Enquiry
 export const sendEnquiry = formValues => async dispatch => {
-  const res = await baseRequest.post(`/api/sendenquiry`, formValues);
-  console.log(res.data);
+  try {
+    await baseRequest.post(`/api/sendenquiry`, formValues);
+    dispatch({ type: SET_FLASH_MESSAGE, payload: "Your enquiry has been sent" });
+    history.push("/rooms/0");
+  } catch (e) {
+    dispatch({ type: SET_FLASH_MESSAGE, payload: "Sorry, we had an error processing" });
+    history.push("/");
+  }
+
+}
+
+// flash meassege
+export const clearFlashMessage = () => async dispatch => {
+  dispatch({ type: SET_FLASH_MESSAGE, payload: null });
 }

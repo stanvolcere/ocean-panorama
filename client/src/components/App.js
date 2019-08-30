@@ -20,6 +20,7 @@ import SignInModal from "./Auth/SignInModal";
 import AfterSignIn from "./Auth/AfterSignIn";
 import SignOut from "./Auth/SignOut";
 import SendEnquiryModal from "./Enquiry/SendEnquiryModal";
+import FlashMessage from "./FlashMessage";
 import Footer from "./Footer";
 
 class App extends Component {
@@ -33,6 +34,7 @@ class App extends Component {
       <Router history={history} >
         <div className="main__styling__after__root">
           <Header />
+          <FlashMessage />
           <div className="content__on__any__page">
             <Switch>
               <Route exact path="/" component={Landing} />

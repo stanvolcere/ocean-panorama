@@ -110,6 +110,28 @@
   margin: 0
 }
 
+.dropdown {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  max-width: 20em;
+  background-color: #f1f1f1;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  text-decoration: none;
+  z-index: 1;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block; top: 100%;}
+
 /* ROOM LIST VIEW */
 #page__heading__contents{
   margin-top: 1rem;
