@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import moment from "moment";
+
 import CustomDatePicker from "../DatePicker/CustomDatePicker";
+import SelectAmountOfGuests from "./utils/SelectAmountOfGuests";
 import ScrollToTopOnMount from "../utils/ScrollToTopOnMount";
 import requireAuth from '../utils/requireAuth';
 
@@ -14,13 +16,20 @@ class BookingCreate extends Component {
   state = {
     createdAt: moment(),
     cleaningFee: 20,
-    totalPrice: 0
+    totalPrice: 0,
+    numberOfGuests: 0
   };
 
   componentDidMount() {
     this.props.fetchUser();
     this.props.fetchRooms();
     this.props.fetchBlockedDates(this.props.match.params.id);
+
+  }
+
+  componentDidUpdate() {
+    console.log(this.props);
+    this.renderSelectNumberOfGuests();
   }
 
   componentWillUnmount() {
@@ -63,6 +72,23 @@ class BookingCreate extends Component {
     return <div>Something Went Wrong</div>;
   }
 
+  renderSelectNumberOfGuests() {
+    const { room } = this.props;
+
+    if (room) {
+      console.log("hi there ");
+      return (
+        <SelectAmountOfGuests
+          numberOfGuests={this.state.numberOfGuests}
+          incrementGuests={() => this.setState({ numberOfGuests: this.state.numberOfGuests + 1 })}
+          decrementGuests={() => this.setState({ numberOfGuests: this.state.numberOfGuests - 1 })}
+          maxGuests={room.maxGuests}
+        />
+      )
+    }
+
+  }
+
   renderBookingDetails() {
     // before this is rendered we wanna get the blocked days of the roomId
     return (
@@ -79,6 +105,9 @@ class BookingCreate extends Component {
               roomId={this.props.match.params.id}
               blockedDates={this.props.blockedDates}
             />
+            <div className="ui divider" />
+            <div className="content__heading__sub">Number of Guests</div>
+
             <div className="ui divider" />
             <div>
               <div className="content__heading__sub">Price</div>

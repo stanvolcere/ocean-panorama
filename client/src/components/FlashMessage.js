@@ -7,9 +7,9 @@ class FlashMessage extends React.Component {
     renderContent() {
         if (this.props.authToken && this.props.flashMessage) {
             return (
-                <div class="ui info message">
-                    <i class="close icon" onClick={this.props.clearFlashMessage}></i>
-                    <div class="header">
+                <div className="ui info message">
+                    <i className="close icon" onClick={this.props.clearFlashMessage}></i>
+                    <div className="header">
                         {this.props.flashMessage}
                     </div>
                 </div>
