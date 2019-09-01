@@ -52,10 +52,10 @@ export const fetchBooking = id => async dispatch => {
 };
 
 export const createBooking = bookingValues => async dispatch => {
+  console.log(bookingValues);
 
-  const { bookingEndDate, bookingStartDate, price } = bookingValues;
-  if (bookingEndDate && bookingStartDate && price) {
-    console.log("all good");
+  const { bookingEndDate, bookingStartDate, price, numberOfGuests } = bookingValues;
+  if (bookingEndDate && bookingStartDate && price && numberOfGuests) {
     dispatch({ type: SET_FLASH_MESSAGE, payload: "Booking Successful." });
   } else {
     dispatch({ type: SET_FLASH_MESSAGE, payload: "Please enter all details to complete booking." });

@@ -1,35 +1,38 @@
 import React, { Component } from "react";
+import { reduxForm, Field } from 'redux-form';
 
 class SelectAmountOfGuests extends Component {
 
-    // componentDidMount() {
-    //     console.log(this.props);
-    //     //this.setInitialAmountOfGuests();
-    // }
+    componentDidMount() {
+        this.props.setUpGuests();
+    }
 
-    // componentDidUpdate() {
-    //     console.log(this.props);
-    // }
+    renderOptions() {
 
-    // setInitialAmountOfGuests() {
-    //     this.setState({ numberOfGuests: this.props.maxGuests });
-    // }
+        let options = [];
+        for (let i = 1; i <= this.props.numberOfGuests; i++) {
+            options.push(i);
+        }
 
-    renderGuestsActions() {
+        return options.map((value, index) => {
+            return <option key={index}>{value}</option>
+        })
+    }
+
+    renderGuestsSelect() {
         return <div>
-            <button className="ui icon button" onClick={this.props.decrementGuests}>
-                <i className="minus icon"></i>
-            </button>
-            {this.props.numberOfGuests}
-            <button className="ui icon button" onClick={this.props.incrementGuests}>
-                <i className="plus icon"></i>
-            </button>
+            <Field name="numberOfGuests" component='select'>
+                <option />
+                {this.renderOptions()}
+
+            </Field>
         </div>
+
     }
 
     render() {
-        return this.renderGuestsActions();
+        return this.renderGuestsSelect();
     }
 }
 
-export default SelectAmountOfGuests;
+export default reduxForm({ 'form': 'guestSelectForm' })(SelectAmountOfGuests);

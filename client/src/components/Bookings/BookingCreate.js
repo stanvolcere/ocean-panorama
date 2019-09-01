@@ -24,12 +24,10 @@ class BookingCreate extends Component {
     this.props.fetchUser();
     this.props.fetchRooms();
     this.props.fetchBlockedDates(this.props.match.params.id);
-
   }
 
   componentDidUpdate() {
     console.log(this.props);
-    this.renderSelectNumberOfGuests();
   }
 
   componentWillUnmount() {
@@ -72,21 +70,62 @@ class BookingCreate extends Component {
     return <div>Something Went Wrong</div>;
   }
 
+  incrementGuests = () => {
+    if (this.state.numberOfGuests <= this.props.maxGuests) {
+      return this.setState({ numberOfGuests: this.state.numberOfGuests + 1 })
+    }
+    return this.setState({ numberOfGuests: this.state.numberOfGuests })
+  }
+
+  decrementGuests = () => {
+    if (this.state.numberOfGuests > 0) {
+      return this.setState({ numberOfGuests: this.state.numberOfGuests - 1 })
+    }
+    return this.setState({ numberOfGuests: this.state.numberOfGuests })
+  }
+
   renderSelectNumberOfGuests() {
     const { room } = this.props;
-
     if (room) {
-      console.log("hi there ");
       return (
         <SelectAmountOfGuests
           numberOfGuests={this.state.numberOfGuests}
-          incrementGuests={() => this.setState({ numberOfGuests: this.state.numberOfGuests + 1 })}
-          decrementGuests={() => this.setState({ numberOfGuests: this.state.numberOfGuests - 1 })}
-          maxGuests={room.maxGuests}
+          setUpGuests={() => { this.setState({ numberOfGuests: room.maxGuests }) }}
+          incrementGuests={this.incrementGuests}
+          decrementGuests={this.decrementGuests}
         />
       )
     }
+  }
 
+  renderSubmitButton() {
+    const { datePickerDates: { startDate, endDate }, form } = this.props;
+    let className = "disabled";
+
+    if (startDate && endDate && form.guestSelectForm.values) {
+      className = "";
+    }
+
+    return (
+      <div>
+        <button
+          className={`ui ${className} primary right floated button`}
+          onClick={() =>
+            this.onSubmit({
+              status: "Pending",
+              _room: this.props.room,
+              bookingStartDate: startDate,
+              bookingEndDate: endDate,
+              createdOn: this.state.createdAt,
+              price: this.calculatePrice() + this.state.cleaningFee,
+              numberOfGuests: parseInt(form.guestSelectForm.values.numberOfGuests)
+            })
+          }
+        >
+          Confirm
+          </button>
+      </div >
+    )
   }
 
   renderBookingDetails() {
@@ -107,31 +146,14 @@ class BookingCreate extends Component {
             />
             <div className="ui divider" />
             <div className="content__heading__sub">Number of Guests</div>
-
+            {this.renderSelectNumberOfGuests()}
             <div className="ui divider" />
             <div>
               <div className="content__heading__sub">Price</div>
             </div>
             {this.renderPricing()}
           </div>
-
-          <div>
-            <button
-              className="ui primary right floated button"
-              onClick={() =>
-                this.onSubmit({
-                  status: "Pending",
-                  _room: this.props.room,
-                  bookingStartDate: this.props.datePickerDates.startDate,
-                  bookingEndDate: this.props.datePickerDates.endDate,
-                  createdOn: this.state.createdAt,
-                  price: this.calculatePrice() + this.state.cleaningFee
-                })
-              }
-            >
-              Confirm
-          </button>
-          </div>
+          {this.renderSubmitButton()}
         </div>
       </div>
     );
@@ -208,14 +230,15 @@ class BookingCreate extends Component {
 }
 
 const mapStateToProps = (
-  { auth, rooms, blockedDates, datePickerDates },
+  { auth, rooms, blockedDates, datePickerDates, form },
   ownProps
 ) => {
   return {
     auth,
     room: rooms.find(room => room._id === ownProps.match.params.id),
     blockedDates,
-    datePickerDates
+    datePickerDates,
+    form
   };
 };
 
