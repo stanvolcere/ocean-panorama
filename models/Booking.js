@@ -21,9 +21,13 @@ const bookingSchema = new Schema({
         type: Number,
         default: 0
     },
+    numberOfGuests: {
+        type: Number,
+        default: 1
+    },
     bookingStartDate: Date,
     bookingEndDate: Date,
     createdOn: Date
 });
 
-mongoose.model( 'booking', bookingSchema );
+mongoose.model('booking', bookingSchema);
