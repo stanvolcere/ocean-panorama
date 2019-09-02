@@ -49,9 +49,9 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-// app.get("/", (req, res) => {
-//   res.send("Ocean Panorama Landing Page");
-// });
+app.get("/", (req, res) => {
+  res.send("Ocean Panorama Landing Page");
+});
 
 app.listen(PORT, () => {
   console.log("App started!");
