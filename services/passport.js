@@ -4,7 +4,7 @@ const FacebookStrategy = require("passport-facebook").Strategy;
 const LocalStrategy = require("passport-local");
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
-const keys = require("../config/dev");
+const keys = require("../config/keys");
 const mongoose = require("mongoose");
 
 // one arg mena we are trying to fetch something from mongo &&
