@@ -37,7 +37,7 @@ require("./routes/roomRoutes")(app);
 require("./routes/adminRoutes")(app);
 require("./routes/enquiryRoutes")(app);
 
-const publicPath = path.join(__dirname, "build");
+const publicPath = path.join(__dirname, "client/build");
 const PORT = process.env.PORT || 5000;
 
 if (process.env.NODE_ENV === "production") {
