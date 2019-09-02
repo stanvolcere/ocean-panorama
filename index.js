@@ -36,28 +36,25 @@ require("./routes/bookingRoutes")(app);
 require("./routes/roomRoutes")(app);
 require("./routes/adminRoutes")(app);
 require("./routes/enquiryRoutes")(app);
-// another way could be to say
-// const authRoutes = require('./routes/authRoutes');
-// authRoutes(app);
 
-// seeding the database
-// const Booking = mongoose.model('booking');
-// const Room = mongoose.model('room');
+if (process.env.NODE_ENV === 'production') {
+  // express serves up main.js file for the bundled up react app
+  app.use(express.static('client/build'));
+  // express returns the 
+  const path = require('path');
 
-// const addAdmin = async () => {
-//     const room = await new Room({
-//         username: "Stan",
-//         password: 'Extremely nice Apartment'
-//     });
+  // this assumes that if express doesnt have a route for the 
+  // request then it'll pass it over to main.js
+  // which is the React side of the application
+  // the bottom is the catch all case for our routes
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
-//     await room.save();
-// }
-
-// addRoom();
-
-app.get("/", (req, res) => {
-  res.send("Ocean Panorama Landing Page");
-});
+// app.get("/", (req, res) => {
+//   res.send("Ocean Panorama Landing Page");
+// });
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
