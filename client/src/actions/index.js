@@ -70,20 +70,6 @@ export const createBooking = bookingValues => async dispatch => {
   } else {
     dispatch({ type: SET_FLASH_MESSAGE, payload: "Please enter all details to complete booking." });
   }
-
-
-  // try {
-  //   await baseRequest.post(`/api/bookings/`, bookingValues);
-
-  //   //empties our datepicker selected dates fromm the Redux store
-  //   dispatch({ type: CHANGE_DATEPICKER_DATES, payload: {} });
-  //   dispatch({ type: SET_FLASH_MESSAGE, payload: "Booking Successful." });
-  //   history.push("/bookings");
-  // } catch (e) {
-  //   dispatch({ type: SET_FLASH_MESSAGE, payload: "Booking could not be completed." });
-  //   console.log(e);
-  // }
-
 };
 
 export const cancelBooking = id => async dispatch => {

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import moment from "moment";
+import { Link } from "react-router-dom";
 
 import CustomDatePicker from "../DatePicker/CustomDatePicker";
 import SelectAmountOfGuests from "./utils/SelectAmountOfGuests";
@@ -220,11 +221,21 @@ class BookingCreate extends Component {
   // main render method
   render() {
     return (
-      <div className="ui container">
-        {this.scrollToTopOnMount()}
-        <div className="section__heading">Complete Booking</div>
-        {this.renderContent()}
-      </div>
+      <React.Fragment>
+        <Link className="" to={`/rooms/0`}>
+          <i
+            className="booking__details__back__button huge arrow alternate circle left outline icon"
+            data-content="Hello. This is an inverted popup"
+            data-variation="basic"
+          />
+        </Link>
+        <div className="ui container">
+          {this.scrollToTopOnMount()}
+
+          <div className="section__heading">Complete Booking</div>
+          {this.renderContent()}
+        </div>
+      </React.Fragment>
     )
   }
 }
