@@ -7,5 +7,6 @@ module.exports = {
     cookieKey: process.env.COOKIE_KEY,
     sendgridApiKey: process.env.SENDGRID_API_KEY,
     jwtSecret: process.env.JWT_SECRET,
-    redirectDomain: process.env.REDIRECT_DOMAIN
+    redirectDomain: process.env.REDIRECT_DOMAIN,
+    redisClient: process.env.REDISCLOUD_URL
 };
