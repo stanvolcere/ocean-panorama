@@ -3,9 +3,10 @@ const mongoose = require('mongoose');
 const redis = require('redis');
 const generateToken = require('../services/generateToken');
 const { requireAuthUser } = require('../middleware/requireAuth');
+const keys = require("../config/keys");
 
 //setup redis
-const redisURL = 'redis://127.0.0.1:6379';
+const redisURL = keys.redisClient;
 const redisClient = redis.createClient(redisURL);
 
 module.exports = app => {

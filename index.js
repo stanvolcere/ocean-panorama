@@ -37,18 +37,15 @@ require("./routes/roomRoutes")(app);
 require("./routes/adminRoutes")(app);
 require("./routes/enquiryRoutes")(app);
 
-if (process.env.NODE_ENV === 'production') {
-  // express serves up main.js file for the bundled up react app
-  app.use(express.static('client/build'));
-  // express returns the 
-  const path = require('path');
+const publicPath = path.join(__dirname, "build");
+const PORT = process.env.PORT || 5000;
 
-  // this assumes that if express doesnt have a route for the 
-  // request then it'll pass it over to main.js
-  // which is the React side of the application
-  // the bottom is the catch all case for our routes
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+if (process.env.NODE_ENV === "production") {
+  // express serves up main.js file for the bundled up react app
+  app.use(express.static(publicPath));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(publicPath, "index.html"));
   });
 }
 
@@ -56,7 +53,6 @@ if (process.env.NODE_ENV === 'production') {
 //   res.send("Ocean Panorama Landing Page");
 // });
 
-const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log("App started!");
 });
