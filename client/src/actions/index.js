@@ -1,4 +1,5 @@
 import axios from "axios";
+import { reset } from 'redux-form';
 import {
   FETCH_USER,
   FETCH_ROOMS,
@@ -129,6 +130,7 @@ export const sendEnquiry = formValues => async dispatch => {
   try {
     await baseRequest.post(`/api/sendenquiry`, formValues);
     dispatch({ type: SET_FLASH_MESSAGE, payload: "Your enquiry has been sent." });
+    dispatch(reset('enquiryForm'));
     history.push("/rooms/0");
   } catch (e) {
     dispatch({ type: SET_FLASH_MESSAGE, payload: "Sorry, we had an error processing." });
