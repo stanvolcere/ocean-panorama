@@ -27,10 +27,6 @@ class BookingCreate extends Component {
     this.props.fetchBlockedDates(this.props.match.params.id);
   }
 
-  componentDidUpdate() {
-    console.log(this.props);
-  }
-
   componentWillUnmount() {
     this.props.clearSelectedDates();
   }
