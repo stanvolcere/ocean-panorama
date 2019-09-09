@@ -1,16 +1,16 @@
 const mongoose = require("mongoose");
 const moment = require("moment");
-const requireLogin = require("../middleware/requireLogin");
-const { requireAuth } = require('../middleware/requireAuth');
+// const requireLogin = require("../middleware/requireLogin");
+const { requireAuth, requireAuthAdmin } = require('../middleware/requireAuth');
 const { sendBookingConfirmationEmail } = require("../emails/account");
 
 const Booking = mongoose.model("booking");
 
 module.exports = app => {
+  // GUEST Users
+
   // get all bookings for a guest
   app.get("/api/bookings", requireAuth, async (req, res) => {
-
-    //res.send('list of bookings');
     const bookings = await Booking.find({ _user: req.user })
       .populate("_room")
       .exec();
@@ -26,7 +26,7 @@ module.exports = app => {
     return res.status(200).send(bookings);
   });
 
-  app.get("/api/bookings/blocked/:id", requireLogin, async (req, res) => {
+  app.get("/api/bookings/blocked/:id", requireAuth, async (req, res) => {
     const bookingsForSpecifiedRoom = await Booking.find({
       _room: req.params.id,
       bookingEndDate: {
@@ -44,12 +44,15 @@ module.exports = app => {
 
   // specific booking for guest
   app.get("/api/bookings/:id", requireAuth, async (req, res) => {
+
     // return a specific booking
     const id = req.params.id;
-    const booking = await Booking.findById(id).populate("_room");
+    const booking = await Booking.findById(id)
+      .populate("_room")
+      .populate("_user");
 
     if (booking) {
-      return res.send(booking);
+      return res.send([booking]);
     }
 
     return res.status(404).send();
@@ -140,5 +143,24 @@ module.exports = app => {
     } catch (e) {
       res.status(500).send(e);
     }
+  });
+
+  // ADMIN Booking Routes
+  app.get('/api/admin/bookings', requireAuthAdmin, async (req, res) => {
+
+    const bookings = await Booking.find()
+      .populate('_user', 'name')
+      .populate("_room")
+      .exec();
+
+    if (!bookings) {
+      return res.status(404).send();
+    }
+
+    bookings.sort((a, b) => {
+      return moment(a.bookingStartDate).isAfter(b.bookingStartDate);
+    });
+
+    return res.status(200).send(bookings);
   });
 };

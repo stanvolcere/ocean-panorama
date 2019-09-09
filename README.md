@@ -9,7 +9,7 @@ Key Features:
   - Automated communication (e.g booking confirmation, payment confirmation or booking cancelation)between guests and the platform is done using the SendGrid API.
   
 
-Tools: Node.js, Express, React, Redux, Stripe and SendGrid.
+Tools: Node.js, Express, React, Redux, MongoDB, Stripe and SendGrid.
 
 Project Status: Development
 

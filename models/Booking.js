@@ -8,7 +8,7 @@ const bookingSchema = new Schema({
         required: true,
         // ref here tells mongo to look for a collection named 
         // user to form the relationship , ie every survey belongs to a user
-        ref: 'User'
+        ref: 'user'
     },
     _room: {
         type: mongoose.Schema.Types.ObjectId,
