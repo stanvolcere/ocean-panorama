@@ -128,7 +128,7 @@ module.exports = app => {
     }
   });
 
-  // update a booking
+  // delete (via settingg status to cancelled) a booking
   app.delete("/api/bookings/:id", requireAuth, async (req, res) => {
     try {
       const booking = await Booking.findOneAndDelete({
@@ -162,5 +162,41 @@ module.exports = app => {
     });
 
     return res.status(200).send(bookings);
+  });
+
+  //confirm
+  app.patch("/api/admin/bookings/:id/updatestatus", requireAuthAdmin, async (req, res) => {
+    console.log(req.body);
+    const updates = Object.keys(req.body);
+
+    const allowUpdates = ["status"];
+
+    // if all elements in the array returns true the every will return every
+    const isValidOperation = updates.every(update => {
+      return allowUpdates.includes(update);
+    });
+
+    if (!isValidOperation) {
+      return res.status(500).send({ error: "invalid updates" });
+    }
+
+    try {
+      const booking = await Booking.findOne({ _id: req.params.id })
+        .populate("_room")
+        .populate("_user");
+
+      if (!booking) {
+        return res.status(404).send({ info: "Booking Not Found" });
+      }
+
+      updates.forEach(update => {
+        booking[update] = req.body[update];
+      });
+
+      await booking.save();
+      res.status(200).send([booking]);
+    } catch (e) {
+      res.status(500).send(e);
+    }
   });
 };
