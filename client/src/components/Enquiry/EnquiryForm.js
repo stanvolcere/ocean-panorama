@@ -13,12 +13,9 @@ class EnquiryForm extends React.Component {
                 </div>
             )
         }
-
     }
 
     renderSubject({ input, label, meta: { touched, error } }) {
-
-
         return (
             <div className="field">
                 <label>{label}</label>
