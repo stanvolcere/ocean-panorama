@@ -22,8 +22,8 @@ class BookingList extends Component {
 
     if (booking) {
       return (
-        <div className="ui container">
-          <div className="section__heading">Booking Detail View</div>
+        <div id="booking__details__main__container" className="ui container">
+          <div className="section__heading">Booking Details</div>
           <div className="booking__details__main">
             <div>
               {this.renderPhotos(booking._room.imageUrls)}
@@ -36,6 +36,11 @@ class BookingList extends Component {
               </p>
               <p>Total Price: £{booking.price}</p>
               <div className="ui divider"></div>
+              <Link to="#">
+                <button className="ui inverted secondary button">
+                  Message Host
+                </button>
+              </Link>
               <Link to={`/bookings/changedates/${booking._id}`}>
                 <button className="ui inverted secondary button">
                   Change Dates

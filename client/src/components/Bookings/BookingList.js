@@ -61,7 +61,7 @@ class BookingList extends Component {
                   }}
                 >
                   <div>
-                    Total Cost : £{booking.price} (£{booking._room.nightlyPrice}
+                    Total Price : £{booking.price} (£{booking._room.nightlyPrice}
                     /night)
                   </div>
                   <div className="booking_list_buttons">

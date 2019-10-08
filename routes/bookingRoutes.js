@@ -157,9 +157,12 @@ module.exports = app => {
       return res.status(404).send();
     }
 
+    // we want to sort according to date booking was made
     bookings.sort((a, b) => {
-      return moment(a.bookingStartDate).isAfter(b.bookingStartDate);
+      return moment(a.createdOn).isAfter(b.createdOn);
     });
+
+    console.log(bookings[0]);
 
     return res.status(200).send(bookings);
   });

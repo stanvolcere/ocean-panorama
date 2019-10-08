@@ -96,7 +96,7 @@ class BookingCreate extends Component {
   }
 
   renderSubmitButton() {
-    const { datePickerDates: { startDate, endDate }, form } = this.props;
+    const { datePickerDates: { startDate, endDate, dateRange }, form } = this.props;
     let className = "disabled";
 
     if (startDate && endDate && form.guestSelectForm.values) {
@@ -113,6 +113,7 @@ class BookingCreate extends Component {
               _room: this.props.room,
               bookingStartDate: startDate,
               bookingEndDate: endDate,
+              numberOfNights: dateRange,
               createdOn: this.state.createdAt,
               price: this.calculatePrice() + this.state.cleaningFee,
               numberOfGuests: parseInt(form.guestSelectForm.values.numberOfGuests)
@@ -228,7 +229,7 @@ class BookingCreate extends Component {
         <div className="ui container">
           {this.scrollToTopOnMount()}
 
-          <div className="section__heading">Complete Booking</div>
+          <div className="section__heading">Book Listing</div>
           {this.renderContent()}
         </div>
       </React.Fragment>

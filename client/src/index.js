@@ -8,8 +8,9 @@ import { createStore, applyMiddleware, compose } from "redux";
 import App from './components/App';
 import reducers from './reducers';
 
-// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducers, { authToken: localStorage.getItem("token") }, compose(applyMiddleware(reduxThunk)));
+// TODO: comment out before deployment
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducers, { authToken: localStorage.getItem("token") }, composeEnhancers(applyMiddleware(reduxThunk)));
 
 ReactDOM.render(
     <Provider store={store}><App /></Provider>,

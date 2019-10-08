@@ -15,26 +15,28 @@ class Header extends Component {
     if (authToken) {
       return [
         <div key="7" className="item dropdown">
-          <div className="dropbtn">{auth ? auth.name : "Profile"}<i className="dropdown icon"></i></div>
+          <div className="dropbtn"><div className="guests__header__menu__text"> {auth ? auth.name : "Profile"}<i className="dropdown icon"></i></div></div>
           <div className="dropdown-content">
             <Link key="3" to="/bookings" className="item">
-              <div>My Bookings</div>
+              <div className="guests__header__menu__text">My Bookings</div>
             </Link>
             <Link key="4" to="#" className="item">
-              <div>My Profile</div>
+              <div className="guests__header__menu__text">My Profile</div>
             </Link>
           </div>
         </div>
         ,
 
         <div key="5" className="item">
-          <a href="/signout">Log Out</a>
+          <a href="/signout">
+            <div className="guests__header__menu__text">Log Out</div>
+          </a>
         </div>
       ];
     } else {
       return [
         <Link key="1" to="/signin" className="item" >
-          <div>Log In/Sign Up</div>
+          <div className="guests__header__menu__text">Log In/Sign Up</div>
         </Link>
       ];
     }
@@ -44,10 +46,10 @@ class Header extends Component {
     return (
       <div id="guests__header__menu" className="ui secondary menu">
         <Link to="/" className="item">
-          Ocean Panorama
+          <div className="guests__header__menu__text">Ocean Panorama</div>
         </Link>
         <Link to="/rooms/0" className="item">
-          Rooms
+          <div className="guests__header__menu__text">Rooms</div>
         </Link>
         <div className="right menu">{this.renderContent()}</div>
       </div>

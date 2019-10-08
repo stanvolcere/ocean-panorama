@@ -27,6 +27,7 @@ const bookingSchema = new Schema({
     },
     bookingStartDate: Date,
     bookingEndDate: Date,
+    numberOfNights: Number,
     createdOn: Date
 });
 
