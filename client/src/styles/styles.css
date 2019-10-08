@@ -105,6 +105,12 @@
   text-decoration: none;
 }
 
+/* IMAGE GALLERY MODAL */
+.image__gallery__close__button {
+  position: absolute;
+  bottom: 100%;
+}
+
 /* HEADER  */
 #guests__header__menu {
   font-family: 'Darker Grotesque', sans-serif;

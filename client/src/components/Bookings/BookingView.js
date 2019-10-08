@@ -37,7 +37,7 @@ class BookingList extends Component {
               <p>Total Price: £{booking.price}</p>
               <div className="ui divider"></div>
               <Link to="#">
-                <button className="ui inverted secondary button">
+                <button className="ui teal button">
                   Message Host
                 </button>
               </Link>

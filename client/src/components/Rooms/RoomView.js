@@ -19,6 +19,7 @@ class RoomView extends Component {
   renderActions(room) {
     return (
       <div className="room__display__actions">
+        <Link to={`/gallery/${room._id}`}><button className="ui teal button">show gallery</button></Link>
         <Link to={`/enquiry/${room._id}`}><button className="ui yellow button">Make Enquiry</button></Link>
         <BookRoomButton roomId={room._id} />
       </div>

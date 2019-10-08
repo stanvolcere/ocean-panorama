@@ -20,6 +20,7 @@ import SignInModal from "./Auth/SignInModal";
 import AfterSignIn from "./Auth/AfterSignIn";
 import SignOut from "./Auth/SignOut";
 import SendEnquiryModal from "./Enquiry/SendEnquiryModal";
+import ImageGalleryModal from "./ImageGallery/ImageGalleryModal";
 import FlashMessage from "./FlashMessage";
 import Footer from "./Footer";
 
@@ -53,6 +54,7 @@ class App extends Component {
               <Route exact path="/room/book/:id" component={BookingCreate} />
               <Route exact path="/rooms/:id" component={RoomView} />
               <Route exect path="/enquiry/:id" component={SendEnquiryModal}></Route>
+              <Route exect path="/gallery/:id" component={ImageGalleryModal}></Route>
 
               <Route component={PageNotFound} />
             </Switch>
