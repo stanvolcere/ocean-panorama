@@ -19,7 +19,6 @@ class RoomView extends Component {
   renderActions(room) {
     return (
       <div className="room__display__actions">
-        <Link to={`/gallery/${room._id}`}><button className="ui teal button">show gallery</button></Link>
         <Link to={`/enquiry/${room._id}`}><button className="ui yellow button">Make Enquiry</button></Link>
         <BookRoomButton roomId={room._id} />
       </div>
@@ -34,9 +33,9 @@ class RoomView extends Component {
     </div>
   }
 
-  renderPhotos(imageUrls) {
+  renderPhotos(roomId, imageUrls) {
     return (<div className="ui large rounded image">
-      <img src={imageUrls} alt="img"></img>
+      <Link to={`/gallery/${roomId}`}><img src={imageUrls} alt="img"></img></Link>
     </div>)
   }
 
@@ -52,7 +51,7 @@ class RoomView extends Component {
           </div>
           <div className="ui divider" />
           <div className="room__display__content">
-            {this.renderPhotos(room.imageUrls)}
+            {this.renderPhotos(room._id, room.imageUrls)}
             <div className="room__display__details">
               <div className="content__heading__sub">Room Details</div>
               {this.renderRoomDetails(room)}

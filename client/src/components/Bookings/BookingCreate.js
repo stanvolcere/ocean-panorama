@@ -188,26 +188,28 @@ class BookingCreate extends Component {
     return <div>Choose Dates to calculate price</div>;
   }
 
-  renderPhotos(imageUrls) {
+  renderPhotos(roomId, imageUrls) {
     return (
       <div className="ui segment">
         <div className="content__heading__sub">Room Photos</div>
         <div className="ui divider"></div>
-        <div className="booking__room_images"  >
-          <img alt="" className="ui large rounded image" src={imageUrls[0]} />
-        </div>
+        <Link to={`/gallery/${roomId}`}>
+          <div className="ui large rounded image"><img src={imageUrls[0]} alt="img"></img></div>
+        </Link>
       </div>
     );
   }
 
+
+
   // renders the booking details
   renderContent() {
     if (this.props.room) {
-      const { imageUrls } = this.props.room;
+      const { _id, imageUrls } = this.props.room;
       return (
         <div id="new__booking__container" className="ui segment">
           <div className="ui two column very relaxed stackable grid">
-            <div className="column">{this.renderPhotos(imageUrls)}</div>
+            <div className="column">{this.renderPhotos(_id, imageUrls)}</div>
             <div className="column">{this.renderBookingDetails()}</div>
           </div>
         </div>

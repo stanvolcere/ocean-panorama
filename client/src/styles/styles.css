@@ -107,8 +107,16 @@
 
 /* IMAGE GALLERY MODAL */
 .image__gallery__close__button {
-  position: absolute;
-  bottom: 100%;
+  font-size: 3rem;
+  width: fit-content;
+}
+
+.image__gallery__content {
+  height: 90%;
+}
+
+.image__gallery__image {
+  margin: 0 auto;
 }
 
 /* HEADER  */
