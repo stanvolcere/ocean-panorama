@@ -20,6 +20,7 @@ class BookingList extends Component {
 
   renderContent() {
     const { booking } = this.props;
+    console.log(this.props);
 
     if (booking) {
       return (

@@ -111,12 +111,27 @@
   width: fit-content;
 }
 
-.image__gallery__content {
+.image__gallery__container {
   height: 90%;
+}
+
+.image__gallery__content {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .image__gallery__image {
   margin: 0 auto;
+}
+
+.image__gallery__change__image {
+  font-size: 6rem;
+  text-decoration: none;
+  margin: auto 0;
+}
+
+.image__gallery__change__image a {
+  color: white;
 }
 
 /* HEADER  */

@@ -35,7 +35,7 @@ class RoomView extends Component {
 
   renderPhotos(roomId, imageUrls) {
     return (<div className="ui large rounded image">
-      <Link to={`/gallery/${roomId}`}><img src={imageUrls} alt="img"></img></Link>
+      <Link to={`/gallery/${roomId}?returnUrl=/rooms/${roomId}`}><img src={imageUrls} alt="img"></img></Link>
     </div>)
   }
 
