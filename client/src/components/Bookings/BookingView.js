@@ -11,16 +11,14 @@ class BookingList extends Component {
     this.props.fetchBookings();
   }
 
-  renderPhotos(roomId, imageUrls) {
-    return <Link to={`/gallery/${roomId}`}>
-      <div className="ui large rounded image"><img src={imageUrls[0]} alt="img"></img></div>
+  renderPhotos(roomId, imageUrls, bookingId) {
+    return <Link to={`/gallery/${roomId}?returnUrl=/bookings/${bookingId}`}>
+      <div className="ui big rounded image"><img src={imageUrls[0]} alt="img"></img></div>
     </Link>
-
   }
 
   renderContent() {
     const { booking } = this.props;
-    console.log(this.props);
 
     if (booking) {
       return (
@@ -28,7 +26,7 @@ class BookingList extends Component {
           <div className="section__heading">Booking Details</div>
           <div className="booking__details__main">
             <div>
-              {this.renderPhotos(booking._room._id, booking._room.imageUrls)}
+              {this.renderPhotos(booking._room._id, booking._room.imageUrls, booking._id)}
             </div>
             <div className="booking__details__main__content">
               <p>Room: {booking._room.title}</p>

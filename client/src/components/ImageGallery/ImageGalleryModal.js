@@ -44,7 +44,6 @@ class ImageGalleryModal extends React.Component {
                 </div>
             </div >,
             document.querySelector("#modal")
-
         );
     }
 };

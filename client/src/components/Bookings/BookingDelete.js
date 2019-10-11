@@ -22,7 +22,7 @@ class BookingDelete extends Component {
         >
           Cancel Booking
         </button>
-        <Link to="/bookings" className="ui button">
+        <Link to={`/bookings/${id}`} className="ui button">
           Dismiss
         </Link>
       </React.Fragment>
@@ -31,7 +31,6 @@ class BookingDelete extends Component {
 
   render() {
     const { id } = this.props.match.params;
-
     return (
       <Modal
         title="Cancel Booking"
