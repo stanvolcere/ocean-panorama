@@ -34,9 +34,12 @@ class RoomView extends Component {
   }
 
   renderPhotos(roomId, imageUrls) {
-    return (<div className="ui large rounded image">
-      <Link to={`/gallery/${roomId}?returnUrl=/rooms/${roomId}`}><img src={imageUrls} alt="img"></img></Link>
-    </div>)
+    if (imageUrls) {
+      return (<div className="ui large rounded image">
+        <Link to={`/gallery/${roomId}?returnUrl=/rooms/${roomId}`}><img src={imageUrls[0]} alt="img"></img></Link>
+      </div>)
+    }
+    return <div></div>
   }
 
   // main content holding the currently selected room
