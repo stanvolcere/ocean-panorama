@@ -3,16 +3,23 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import { fetchRooms } from "../../actions";
-import { Link } from "react-router-dom";
 const queryString = require('query-string');
 
 class ImageGalleryModal extends React.Component {
 
-    state = { returnUrl: "" };
+    state = {
+        returnUrl: "",
+        currentImageUrlId: 0
+    };
 
     componentDidMount() {
         this.props.fetchRooms();
         this.setReturnUrl();
+    }
+
+    componentDidUpdate() {
+        console.log(this.props);
+        console.log(this.state);
     }
 
     // sets the return URL on our local state 
@@ -22,16 +29,45 @@ class ImageGalleryModal extends React.Component {
     }
 
     dismissAction = () => {
-        this.props.history.push(this.state.returnUrl);
+        if (this.state.returnUrl && this.state.returnUrl.length > 0) {
+            return this.props.history.push(this.state.returnUrl);
+        }
+        return this.props.history.push("/rooms/0");
     }
 
     renderPhotos(imageUrls) {
-        return <div className="image__gallery__content">
-            <div className="image__gallery__change__image"><Link to="#"><i className="arrow circle left icon"></i></Link></div>
-            <img className="ui huge image" alt="image__gallery" src={imageUrls}></img>
-            <div className="image__gallery__change__image"><Link to="#"><i className="arrow circle right icon"></i></Link></div>
-        </div>
+        if (imageUrls) {
+            return <div className="image__gallery__content">
+                <div className="image__gallery__change__image" onClick={() => this.onLeftArrowClick(imageUrls.length)}><i className="arrow circle left icon"></i></div>
+                <img className="ui huge image" alt="image__gallery" src={imageUrls[this.state.currentImageUrlId]}></img>
+                <div className="image__gallery__change__image" onClick={() => this.onRightArrowClick(imageUrls.length)}><i className="arrow circle right icon"></i></div>
+            </div >
+        }
+        return <div></div>
     }
+
+    onRightArrowClick(imageUrlsSize) {
+        let currentId = this.state.currentImageUrlId;
+        currentId++;
+
+        if (currentId >= imageUrlsSize) {
+            this.setState({ currentImageUrlId: 0 });
+        } else {
+            this.setState({ currentImageUrlId: this.state.currentImageUrlId + 1 });
+        }
+    }
+
+    onLeftArrowClick(imageUrlsSize) {
+        let currentId = this.state.currentImageUrlId;
+        currentId--;
+
+        if (currentId < 0) {
+            this.setState({ currentImageUrlId: imageUrlsSize - 1 });
+        } else {
+            this.setState({ currentImageUrlId: this.state.currentImageUrlId - 1 });
+        }
+    }
+
 
     render() {
         // e.stopPropagation stops the event from bubbling up to en eventual event handler
