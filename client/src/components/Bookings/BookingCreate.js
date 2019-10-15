@@ -193,7 +193,7 @@ class BookingCreate extends Component {
       <div className="ui segment">
         <div className="content__heading__sub">Room Photos</div>
         <div className="ui divider"></div>
-        <Link to={`/gallery/${roomId}`}>
+        <Link to={`/gallery/${roomId}?returnUrl=/room/book/${roomId}`}>
           <div className="ui large rounded image"><img src={imageUrls[0]} alt="img"></img></div>
         </Link>
       </div>
