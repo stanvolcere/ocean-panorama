@@ -25,6 +25,10 @@ const bookingSchema = new Schema({
         type: Number,
         default: 1
     },
+    paid: {
+        type: Boolean,
+        default: false
+    },
     bookingStartDate: Date,
     bookingEndDate: Date,
     numberOfNights: Number,
