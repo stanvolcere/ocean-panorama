@@ -22,6 +22,7 @@ import SignOut from "./Auth/SignOut";
 import SendEnquiryModal from "./Enquiry/SendEnquiryModal";
 import ImageGalleryModal from "./ImageGallery/ImageGalleryModal";
 import FlashMessage from "./FlashMessage";
+import Profile from "./Auth/Profile";
 import Footer from "./Footer";
 
 class App extends Component {
@@ -42,6 +43,7 @@ class App extends Component {
               <Route exact path="/signin" component={SignInModal} />
               <Route exact path="/aftersignin" component={AfterSignIn} />
               <Route exact path="/signout" component={SignOut} />
+              <Route exact path="/profile" component={Profile} />
 
               <Route exact path="/bookings" component={BookingList} />
               <Route exact path="/bookings/:id" component={BookingView} />

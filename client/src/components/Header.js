@@ -20,7 +20,7 @@ class Header extends Component {
             <Link key="3" to="/bookings" className="item">
               <div className="guests__header__menu__text">My Bookings</div>
             </Link>
-            <Link key="4" to="#" className="item">
+            <Link key="4" to="/profile" className="item">
               <div className="guests__header__menu__text">My Profile</div>
             </Link>
           </div>

@@ -17,6 +17,17 @@ class BookingList extends Component {
     </Link>
   }
 
+  renderPaymentAction(isPaid) {
+    if (!isPaid) {
+      return <Link to="#">
+        <button className="ui blue button">
+          <span>Pay Now</span>
+        </button>
+      </Link>
+    }
+    return;
+  }
+
   renderContent() {
     const { booking } = this.props;
 
@@ -36,19 +47,30 @@ class BookingList extends Component {
               </p>
               <p>Total Price: £{booking.price}</p>
               <div className="ui divider"></div>
+              {this.renderPaymentAction(booking.paid)}
               <Link to="#">
                 <button className="ui teal button">
-                  Message Host
+                  <span>Message Host</span>
                 </button>
               </Link>
-              <Link to={`/bookings/changedates/${booking._id}`}>
-                <button className="ui inverted secondary button">
-                  Change Dates
-                </button>
-              </Link>
-              <Link to={`/bookings/cancel/${booking._id}`}>
-                <button className="ui inverted red button">Cancel Booking</button>
-              </Link>
+              <div class="ui compact menu">
+                <div class="ui simple dropdown item">
+                  <span>Booking Options</span>
+                  <div class="menu">
+                    <div class="item">
+                      <Link to={`/bookings/changedates/${booking._id}`}>
+                        Change Dates
+                      </Link></div>
+                    <div class="item">
+                      <Link to={`/bookings/cancel/${booking._id}`}>
+                        Cancel Booking
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
             </div>
 
           </div>
