@@ -10,9 +10,11 @@ class Payments extends Component {
             <StripeCheckout
                 name='Ocean Panorama'
                 description="Payment for Booking"
-                amount={this.props.price}
-                //token={token => this.props.handleToken(token)}
-                token={() => console.log("hi")}
+                // note the amoinut is in cents and thus must be converted to hundreds
+                amount={this.props.price * 100}
+                currency="GBP"
+                token={token => this.props.handleToken(token)}
+                // token={() => console.log("hi")}
                 stripeKey={process.env.REACT_APP_STRIPE_KEY}
 
             >

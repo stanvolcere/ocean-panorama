@@ -143,3 +143,10 @@ export const sendEnquiry = formValues => async dispatch => {
 export const clearFlashMessage = () => async dispatch => {
   dispatch({ type: SET_FLASH_MESSAGE, payload: null });
 }
+
+// PAYMENTS
+export const handleToken = (token) => async dispatch => {
+  console.log(token);
+  //const res = await axios.post('/api/stripe', token);
+  // dispatch({ type: FETCH_USER, payload: res.data });
+}
