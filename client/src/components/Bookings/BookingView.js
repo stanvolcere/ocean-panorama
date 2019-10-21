@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import * as actions from "../../actions";
 import { displayDate } from "./utils/dataPickerHelpers";
 import ScrollTopTopOnMount from "../utils/ScrollToTopOnMount";
+import Payments from "../Payments/Payments";
 import requireAuth from "../utils/requireAuth";
 
 class BookingList extends Component {
@@ -19,11 +20,7 @@ class BookingList extends Component {
 
   renderPaymentAction(isPaid) {
     if (!isPaid) {
-      return <Link to="#">
-        <button className="ui blue button">
-          <span>Pay Now</span>
-        </button>
-      </Link>
+      return <Payments price={this.props.booking.price} />
     }
     return;
   }
@@ -53,15 +50,15 @@ class BookingList extends Component {
                   <span>Message Host</span>
                 </button>
               </Link>
-              <div class="ui compact menu">
-                <div class="ui simple dropdown item">
+              <div className="ui compact menu">
+                <div className="ui simple dropdown item">
                   <span>Booking Options</span>
-                  <div class="menu">
-                    <div class="item">
+                  <div className="menu">
+                    <div className="item">
                       <Link to={`/bookings/changedates/${booking._id}`}>
                         Change Dates
                       </Link></div>
-                    <div class="item">
+                    <div className="item">
                       <Link to={`/bookings/cancel/${booking._id}`}>
                         Cancel Booking
                       </Link>

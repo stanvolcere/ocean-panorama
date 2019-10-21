@@ -1,10 +1,11 @@
 const keys = require('../config/keys');
-const requireLogin = require('../middlewares/requireLogin');
-const stripe = require('stripe')(keys.stripeSecretKey);
+// const requireLogin = require('../middlewares/requireLogin');
+const { requireAuthUser } = require('../middleware/requireAuth');
+//const stripe = require('stripe')(keys.stripeSecretKey);
 
 module.exports = app => {
 
-    app.post('/api/stripe', requireLogin, async (req, res) => {
+    app.post('/api/stripe', async (req, res) => {
         console.log(req.body);
         // stripe.charges.create() returns a promise
         // const charge = await stripe.charges.create({
