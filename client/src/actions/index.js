@@ -145,9 +145,15 @@ export const clearFlashMessage = () => async dispatch => {
 }
 
 // PAYMENTS
-export const handleToken = (token) => async dispatch => {
-  // note: the token needed by Stripe servers (for verifying the card being used) is located on token.id
-  const res = await baseRequest.post('/api/stripe', token);
-  console.log(res);
-  // dispatch({ type: FETCH_BOOKINGS, payload: res.data });
+export const handleToken = (data) => async dispatch => {
+  try {
+    // note: the token needed by Stripe servers (for verifying the card being used) is located on token.id
+    const res = await baseRequest.post('/api/stripe', data);
+    dispatch({ type: FETCH_BOOKINGS, payload: res.data });
+    dispatch({ type: SET_FLASH_MESSAGE, payload: "Payment was successful. See you soon!" });
+    history.push(`/bookings/${data.bookingId}`);
+  } catch (e) {
+    dispatch({ type: SET_FLASH_MESSAGE, payload: "Payment could not be complete." });
+    console.log(e);
+  }
 }

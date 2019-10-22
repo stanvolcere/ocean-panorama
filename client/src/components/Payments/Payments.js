@@ -5,9 +5,14 @@ import { handleToken } from '../../actions';
 
 // remember the amount is denoted in cents -> 5 dollars is 500 cents
 class Payments extends Component {
+
+    onToken = (bookingId) => token => {
+        this.props.handleToken({ token, bookingId });
+    }
+
     render() {
-        const { price } = this.props;
-        const bookingAmount = price * 100;
+        const { bookingId, price } = this.props;
+        const bookingDisplayAmount = price * 100;
 
         return (
             <StripeCheckout
@@ -16,9 +21,9 @@ class Payments extends Component {
                 description={`Total price is £${price}`}
                 billingAddress
                 // note the amoinut is in cents and thus must be converted to hundreds
-                amount={bookingAmount}
+                amount={bookingDisplayAmount}
                 currency="GBP"
-                token={(token) => this.props.handleToken(token)}
+                token={this.onToken(bookingId, price)}
                 stripeKey={process.env.REACT_APP_STRIPE_KEY}
             >
                 <button className="ui blue button">Pay Now</button>

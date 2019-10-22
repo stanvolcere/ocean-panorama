@@ -7,7 +7,7 @@ import ScrollTopTopOnMount from "../utils/ScrollToTopOnMount";
 import Payments from "../Payments/Payments";
 import requireAuth from "../utils/requireAuth";
 
-class BookingList extends Component {
+class BookingView extends Component {
   componentDidMount() {
     this.props.fetchBookings();
   }
@@ -42,6 +42,7 @@ class BookingList extends Component {
                 Dates: {displayDate(booking.bookingStartDate)} -{" "}
                 {displayDate(booking.bookingEndDate)}
               </p>
+              <p>Duration: {booking.numberOfNights} nights</p>
               <p>Total Price: £{booking.price}</p>
               <div className="ui divider"></div>
               {this.renderPaymentAction(booking.paid)}
@@ -102,4 +103,4 @@ const mapStateToProps = ({ bookings }, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, actions)(requireAuth(BookingList));
+export default connect(mapStateToProps, actions)(requireAuth(BookingView));
