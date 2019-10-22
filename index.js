@@ -37,7 +37,7 @@ require("./routes/bookingRoutes")(app);
 require("./routes/roomRoutes")(app);
 require("./routes/adminRoutes")(app);
 require("./routes/enquiryRoutes")(app);
-require("./routes/billingRoutes")(app);
+require("./routes/paymentRoutes")(app);
 
 const publicPath = path.join(__dirname, "client/build");
 const PORT = process.env.PORT || 5000;
