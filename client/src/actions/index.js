@@ -147,9 +147,7 @@ export const clearFlashMessage = () => async dispatch => {
 // PAYMENTS
 export const handleToken = (token) => async dispatch => {
   // note: the token needed by Stripe servers (for verifying the card being used) is located on token.id
-  console.log(token);
-
-  // const res = await axios.post('/api/stripe', { ...token, ...price });
-  // console.log(res);
-  // dispatch({ type: FETCH_USER, payload: res.data });
+  const res = await baseRequest.post('/api/stripe', token);
+  console.log(res);
+  // dispatch({ type: FETCH_BOOKINGS, payload: res.data });
 }

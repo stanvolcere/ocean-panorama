@@ -17,11 +17,6 @@ class ImageGalleryModal extends React.Component {
         this.setReturnUrl();
     }
 
-    componentDidUpdate() {
-        console.log(this.props);
-        console.log(this.state);
-    }
-
     // sets the return URL on our local state 
     setReturnUrl() {
         const query = queryString.parse(this.props.location.search);

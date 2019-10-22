@@ -1,11 +1,15 @@
+const mongoose = require("mongoose");
 const keys = require('../config/keys');
-// const requireLogin = require('../middlewares/requireLogin');
-const { requireAuthUser } = require('../middleware/requireAuth');
+const { requireAuth } = require('../middleware/requireAuth');
 //const stripe = require('stripe')(keys.stripeSecretKey);
+const Booking = mongoose.model("booking");
 
 module.exports = app => {
 
-    app.post('/api/stripe', async (req, res) => {
+    // the amount here can be computed by us 
+    app.post('/api/stripe', requireAuth, async (req, res) => {
+
+        // the actual amount we want to charge is decided here
         console.log(req.body);
         // stripe.charges.create() returns a promise
         // const charge = await stripe.charges.create({

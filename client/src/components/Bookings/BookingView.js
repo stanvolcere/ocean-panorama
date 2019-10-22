@@ -20,7 +20,7 @@ class BookingList extends Component {
 
   renderPaymentAction(isPaid) {
     if (!isPaid) {
-      return <Payments price={this.props.booking.price} />
+      return <Payments bookingId={this.props.booking._id} price={this.props.booking.price} />
     }
     return;
   }
