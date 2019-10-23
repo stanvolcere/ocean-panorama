@@ -25,6 +25,17 @@ class BookingView extends Component {
     return;
   }
 
+  renderChangeDatesAction(bookingId, isPaid) {
+    if (!isPaid) {
+      return <div className="item">
+        <Link to={`/bookings/changedates/${bookingId}`}>
+          Change Dates
+      </Link>
+      </div>
+    }
+    return;
+  }
+
   renderContent() {
     const { booking } = this.props;
 
@@ -55,10 +66,7 @@ class BookingView extends Component {
                 <div className="ui simple dropdown item">
                   <span>Booking Options</span>
                   <div className="menu">
-                    <div className="item">
-                      <Link to={`/bookings/changedates/${booking._id}`}>
-                        Change Dates
-                      </Link></div>
+                    {this.renderChangeDatesAction(booking._id, booking.paid)}
                     <div className="item">
                       <Link to={`/bookings/cancel/${booking._id}`}>
                         Cancel Booking
@@ -67,10 +75,7 @@ class BookingView extends Component {
                   </div>
                 </div>
               </div>
-
-
             </div>
-
           </div>
         </div>
       );

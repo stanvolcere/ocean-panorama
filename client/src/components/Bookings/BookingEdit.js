@@ -8,6 +8,7 @@ import * as actions from "../../actions";
 import history from "../../history";
 import { displayDate, getDateDiff } from "../Bookings/utils/dataPickerHelpers";
 import requireAuth from "../utils/requireAuth";
+import { shouldNavigateAwayIfBookingIsPaid } from "./utils/bookingIsPaid";
 
 class BookingEdit extends Component {
   state = {
@@ -18,6 +19,13 @@ class BookingEdit extends Component {
     this.props.fetchBookings();
     if (this.props.booking) {
       this.props.fetchBlockedDates(this.props.booking._room._id);
+    }
+  }
+
+  // this could be refactored into an external higher order component
+  componentDidUpdate() {
+    if (this.props.booking) {
+      shouldNavigateAwayIfBookingIsPaid(this.props.booking._id, this.props.booking.paid);
     }
   }
 
