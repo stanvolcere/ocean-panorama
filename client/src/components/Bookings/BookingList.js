@@ -1,13 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import * as actions from "../../actions";
+import { fetchBookings } from "../../actions";
 import { displayDate } from "./utils/dataPickerHelpers";
 import requireAuth from "../utils/requireAuth";
 
 class BookingList extends Component {
+
+  state = {
+    upcoming: true
+  }
+
   componentDidMount() {
+    console.log(this.props);
     this.props.fetchBookings();
+  }
+
+  componentDidUpdate() {
+    console.log(this.props);
   }
 
   renderPhotos(imageUrls) {
@@ -84,6 +94,9 @@ class BookingList extends Component {
     return (
       <div id="page__heading__contents" className="ui container">
         <div className="section__heading">Upcoming Bookings</div>
+        <Link to="/bookings?filterBookings=all" >All</Link>
+        <span></span>
+        <Link to="/bookings?filterBookings=upcoming" >Upcoming</Link>
         <div className="booking_list_item_content">
           {this.renderContent()}
         </div>
@@ -101,4 +114,4 @@ const mapStateToProps = ({ bookings, auth }) => {
 
 // compose from redux lib allows us to have multiple HOCs to our React Componenet
 // export default connect(mapStateToProps, actions)(requireAuth(BookingList));
-export default connect(mapStateToProps, actions)(requireAuth(BookingList));
+export default connect(mapStateToProps, { fetchBookings })(requireAuth(BookingList));

@@ -42,8 +42,8 @@ export const saveToken = () => async (dispatch, getState) => {
 };
 
 //// Bookings
-export const fetchBookings = () => async (dispatch, getState) => {
-  const res = await baseRequest.get("/api/bookings");
+export const fetchBookings = (config = null) => async (dispatch, getState) => {
+  const res = await baseRequest.get("/api/bookings", config);
   dispatch({ type: FETCH_BOOKINGS, payload: res.data });
 };
 

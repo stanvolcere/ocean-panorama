@@ -8,12 +8,22 @@ const Booking = mongoose.model("booking");
 
 module.exports = app => {
   // GUEST Users
+  const UPCOMING = 1;
 
   // get all bookings for a guest
   app.get("/api/bookings", requireAuth, async (req, res) => {
-    const bookings = await Booking.find({ _user: req.user })
-      .populate("_room")
-      .exec();
+    const { config } = req.body
+    let bookings = null;
+
+    if (config === UPCOMING) {
+      bookings = await Booking.find({ _user: req.user })
+        .populate("_room")
+        .exec();
+    } else {
+      bookings = await Booking.find({ _user: req.user, bookingStartDate: { $gte: moment() } })
+        .populate("_room")
+        .exec();
+    }
 
     if (!bookings) {
       return res.status(404).send();
@@ -24,6 +34,7 @@ module.exports = app => {
     });
 
     return res.status(200).send(bookings);
+
   });
 
   app.get("/api/bookings/blocked/:id", requireAuth, async (req, res) => {
