@@ -189,6 +189,7 @@
 /* General  */
 .content__heading {
   font-size: 3rem;
+  margin: 1rem 0 1rem 0;
 }
 
 .content__heading__sub {
@@ -409,6 +410,18 @@ hr {
   flex-direction: column;
   justify-content: space-between;
   
+}
+
+/* INSTANT MESSAGE */
+
+.instant__message__container {
+  display: flex;
+  flex-direction: row;
+  background-color: #3f51b5;
+  height: 30rem;
+}
+.instant__message__box {
+  flex-grow: 1; 
 }
 
 /* FOOTER STYLING */

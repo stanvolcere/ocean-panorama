@@ -5,6 +5,7 @@ import * as actions from "../../actions";
 import { displayDate } from "./utils/dataPickerHelpers";
 import ScrollTopTopOnMount from "../utils/ScrollToTopOnMount";
 import Payments from "../Payments/Payments";
+import InstantMessage from "../InstantMessage/InstantMessage";
 import requireAuth from "../utils/requireAuth";
 
 class BookingView extends Component {
@@ -41,37 +42,34 @@ class BookingView extends Component {
 
     if (booking) {
       return (
-        <div id="booking__details__main__container" className="ui container">
-          <div className="section__heading">Booking Details</div>
-          <div className="booking__details__main">
-            <div>
-              {this.renderPhotos(booking._room._id, booking._room.imageUrls, booking._id)}
-            </div>
-            <div className="booking__details__main__content">
-              <p>Room: {booking._room.title}</p>
-              <p>
-                Dates: {displayDate(booking.bookingStartDate)} -{" "}
-                {displayDate(booking.bookingEndDate)}
-              </p>
-              <p>Duration: {booking.numberOfNights} nights</p>
-              <p>Total Price: £{booking.price}</p>
-              <div className="ui divider"></div>
-              {this.renderPaymentAction(booking.paid)}
-              <Link to="#">
-                <button className="ui teal button">
-                  <span>Message Host</span>
-                </button>
-              </Link>
-              <div className="ui compact menu">
-                <div className="ui simple dropdown item">
-                  <span>Booking Options</span>
-                  <div className="menu">
-                    {this.renderChangeDatesAction(booking._id, booking.paid)}
-                    <div className="item">
-                      <Link to={`/bookings/cancel/${booking._id}`}>
-                        Cancel Booking
+        <div className="booking__details__main">
+          <div>
+            {this.renderPhotos(booking._room._id, booking._room.imageUrls, booking._id)}
+          </div>
+          <div className="booking__details__main__content">
+            <p>Room: {booking._room.title}</p>
+            <p>
+              Dates: {displayDate(booking.bookingStartDate)} -{" "}
+              {displayDate(booking.bookingEndDate)}
+            </p>
+            <p>Duration: {booking.numberOfNights} nights</p>
+            <p>Total Price: £{booking.price}</p>
+            <div className="ui divider"></div>
+            {this.renderPaymentAction(booking.paid)}
+            <Link to="#">
+              <button className="ui teal button">
+                <span>Message Host</span>
+              </button>
+            </Link>
+            <div className="ui compact menu">
+              <div className="ui simple dropdown item">
+                <span>Booking Options</span>
+                <div className="menu">
+                  {this.renderChangeDatesAction(booking._id, booking.paid)}
+                  <div className="item">
+                    <Link to={`/bookings/cancel/${booking._id}`}>
+                      Cancel Booking
                       </Link>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -81,6 +79,10 @@ class BookingView extends Component {
       );
     }
     return "Something went wrong. Try refreshing";
+  }
+
+  renderInstantMessageContent() {
+    return <InstantMessage />
   }
 
   render() {
@@ -95,8 +97,12 @@ class BookingView extends Component {
             data-variation="basic"
           />
         </Link>
-
-        {this.renderContent()}
+        <div id="booking__details__main__container" className="ui container">
+          <div className="content__heading">Booking details</div>
+          {this.renderContent()}
+          <div className="ui divider"></div>
+          {this.renderInstantMessageContent()}
+        </div>
       </div>
     );
   }

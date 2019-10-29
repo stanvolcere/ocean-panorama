@@ -40,7 +40,6 @@ class EnquiryForm extends React.Component {
     }
 
     onSubmit = (formValues) => {
-        console.log(formValues);
         const { auth, room } = this.props;
         this.props.onSubmit({ ...formValues, email: auth.email, name: auth.name, roomTitle: room.title });
     }
