@@ -6,7 +6,6 @@ class InstantMessage extends Component {
 
     renderMessageBox() {
         return <div className="field">
-
             <textarea></textarea>
         </div>
     }
