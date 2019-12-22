@@ -212,7 +212,7 @@
   top: 0;
   /* background-image: linear-gradient(to right bottom, #65a5cf80, #1c5488),
     url("https://ocean-panorama.s3.eu-west-2.amazonaws.com/site-photos/landing-page/landing-dp.png"); */
-  background-image: url("https://ocean-panorama.s3.eu-west-2.amazonaws.com/site-photos/landing-page/landing-dp.png");
+  background-image: url("https://oceanpanoramaweb.s3.eu-west-2.amazonaws.com/landing-page/landing-dp.png");
   background-size: cover;
   background-position: top;
   background-origin: content-box;
