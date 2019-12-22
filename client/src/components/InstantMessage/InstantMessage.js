@@ -14,20 +14,25 @@ class InstantMessage extends Component {
         return <div>message display</div>
     }
 
+    renderHolder() {
+        return <div></div>
+    }
+
     render() {
-        return (
-            <div>
-                <div className="content__heading">Message Host</div>
-                <div className="instant__message__container">
-                    <div className="instant__message__box">
-                        {this.renderMessageBox()}
-                    </div>
-                    <div className="instant__message__box">
-                        {this.renderMessageDisplay()}
-                    </div>
-                </div>
-            </div >
-        );
+        return this.renderHolder();
+        // return (
+        //     <div>
+        //         <div className="content__heading">Message Host</div>
+        //         <div className="instant__message__container">
+        //             <div className="instant__message__box">
+        //                 {this.renderMessageBox()}
+        //             </div>
+        //             <div className="instant__message__box">
+        //                 {this.renderMessageDisplay()}
+        //             </div>
+        //         </div>
+        //     </div >
+        //);
     }
 }
 
