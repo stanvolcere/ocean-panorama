@@ -1,3 +1,8 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
 /* MAIN PAGE  */
 .content__on__any__page {
   flex: 1;
@@ -140,11 +145,29 @@
   font-size: 1.1em;
   background-color: transparent;
   /* background-image: linear-gradient(to right bottom, #65a5cf80, #1c5488); */
-  margin: 0
+  margin: 0;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-decoration: none;
 }
 
-.guests__header__menu__text {
-  text-transform: uppercase;
+.guests__header__content {
+  display: flex;
+}
+
+.guests__header__content__item {
+  padding: 0.5rem;
+  text-decoration: none;
+}
+
+.guests__header__content__item:hover {
+  color: gray;
+}
+
+.guests__header__content__item:active {
+  color: inherit;
 }
 
 .dropdown {
@@ -155,10 +178,11 @@
 
 .dropdown-content {
   display: none;
+  flex-direction: column;
   position: absolute;
   max-width: 20em;
   background-color: #f1f1f1;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding: 0.5rem;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   text-decoration: none;
@@ -167,7 +191,7 @@
 
 .dropdown-content a:hover {background-color: #ddd;}
 
-.dropdown:hover .dropdown-content {display: block; top: 100%;}
+.dropdown:hover .dropdown-content {display: flex; top: 100%;}
 
 /* ROOM LIST VIEW */
 #page__heading__contents{
@@ -206,7 +230,7 @@
 /* COMPLETE LANDING PAGE SECTION */
 
 .landing-hero {
-  height: 90vh;
+  height: 75vh;
   margin: 0;
   padding: 1rem 6rem 6rem 6rem;
   top: 0;
