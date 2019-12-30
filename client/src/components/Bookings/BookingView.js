@@ -55,7 +55,7 @@ class BookingView extends Component {
             <p>Duration: {booking.numberOfNights} nights</p>
             <p>Total Price: £{booking.price}</p>
             <div className="ui divider"></div>
-            {/*this.renderPaymentAction(booking.paid)*/}
+            {this.renderPaymentAction(booking.paid)}
             <Link to="#">
               <button className="ui teal button">
                 <span>Message Host</span>
