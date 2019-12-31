@@ -57,9 +57,9 @@ class BookingCreate extends Component {
         <div className="booking__render__room">
           <div>{room.title}</div>
           <div className="booking__room__details">
-            <p>{room.bedrooms} <i className="bed icon"></i></p>
-            <p>{room.beds} <i className="shower icon"></i></p>
-            <p>{room.maxGuests} <i className="male icon"></i></p>
+            <p>{room.bedrooms} <i class="fas fa-bed"></i></p>
+            <p>{room.beds} <i class="fas fa-shower"></i></p>
+            <p>{room.maxGuests} <i class="fas fa-male"></i></p>
           </div>
         </div>
       );
@@ -97,16 +97,18 @@ class BookingCreate extends Component {
 
   renderSubmitButton() {
     const { datePickerDates: { startDate, endDate, dateRange }, form } = this.props;
-    let className = "disabled";
+    let disabled = true;
 
     if (startDate && endDate && form.guestSelectForm.values) {
-      className = "";
+      disabled = false;
     }
 
     return (
-      <div>
+      <div className="booking__confirm__button">
+
         <button
-          className={`ui ${className} primary right floated button`}
+          className={`button`}
+          disabled={disabled}
           onClick={() =>
             this.onSubmit({
               status: "Pending",
@@ -121,7 +123,7 @@ class BookingCreate extends Component {
           }
         >
           Confirm
-          </button>
+        </button>
       </div >
     )
   }
@@ -129,31 +131,26 @@ class BookingCreate extends Component {
   renderBookingDetails() {
     // before this is rendered we wanna get the blocked days of the roomId
     return (
-      <div className="ui segment">
-        <div className="booking__details">
+      <div className="booking__details">
+        <div>
+          {this.renderGuest()}
+          <div className="content__heading__sub">Room</div>
+          {this.renderRoom()}
+          <div className="content__heading__sub">Select Your Dates</div>
+          <CustomDatePicker
+            roomId={this.props.match.params.id}
+            blockedDates={this.props.blockedDates}
+          />
+          <div className="content__heading__sub">Number of Guests</div>
+          {this.renderSelectNumberOfGuests()}
           <div>
-            {this.renderGuest()}
-            <div className="ui divider" />
-            <div className="content__heading__sub">Room</div>
-            {this.renderRoom()}
-            <div className="ui divider" />
-            <div className="content__heading__sub">Select Your Dates</div>
-            <CustomDatePicker
-              roomId={this.props.match.params.id}
-              blockedDates={this.props.blockedDates}
-            />
-            <div className="ui divider" />
-            <div className="content__heading__sub">Number of Guests</div>
-            {this.renderSelectNumberOfGuests()}
-            <div className="ui divider" />
-            <div>
-              <div className="content__heading__sub">Price</div>
-            </div>
-            {this.renderPricing()}
+            <div className="content__heading__sub">Price</div>
           </div>
-          {this.renderSubmitButton()}
+          {this.renderPricing()}
         </div>
+        {this.renderSubmitButton()}
       </div>
+
     );
   }
 
@@ -190,34 +187,24 @@ class BookingCreate extends Component {
 
   renderPhotos(roomId, imageUrls) {
     return (
-      <div className="ui segment">
-        <div className="content__heading__sub">Room Photos</div>
-        <div className="ui divider"></div>
-        <Link to={`/gallery/${roomId}?returnUrl=/room/book/${roomId}`}>
-          <div className="ui large rounded image"><img src={imageUrls[0]} alt="img"></img></div>
-        </Link>
-      </div>
+      <Link to={`/gallery/${roomId}?returnUrl=/room/book/${roomId}`}>
+        <div className="room__details__image"><img src={imageUrls[0]} alt="img"></img></div>
+      </Link>
     );
   }
 
-
-
-  // renders the booking details
   renderContent() {
     if (this.props.room) {
       const { _id, imageUrls } = this.props.room;
       return (
-        <div id="new__booking__container" className="ui segment">
-          <div className="ui two column very relaxed stackable grid">
-            <div className="column">{this.renderPhotos(_id, imageUrls)}</div>
-            <div className="column">{this.renderBookingDetails()}</div>
-          </div>
+        <div id="new__booking__container">
+          {this.renderPhotos(_id, imageUrls)}
+          {this.renderBookingDetails()}
         </div>
       );
     }
   }
 
-  // main render method
   render() {
     return (
       <React.Fragment>
@@ -228,9 +215,8 @@ class BookingCreate extends Component {
             data-variation="basic"
           />
         </Link>
-        <div className="ui container">
+        <div className="container">
           {this.scrollToTopOnMount()}
-
           <div className="section__heading">Book Listing</div>
           {this.renderContent()}
         </div>

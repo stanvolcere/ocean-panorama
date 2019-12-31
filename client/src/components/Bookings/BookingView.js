@@ -15,7 +15,7 @@ class BookingView extends Component {
 
   renderPhotos(roomId, imageUrls, bookingId) {
     return <Link to={`/gallery/${roomId}?returnUrl=/bookings/${bookingId}`}>
-      <div className="ui big rounded image"><img src={imageUrls[0]} alt="img"></img></div>
+      <div className="room__details__image"><img src={imageUrls[0]} alt="img"></img></div>
     </Link>
   }
 

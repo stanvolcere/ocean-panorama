@@ -27,15 +27,15 @@ class RoomView extends Component {
 
   renderRoomDetails(room) {
     return <div className="room__details__info">
-      <span>{room.beds} <i className="bed icon"></i></span>
-      <span>{room.baths} <i className="shower icon"></i></span>
-      <span>{room.maxGuests} <i className="male icon"></i></span>
+      <span>{room.beds} <i class="fas fa-bed"></i></span>
+      <span>{room.baths} <i class="fas fa-shower"></i></span>
+      <span>{room.maxGuests} <i class="fas fa-male"></i></span>
     </div>
   }
 
   renderPhotos(roomId, imageUrls) {
     if (imageUrls) {
-      return (<div className="ui large rounded image">
+      return (<div className="room__details__image">
         <Link to={`/gallery/${roomId}?returnUrl=/rooms/${roomId}`}><img src={imageUrls[0]} alt="img"></img></Link>
       </div>)
     }
@@ -78,12 +78,12 @@ class RoomView extends Component {
   render() {
 
     return (
-      <div id="page__heading__contents" className="ui container">
+      <div id="page__heading__contents" className="container">
         {this.scrollToTopOnMount()}
         <div className="section__heading">Our Rooms</div>
-        <div className="ui grid">
-          <div className="six wide column room__view__list">{this.renderLeftContent()}</div>
-          <div className="eight wide column">{this.renderRightContent()}</div>
+        <div className="room__list">
+          <div className="">{this.renderLeftContent()}</div>
+          <div className="">{this.renderRightContent()}</div>
         </div>
       </div>
     );

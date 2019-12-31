@@ -16,14 +16,10 @@ class BookingList extends Component {
     this.props.fetchBookings();
   }
 
-  componentDidUpdate() {
-    console.log(this.props);
-  }
-
   renderPhotos(imageUrls) {
     return (
       <React.Fragment>
-        <img alt="img" className="ui big rounded image" src={imageUrls[0]} />
+        <img alt="img" className="room__details__image" src={imageUrls[0]} />
       </React.Fragment>
     );
   }
@@ -46,7 +42,7 @@ class BookingList extends Component {
       return (
         <div key={booking._id} className="ui divided items">
           <div id="booking_list_raised" className="item">
-            <div className="ui medium rounded image">
+            <div className="">
               {this.renderPhotos(booking._room.imageUrls)}
             </div>
             <div className="middle aligned content">

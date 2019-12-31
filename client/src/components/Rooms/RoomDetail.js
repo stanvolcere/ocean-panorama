@@ -29,7 +29,7 @@ class RoomDetail extends Component {
   renderImages(imageUrls) {
     return (
       <div>
-        <img alt="" className="ui medium centered image" src={imageUrls[0]} />
+        <img alt="image of the rooms" className="room__details__image" src={imageUrls[0]} />
       </div>
     );
   }
@@ -57,7 +57,7 @@ class RoomDetail extends Component {
   render() {
     return (
       <div
-        className="ui container"
+        className="container"
         style={{
           display: "flex",
           flexDirection: "column",
